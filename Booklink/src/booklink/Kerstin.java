@@ -15,8 +15,7 @@ public class Kerstin {
     
     public void nix() {
         // Diese Funktion macht gar nix :D
-        
-        // Kollision
+
     }
             
 }
