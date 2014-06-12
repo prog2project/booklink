@@ -2,9 +2,10 @@
 import java.sql.*;
 
 public class Datenbank {
+public class DBController {
 	private static final DBController dbcontroller = new DBController();
     private static Connection connection;
-    private static final String DB_PATH = System.getProperty("user.home") + "/" + "testdb.db";
+    private static final String DB_PATH = System.getProperty("user.home") + "/" + "Booklink.db";
 
     static {
         try {
@@ -37,7 +38,7 @@ public class Datenbank {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
                 try {
-                    if (!connection.isClosed() && connection != null) {
+                    if (connection.isClosed() && connection != null) {
                         connection.close();
                         if (connection.isClosed())
                             System.out.println("Connection to Database closed");
@@ -49,39 +50,49 @@ public class Datenbank {
         });
     }
 
-    private void handleDB() {
+    private void handleDB(String autor, String titel, String erscheinungsjahr,int iban) {
         try {
             Statement stmt = connection.createStatement();
-            stmt.executeUpdate("DROP TABLE IF EXISTS books;");
-            stmt.executeUpdate("CREATE TABLE books (author, title, publication, iban);");
-            stmt.execute("INSERT INTO books (author, title, publication, iban) VALUES ('Paul P.', 'Paul ', '2014-05-06', '1234')");
+            
+           
+           // stmt.executeUpdate("CREATE TABLE IF NOT EXISTS books;");
+           stmt.executeUpdate("CREATE TABLE IF NOT EXISTS books (Autor, Titel, Veröffentlichung, IBAN);");
+           // stmt.execute("INSERT INTO books (author, title, publication, pages) VALUES ('Paulchen Paule', 'Paul ', '2001-05-06', '1234')");
             
             PreparedStatement ps = connection
                     .prepareStatement("INSERT INTO books VALUES (?, ?, ?, ?);");
 
-            ps.setString(1, "Willi W.");
-            ps.setString(2, "Titel");
-            ps.setDate(3, Date.valueOf("2011-05-16"));
-            ps.setInt(4, 432);
+            ps.setString(1, autor);
+            ps.setString(2, titel);
+            ps.setDate(3, Date.valueOf(erscheinungsjahr));
+            ps.setInt(4, iban);
             ps.addBatch();
+            
+            //PreparedStatement ps2 = connection
+                    //.prepareStatement("Select From book where ;");
+            
+            //ps.setString(1, "Anton Antonius");
+           // ps.setString(2, "Anton's Alarm");
+            //ps.setDate(3, Date.valueOf("2009-10-01"));
+           // ps.setInt(4, 123);
+           // ps.addBatch();
 
-            ps.setString(1, "Mr. A.");
-            ps.setString(2, "Titel 2");
-            ps.setDate(3, Date.valueOf("2009-10-01"));
-            ps.setInt(4, 123);
-            ps.addBatch();
-
+           // ResultSet rsneu;		Return werte
+          /// ps2.setString(1,"Anton");
+           // rsneu.
+            
+            
             connection.setAutoCommit(false);
             ps.executeBatch();
             connection.setAutoCommit(true);
 
             ResultSet rs = stmt.executeQuery("SELECT * FROM books;");
             while (rs.next()) {
-                System.out.println("Autor = " + rs.getString("author"));
-                System.out.println("Titel = " + rs.getString("title"));
+                System.out.println("Autor = " + rs.getString("Autor"));
+                System.out.println("Titel = " + rs.getString("Titel"));
                 System.out.println("Erscheinungsdatum = "
-                        + rs.getDate("publication"));
-                System.out.println("Seiten = " + rs.getInt("pages"));
+                        + rs.getDate("Veröffentlichung"));
+                System.out.println("IBAN = " + rs.getInt("IBAN"));
             }
             rs.close();
             connection.close();
@@ -94,6 +105,6 @@ public class Datenbank {
     public static void main(String[] args) {
         DBController dbc = DBController.getInstance();
         dbc.initDBConnection();
-        dbc.handleDB();
+        dbc.handleDB("Basti","Testbuch","2014-01-03",123456789);
     } 
 }
