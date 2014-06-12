@@ -57,7 +57,7 @@ public class DBController {
            
            // stmt.executeUpdate("CREATE TABLE IF NOT EXISTS books;");
            stmt.executeUpdate("CREATE TABLE IF NOT EXISTS books (Autor, Titel, Veröffentlichung, IBAN);");
-           // stmt.execute("INSERT INTO books (author, title, publication, pages) VALUES ('Paulchen Paule', 'Paul ', '2001-05-06', '1234')");
+           // stmt.execute("INSERT INTO books (author, title, publication, pages) VALUES ('Paul', 'ppp ', '2001-05-06', '1234')");
             
             PreparedStatement ps = connection
                     .prepareStatement("INSERT INTO books VALUES (?, ?, ?, ?);");
