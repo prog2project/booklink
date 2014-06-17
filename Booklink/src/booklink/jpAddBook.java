@@ -78,6 +78,12 @@ public class jpAddBook extends javax.swing.JPanel {
         lblAuthor.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         lblAuthor.setText("Autor");
 
+        tfAuthor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfAuthorActionPerformed(evt);
+            }
+        });
+
         lblISBN.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         lblISBN.setText("ISBN");
 
@@ -109,11 +115,11 @@ public class jpAddBook extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblBooktitel)
                     .addComponent(lblAuthor)
                     .addComponent(lblPress)
-                    .addComponent(lblISBN))
-                .addGap(35, 35, 35)
+                    .addComponent(lblISBN)
+                    .addComponent(lblBooktitel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tfBooktitel, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                     .addComponent(tfAuthor)
@@ -199,6 +205,10 @@ public class jpAddBook extends javax.swing.JPanel {
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void tfAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAuthorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfAuthorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
