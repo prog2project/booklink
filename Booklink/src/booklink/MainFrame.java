@@ -4,7 +4,7 @@ package booklink;
 
 import java.awt.event.KeyEvent;
 
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 
 
@@ -17,8 +17,8 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     
-    JFrame BuchJFrame = new JFrame(); 
-    JFrame PDFJFrame2 = new JFrame();
+    JPanel jpAddBook = new JPanel(); 
+    JPanel jpAddPDF = new JPanel();
    
     
     @SuppressWarnings("unchecked")
@@ -210,11 +210,11 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_BuchButton1ActionPerformed
 
     private void BuchButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuchButton1MouseClicked
-        BuchJFrame.setVisible(true);                                              // Fenster für Buch + anzeigen lassen      !!!!
+        jpAddBook.setVisible(true);                                              // Fenster für Buch + anzeigen lassen      !!!!
     }//GEN-LAST:event_BuchButton1MouseClicked
 
     private void PDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PDFMouseClicked
-       PDFJFrame2.setVisible(true);                                              // Fenster für PDfs anzeigen lassen      !!!!
+       jpAddBook.setVisible(true);                                              // Fenster für PDfs anzeigen lassen      !!!!
     }//GEN-LAST:event_PDFMouseClicked
 
     private void BooklistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BooklistMouseClicked
