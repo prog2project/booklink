@@ -186,11 +186,11 @@ public class jpAddBook extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        // TODO add your handling code here:
+        System.out.println("btnOkActionPerformed");
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void tfBooktitelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBooktitelActionPerformed
-        // TODO add your handling code here:
+         System.out.println("tfBooktitelActionPerformed");
     }//GEN-LAST:event_tfBooktitelActionPerformed
 
     private void tfPressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPressActionPerformed
