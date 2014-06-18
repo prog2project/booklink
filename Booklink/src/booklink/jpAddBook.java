@@ -46,6 +46,9 @@ public class jpAddBook extends javax.swing.JPanel {
         tfEdition = new javax.swing.JTextField();
         tfLendingPeriod = new javax.swing.JTextField();
         tfComment = new javax.swing.JTextField();
+        lblBooktitelError = new javax.swing.JLabel();
+        lblAuthorError = new javax.swing.JLabel();
+        lblTitelAndAutorError = new javax.swing.JLabel();
 
         btnOk.setText("OK");
         btnOk.addActionListener(new java.awt.event.ActionListener() {
@@ -108,42 +111,59 @@ public class jpAddBook extends javax.swing.JPanel {
         lblComment.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         lblComment.setText("Bemerkung");
 
+        lblBooktitelError.setForeground(new java.awt.Color(255, 0, 0));
+        lblBooktitelError.setText("Geben Sie bitte einen Buchtitel ein.");
+
+        lblAuthorError.setText("Geben Sie bitte einen Autor an.");
+
+        lblTitelAndAutorError.setText("Geben Sie bitte Buchtitel & Autor an.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAuthor)
-                    .addComponent(lblPress)
-                    .addComponent(lblISBN)
-                    .addComponent(lblBooktitel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tfBooktitel, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(tfAuthor)
-                    .addComponent(tfISBN)
-                    .addComponent(tfPress))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblYear, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblEdition, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblLendingPeriod, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblComment, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfEdition)
-                            .addComponent(tfLendingPeriod)
-                            .addComponent(tfYear, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(tfComment))))
-                .addGap(26, 26, 26))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblAuthor)
+                                    .addComponent(lblPress)
+                                    .addComponent(lblISBN)
+                                    .addComponent(lblBooktitel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfBooktitel, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(tfAuthor)
+                                    .addComponent(tfISBN)
+                                    .addComponent(tfPress))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblYear, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblEdition, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblLendingPeriod, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblComment, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfEdition)
+                                    .addComponent(tfLendingPeriod)
+                                    .addComponent(tfYear, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(tfComment)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblTitelAndAutorError)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(26, 26, 26))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblAuthorError)
+                            .addComponent(lblBooktitelError))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,16 +197,43 @@ public class jpAddBook extends javax.swing.JPanel {
                     .addComponent(tfComment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblComment)
                     .addComponent(lblPress))
-                .addGap(79, 79, 79)
+                .addGap(42, 42, 42)
+                .addComponent(lblBooktitelError)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblAuthorError)
+                .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
-                    .addComponent(btnOk))
+                    .addComponent(btnOk)
+                    .addComponent(lblTitelAndAutorError))
                 .addGap(40, 40, 40))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         System.out.println("btnOkActionPerformed");
+        
+        if (tfBooktitel.getText().trim().equals("Buchtitel")) // Wenn dieses Feld leer dann soll Label angezeigt werden
+            lblBooktitelError.setVisible(true);
+        else
+            lblBooktitelError.setVisible(false);
+        
+        if (tfAuthor.getText().trim().equals("Autor"))
+            lblAuthorError.setVisible(true);
+        else
+            lblAuthorError.setVisible(false);
+        
+        if (tfBooktitel.getText().trim().equals("Buchtitel") && tfAuthor.getText().trim().equals("Autor"))
+            lblTitelAndAutorError.setVisible(true);
+        else
+            lblTitelAndAutorError.setVisible(false);
+        
+        
+            
+        
+    
+        
+        
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void tfBooktitelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBooktitelActionPerformed
@@ -215,12 +262,15 @@ public class jpAddBook extends javax.swing.JPanel {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnOk;
     private javax.swing.JLabel lblAuthor;
+    private javax.swing.JLabel lblAuthorError;
     private javax.swing.JLabel lblBooktitel;
+    private javax.swing.JLabel lblBooktitelError;
     private javax.swing.JLabel lblComment;
     private javax.swing.JLabel lblEdition;
     private javax.swing.JLabel lblISBN;
     private javax.swing.JLabel lblLendingPeriod;
     private javax.swing.JLabel lblPress;
+    private javax.swing.JLabel lblTitelAndAutorError;
     private javax.swing.JLabel lblYear;
     private javax.swing.JTextField tfAuthor;
     private javax.swing.JTextField tfBooktitel;
