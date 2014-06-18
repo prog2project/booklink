@@ -27,10 +27,10 @@ public class DBController {
 		try {
 			if (connection != null)
 				return;
-			System.out.println("Creating Connection to Database...");
+			System.out.println("Verbindung zu Datenbank wird hergestellt...");
 			connection = DriverManager.getConnection("jdbc:sqlite:" + DB_PATH);
 			if (!connection.isClosed())
-				System.out.println("...Connection established");
+				System.out.println("...Verbindung hergestellt");
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -41,7 +41,7 @@ public class DBController {
 					if (connection.isClosed() && connection != null) {
 						connection.close();
 						if (connection.isClosed())
-							System.out.println("Connection to Database closed");
+							System.out.println("Verbindung mit Datenbank geschlossen!");
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -55,21 +55,16 @@ public class DBController {
 			String leihfrist) {
 		try {
 			Statement stmt = connection.createStatement();
-
 			stmt.executeUpdate("CREATE TABLE IF NOT EXISTS books (Autor, Titel, Veröffentlichung, IBAN,  Verlag, Auflage, Leihfrist);");
-			
-			PreparedStatement ps = connection
-					.prepareStatement("INSERT INTO books VALUES (?, ?, ?, ?, ?, ?, ?);");
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO books VALUES (?, ?, ?, ?, ?, ?, ?);");
 
 			boolean vorhanden = false;
-			PreparedStatement st2 = connection
-					.prepareStatement("select Titel from books where IBAN = ?");
+			PreparedStatement st2 = connection.prepareStatement("select Titel from books where IBAN = ?");
 			st2.setInt(1, iban);
 			ResultSet rs3 = st2.executeQuery();
 			while (rs3.next()) {
 				System.out.println(rs3.getString(1));
 				if (rs3.getString(1) != null) {
-
 					vorhanden = true;
 				}
 			}
@@ -94,17 +89,15 @@ public class DBController {
 			connection.setAutoCommit(false);
 			ps.executeBatch();
 			connection.setAutoCommit(true);
-
-			// connection.close();
+			connection.close();
 		} catch (SQLException e) {
-			System.err.println("Couldn't handle DB-Query");
+			System.err.println("Fehler bei Datenbank-Abfrage");
 			e.printStackTrace();
 		}
 	}
 
 	public void ausgabeDB() {
 		try {
-
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM books;");
 			while (rs.next()) {
@@ -126,15 +119,31 @@ public class DBController {
 		}
 	}
 
+	private void loescheBuch(int iban) {
+		String query = "delete from books where iban=" + iban;
+		try {
+			Statement stmt5 = connection.createStatement();
+			stmt5.execute(query);
+			System.out.println("Das Buch mit der iban = " + iban + " wurde gelöscht!");
+			connection.close();
+		} catch (SQLException e) {
+			System.err.println("Fehler beim Löschen");
+			e.printStackTrace();
+		}
+	}
+
 	public static void main(String[] args) {
 		DBController dbc = DBController.getInstance();
 		dbc.initDBConnection();
-		dbc.schreibeDB("Basti", "Testbuch", "2014-01-03", 123456789,
-				"Springer", 3, "5 Wochen");
-		dbc.schreibeDB("Basti3", "Testbuch3", "2012-01-03", 11111112,
-				"Springer", 2, "5 Wochen");
+		dbc.schreibeDB("Basti", "Testbuch", "2014-01-03", 123456789,"Springer", 3, "5 Wochen");
 		DBController dbc2 = DBController.getInstance();
 		dbc2.initDBConnection();
-		dbc2.ausgabeDB();
+		dbc2.schreibeDB("Basti3", "Testbuch3", "2012-01-03", 11111112,"Springer", 2, "5 Wochen");
+		DBController dbc3 = DBController.getInstance();
+		dbc3.initDBConnection();
+		dbc3.loescheBuch(11111112);
+		DBController dbc4 = DBController.getInstance();
+		dbc4.initDBConnection();
+		dbc4.ausgabeDB();
 	}
 }
