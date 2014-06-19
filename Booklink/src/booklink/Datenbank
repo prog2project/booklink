@@ -23,7 +23,7 @@ public class DBController {
 		return dbcontroller;
 	}
 
-	private void initDBConnection() {
+	public void initDBConnection() { 
 		try {
 			if (connection != null)
 				return;
@@ -41,7 +41,8 @@ public class DBController {
 					if (connection.isClosed() && connection != null) {
 						connection.close();
 						if (connection.isClosed())
-							System.out.println("Verbindung mit Datenbank geschlossen!");
+							System.out
+									.println("Verbindung mit Datenbank geschlossen!");
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -50,17 +51,20 @@ public class DBController {
 		});
 	}
 
-	private void schreibeDB(String autor, String titel,
-			String erscheinungsjahr, int iban, String verlag, int auflage,
+	public void schreibeDB(String autor,
+			String titel, // private
+			String erscheinungsjahr, int isbn, String verlag, int auflage,
 			String leihfrist) {
 		try {
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("CREATE TABLE IF NOT EXISTS books (Autor, Titel, Veröffentlichung, IBAN,  Verlag, Auflage, Leihfrist);");
-			PreparedStatement ps = connection.prepareStatement("INSERT INTO books VALUES (?, ?, ?, ?, ?, ?, ?);");
+			stmt.executeUpdate("CREATE TABLE IF NOT EXISTS books (Autor, Titel, Veröffentlichung, ISBN,  Verlag, Auflage, Leihfrist);");
+			PreparedStatement ps = connection
+					.prepareStatement("INSERT INTO books VALUES (?, ?, ?, ?, ?, ?, ?);");
 
 			boolean vorhanden = false;
-			PreparedStatement st2 = connection.prepareStatement("select Titel from books where IBAN = ?");
-			st2.setInt(1, iban);
+			PreparedStatement st2 = connection
+					.prepareStatement("select Titel from books where ISBN = ?");
+			st2.setInt(1, isbn);
 			ResultSet rs3 = st2.executeQuery();
 			while (rs3.next()) {
 				System.out.println(rs3.getString(1));
@@ -75,7 +79,7 @@ public class DBController {
 				ps.setString(1, autor);
 				ps.setString(2, titel);
 				ps.setDate(3, Date.valueOf(erscheinungsjahr));
-				ps.setInt(4, iban);
+				ps.setInt(4, isbn);
 				ps.setString(5, verlag);
 				ps.setInt(6, auflage);
 				ps.setString(7, leihfrist);
@@ -96,7 +100,7 @@ public class DBController {
 		}
 	}
 
-	public void ausgabeDB() {
+	public void ausgabeDB() { 
 		try {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM books;");
@@ -105,7 +109,7 @@ public class DBController {
 				System.out.println("Titel = " + rs.getString("Titel"));
 				System.out.println("Erscheinungsdatum = "
 						+ rs.getDate("Veröffentlichung"));
-				System.out.println("IBAN = " + rs.getInt("IBAN"));
+				System.out.println("ISBN = " + rs.getInt("ISBN"));
 				System.out.println("Verlag = " + rs.getString("Verlag"));
 				System.out.println("Auflage = " + rs.getInt("Auflage"));
 				System.out.println("Leihfrist = " + rs.getString("Leihfrist"));
@@ -119,12 +123,13 @@ public class DBController {
 		}
 	}
 
-	private void loescheBuch(int iban) {
-		String query = "delete from books where iban=" + iban;
+	public void loescheBuch(int isbn) { 
+		String query = "delete from books where ISBN=" + isbn;
 		try {
 			Statement stmt5 = connection.createStatement();
 			stmt5.execute(query);
-			System.out.println("Das Buch mit der iban = " + iban + " wurde gelöscht!");
+			System.out.println("Das Buch mit der ISBN = " + isbn
+					+ " wurde gelöscht!");
 			connection.close();
 		} catch (SQLException e) {
 			System.err.println("Fehler beim Löschen");
@@ -135,10 +140,12 @@ public class DBController {
 	public static void main(String[] args) {
 		DBController dbc = DBController.getInstance();
 		dbc.initDBConnection();
-		dbc.schreibeDB("Basti", "Testbuch", "2014-01-03", 123456789,"Springer", 3, "5 Wochen");
+		dbc.schreibeDB("Mr. X", "Testbuch", "2014-01-03", 123456789,
+				"Springer", 3, "5 Wochen");
 		DBController dbc2 = DBController.getInstance();
 		dbc2.initDBConnection();
-		dbc2.schreibeDB("Basti3", "Testbuch3", "2012-01-03", 11111112,"Springer", 2, "5 Wochen");
+		dbc2.schreibeDB("Horst", "Testbuch3", "2012-01-03", 11111112,
+				"Springer", 2, "5 Wochen");
 		DBController dbc3 = DBController.getInstance();
 		dbc3.initDBConnection();
 		dbc3.loescheBuch(11111112);
@@ -147,3 +154,4 @@ public class DBController {
 		dbc4.ausgabeDB();
 	}
 }
+
