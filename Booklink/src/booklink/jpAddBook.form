@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -17,58 +17,55 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblAuthor" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblPress" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblISBN" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblBooktitel" min="-2" pref="58" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="tfBooktitel" pref="200" max="32767" attributes="0"/>
-                                  <Component id="tfAuthor" max="32767" attributes="0"/>
-                                  <Component id="tfISBN" max="32767" attributes="0"/>
-                                  <Component id="tfPress" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="24" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblYear" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblEdition" alignment="1" min="-2" pref="82" max="-2" attributes="0"/>
-                                  <Component id="lblLendingPeriod" alignment="1" min="-2" pref="82" max="-2" attributes="0"/>
-                                  <Component id="lblComment" alignment="1" min="-2" pref="82" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="tfEdition" max="32767" attributes="0"/>
-                                  <Component id="tfLendingPeriod" max="32767" attributes="0"/>
-                                  <Component id="tfYear" alignment="0" pref="200" max="32767" attributes="0"/>
-                                  <Component id="tfComment" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="lblTitelAndAutorError" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btnCancel" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnOk" min="-2" pref="100" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Component id="lblAuthorError" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblBooktitelError" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblTitelAndAutorError" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblAuthorError" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblBooktitelError" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="btnCancel" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="btnOk" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblAuthor" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblPress" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblISBN" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblBooktitel" min="-2" pref="58" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="tfPress" pref="200" max="32767" attributes="0"/>
+                                  <Component id="tfAuthor" max="32767" attributes="0"/>
+                                  <Component id="tfBooktitel" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="jFormattedTextField2" min="-2" pref="200" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblEdition" min="-2" pref="82" max="-2" attributes="0"/>
+                              <Component id="lblYear" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblLendingPeriod" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
+                              <Component id="lblComment" min="-2" pref="82" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="tfYear" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="tfEdition" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="tfLendingPeriod" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="tfComment" min="-2" pref="200" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
+              <EmptySpace pref="35" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -78,48 +75,41 @@
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblBooktitel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfBooktitel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblYear" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfBooktitel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfYear" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="53" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="lblISBN" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfEdition" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblEdition" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfAuthor" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblAuthor" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfISBN" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblLendingPeriod" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfLendingPeriod" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+              <EmptySpace pref="42" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="tfPress" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfComment" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblEdition" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblAuthor" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfAuthor" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfEdition" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblLendingPeriod" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jFormattedTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblISBN" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfLendingPeriod" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblComment" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblPress" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfPress" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfComment" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-              <Component id="lblBooktitelError" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblAuthorError" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblBooktitelError" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTitelAndAutorError" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblAuthorError" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnOk" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblTitelAndAutorError" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
           </Group>
@@ -129,6 +119,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="btnOk">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="12" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="OK"/>
       </Properties>
       <Events>
@@ -137,6 +130,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnCancel">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="12" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Abbrechen"/>
       </Properties>
       <Events>
@@ -147,66 +143,47 @@
     <Component class="javax.swing.JLabel" name="lblBooktitel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="11" style="0"/>
+          <Font name="Arial" size="12" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Buchtitel"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfBooktitel">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfBooktitelActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblAuthor">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="11" style="0"/>
+          <Font name="Arial" size="12" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Autor"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfAuthor">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfAuthorActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblISBN">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="11" style="0"/>
+          <Font name="Arial" size="12" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="ISBN"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfISBN">
-    </Component>
     <Component class="javax.swing.JLabel" name="lblPress">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="11" style="0"/>
+          <Font name="Arial" size="12" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Verlag"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfPress">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfPressActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblYear">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="11" style="0"/>
+          <Font name="Arial" size="12" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Erscheinungsjahr"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfYear">
-    </Component>
     <Component class="javax.swing.JLabel" name="lblEdition">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="11" style="0"/>
+          <Font name="Arial" size="12" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Auflage"/>
       </Properties>
@@ -214,27 +191,27 @@
     <Component class="javax.swing.JLabel" name="lblLendingPeriod">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="11" style="0"/>
+          <Font name="Arial" size="12" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Leihfrist"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Standardcursor"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblComment">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="11" style="0"/>
+          <Font name="Arial" size="12" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Bemerkung"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfEdition">
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfLendingPeriod">
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfComment">
-    </Component>
     <Component class="javax.swing.JLabel" name="lblBooktitelError">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="12" style="0"/>
+        </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="ff" type="rgb"/>
         </Property>
@@ -243,13 +220,59 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblAuthorError">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="12" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Geben Sie bitte einen Autor an."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTitelAndAutorError">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="12" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Geben Sie bitte Buchtitel &amp; Autor an."/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="tfBooktitel">
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="tfAuthor">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfAuthorActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField2">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format subtype="0" type="0"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="tfPress">
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="tfYear">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format subtype="0" type="0"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="tfEdition">
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="tfLendingPeriod">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format subtype="1" type="1"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="tfComment">
     </Component>
   </SubComponents>
 </Form>
