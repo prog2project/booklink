@@ -17,38 +17,36 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="lblAuthorError" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTitelAndAutorError" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblBooktitelError" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblTitelAndAutorError" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblAuthorError" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
                           <Component id="btnCancel" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="btnOk" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblAuthor" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblPress" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblISBN" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblAuthor" min="-2" max="-2" attributes="0"/>
                               <Component id="lblBooktitel" min="-2" pref="58" max="-2" attributes="0"/>
+                              <Component id="lblISBN" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblPress" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="tfPress" pref="200" max="32767" attributes="0"/>
-                                  <Component id="tfAuthor" max="32767" attributes="0"/>
-                                  <Component id="tfBooktitel" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="jFormattedTextField2" min="-2" pref="200" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="tfAuthor" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="tfBooktitel" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="jFormattedTextField2" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="tfPress" min="-2" pref="200" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblEdition" min="-2" pref="82" max="-2" attributes="0"/>
                               <Component id="lblYear" min="-2" max="-2" attributes="0"/>
@@ -65,7 +63,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="35" max="32767" attributes="0"/>
+              <EmptySpace pref="30" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -79,7 +77,7 @@
                   <Component id="tfBooktitel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfYear" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="42" max="32767" attributes="0"/>
+              <EmptySpace pref="48" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblEdition" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblAuthor" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -93,12 +91,19 @@
                   <Component id="lblISBN" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfLendingPeriod" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblComment" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblPress" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfPress" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfComment" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblComment" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPress" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfComment" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="tfPress" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -111,7 +116,7 @@
                   <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnOk" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
