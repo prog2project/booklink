@@ -2,8 +2,9 @@
 package booklink;
 
 
-import java.awt.event.KeyEvent;
 
+import java.awt.event.KeyEvent;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 
@@ -17,8 +18,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     
-    JPanel jpAddBook = new JPanel(); 
-    JPanel jpAddPDF = new JPanel();
+    
    
     
     @SuppressWarnings("unchecked")
@@ -26,15 +26,13 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         SearchField = new javax.swing.JTextField();
-        BookPDFs = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        Bookinfo = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         Booklist = new javax.swing.JList();
         PDF = new javax.swing.JButton();
         Search = new javax.swing.JButton();
         BuchButton1 = new javax.swing.JButton();
+        multipanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Booklink");
@@ -50,48 +48,6 @@ public class MainFrame extends javax.swing.JFrame {
                 SearchFieldKeyPressed(evt);
             }
         });
-
-        jLabel2.setText("jLabel2");
-
-        javax.swing.GroupLayout BookinfoLayout = new javax.swing.GroupLayout(Bookinfo);
-        Bookinfo.setLayout(BookinfoLayout);
-        BookinfoLayout.setHorizontalGroup(
-            BookinfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BookinfoLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
-        );
-        BookinfoLayout.setVerticalGroup(
-            BookinfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BookinfoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(101, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout BookPDFsLayout = new javax.swing.GroupLayout(BookPDFs);
-        BookPDFs.setLayout(BookPDFsLayout);
-        BookPDFsLayout.setHorizontalGroup(
-            BookPDFsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BookPDFsLayout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(147, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BookPDFsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Bookinfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        BookPDFsLayout.setVerticalGroup(
-            BookPDFsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BookPDFsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Bookinfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
-        );
 
         Booklist.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Grundlagen der Informatik", "Programmieren 1", "Programmieren 2", "Mathematik" };
@@ -136,44 +92,67 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout multipanelLayout = new javax.swing.GroupLayout(multipanel);
+        multipanel.setLayout(multipanelLayout);
+        multipanelLayout.setHorizontalGroup(
+            multipanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        multipanelLayout.setVerticalGroup(
+            multipanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 309, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 158, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                    .addComponent(SearchField))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(57, 57, 57)
-                                .addComponent(BuchButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(PDF, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(BookPDFs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Search, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(PDF)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Search)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BuchButton1)
+                        .addGap(0, 388, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(multipanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(SearchField)
-                    .addComponent(PDF, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(BuchButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(PDF)
+                        .addComponent(Search)
+                        .addComponent(BuchButton1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 14, Short.MAX_VALUE)
-                        .addComponent(BookPDFs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(multipanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2))
                 .addContainerGap())
         );
@@ -190,7 +169,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchFieldActionPerformed
 
     private void SearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchMouseClicked
-        jLabel1.setText("Gesucht wurde:  "+ SearchField.getText());             // Suche + Button
+       // jLabel1.setText("Gesucht wurde:  "+ SearchField.getText());             // Suche + Button
       
          
         
@@ -199,8 +178,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     
     private void SearchFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchFieldKeyPressed
-      if(evt.getKeyCode()== KeyEvent.VK_ENTER)                                  // Suche + ENTER 
-          jLabel1.setText("Gesucht wurde:  "+SearchField.getText());
+      //if(evt.getKeyCode()== KeyEvent.VK_ENTER)                                  // Suche + ENTER 
+         // jLabel1.setText("Gesucht wurde:  "+SearchField.getText());
       
       
     }//GEN-LAST:event_SearchFieldKeyPressed
@@ -210,16 +189,30 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_BuchButton1ActionPerformed
 
     private void BuchButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuchButton1MouseClicked
-        jpAddBook.setVisible(true);                                              // Fenster für Buch + anzeigen lassen      !!!!
+         jpAddBook bookpanel = new jpAddBook();
+         multipanel.setVisible(true); 
+         multipanel.setLayout(new java.awt.BorderLayout()); 
+         multipanel.add(bookpanel); 
+         multipanel.validate();
     }//GEN-LAST:event_BuchButton1MouseClicked
 
     private void PDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PDFMouseClicked
-       jpAddBook.setVisible(true);                                              // Fenster für PDfs anzeigen lassen      !!!!
+      JPanel jpAddPDF = new JPanel();
+     jpAddPDF.setLayout( new BoxLayout(jpAddPDF, BoxLayout.PAGE_AXIS ) );
+
+        
+                                                    // Fenster für PDfs anzeigen lassen      !!!!
     }//GEN-LAST:event_PDFMouseClicked
 
     private void BooklistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BooklistMouseClicked
-       Booklist.getSelectedValue();                                             // Aus Buchliste wählen
-        jLabel2.setText("Gewählt wurde:  "+Booklist.getSelectedValue());        // Gewähltes Buch anzeigen lassen
+       Booklist.getSelectedValue(); 
+       jpAddBook bookpanel = new jpAddBook();
+       multipanel.setVisible(true); 
+         multipanel.setLayout(new java.awt.BorderLayout()); 
+         multipanel.add(bookpanel); 
+         multipanel.validate();
+        // Aus Buchliste wählen
+        //jLabel2.setText("Gewählt wurde:  "+Booklist.getSelectedValue());        // Gewähltes Buch anzeigen lassen
        
        
     }//GEN-LAST:event_BooklistMouseClicked
@@ -261,15 +254,13 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel BookPDFs;
-    private javax.swing.JPanel Bookinfo;
     private javax.swing.JList Booklist;
     private javax.swing.JButton BuchButton1;
     private javax.swing.JButton PDF;
     private javax.swing.JButton Search;
     private javax.swing.JTextField SearchField;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel multipanel;
     // End of variables declaration//GEN-END:variables
 }
