@@ -11,5 +11,13 @@ package booklink;
  * @author Christian Zwirlein <christian.zwirlein@stud.fh-rosenheim.de>
  */
 public class TestKlasse {
+    /**
+     * 
+     * @param sPathName Ein Array an Pfadnamen, die die PDFs enthalten 
+     */
+    public void savePDF(String sPathName) {
+    
+    
+    }
     
 }
