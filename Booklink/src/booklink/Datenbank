@@ -1,18 +1,42 @@
 
 import java.sql.*;
 
+//
+// Verwendung der Datenbank erfolgt nach folgendem Schema:
+// Methoden:
+//	schreibeDB: Buch in Datenbank schreiben
+//	loescheDB: Buch aus Datenbank entfernen
+//	ausgabeDB: Ausgabe der Bücher aus der Datenbank
+//	exit: Verbindung mit Datenbank trennen
+//	initDBConnection: Verbindung mit Datenbank herstellen
+//
+// Beispiel:
+//		DBController dbc = DBController.getInstance();				//Instanz holen
+//		dbc.initDBConnection();							//Verbindung herstellen
+//		dbc.schreibeDB("Basti", "Testbuch", "2014-01-03", 123456789,		//Methodenaufruf
+//				"Springer", 3, "5 Wochen");	
+//		dbc.exit();								//Verbindung trennen
+//		DBController dbc2 = DBController.getInstance();
+//		dbc2.initDBConnection();
+//		dbc2.schreibeDB("Basti3", "Testbuch3", "2012-01-03", 11111112,"Springer", 2, "5 Wochen");
+//		dbc2.exit();
+//
+//
+// Für jeden Methodenaufruf sollte eine neue Verbindung hergestellt werden und die vorherige geschlossen werden !!!
+
+
 public class DBController {
 	private static final DBController dbcontroller = new DBController();
-	private static Connection connection;
+	public static Connection connection;
 	private static final String DB_PATH = System.getProperty("user.home") + "/"
 			+ "Booklink.db";
 
 	static {
 		try {
 			Class.forName("org.sqlite.JDBC");
-		} catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException fehler) {
 			System.err.println("Fehler beim Laden des JDBC-Treibers");
-			e.printStackTrace();
+			fehler.printStackTrace();
 		}
 	}
 
@@ -23,67 +47,56 @@ public class DBController {
 		return dbcontroller;
 	}
 
-	public void initDBConnection() { 
+	public boolean initDBConnection() { 
 		try {
 			if (connection != null)
-				return;
+				{return false;}
 			System.out.println("Verbindung zu Datenbank wird hergestellt...");
 			connection = DriverManager.getConnection("jdbc:sqlite:" + DB_PATH);
 			if (!connection.isClosed())
+			{
 				System.out.println("...Verbindung hergestellt");
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-
-		Runtime.getRuntime().addShutdownHook(new Thread() {
-			public void run() {
-				try {
-					if (connection.isClosed() && connection != null) {
-						connection.close();
-						if (connection.isClosed())
-							System.out
-									.println("Verbindung mit Datenbank geschlossen!");
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+				return true;
 			}
-		});
+			} catch (SQLException fehler) {
+			throw new RuntimeException(fehler);
+		}
+		return false;
 	}
 
 	public void schreibeDB(String autor,
-			String titel, // private
+			String titel, 
 			String erscheinungsjahr, int isbn, String verlag, int auflage,
 			String leihfrist) {
 		try {
-			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("CREATE TABLE IF NOT EXISTS books (Autor, Titel, Veröffentlichung, ISBN,  Verlag, Auflage, Leihfrist);");
-			PreparedStatement ps = connection
+			Statement erstelleDatenbank = connection.createStatement();
+			erstelleDatenbank.executeUpdate("CREATE TABLE IF NOT EXISTS books (Autor, Titel, Veröffentlichung, ISBN,  Verlag, Auflage, Leihfrist);");
+			PreparedStatement schreibeEinträge = connection
 					.prepareStatement("INSERT INTO books VALUES (?, ?, ?, ?, ?, ?, ?);");
 
 			boolean vorhanden = false;
-			PreparedStatement st2 = connection
+			PreparedStatement isbnSuche = connection
 					.prepareStatement("select Titel from books where ISBN = ?");
-			st2.setInt(1, isbn);
-			ResultSet rs3 = st2.executeQuery();
-			while (rs3.next()) {
-				System.out.println(rs3.getString(1));
-				if (rs3.getString(1) != null) {
+			isbnSuche.setInt(1, isbn);
+			ResultSet Suchresultate = isbnSuche.executeQuery();
+			while (Suchresultate.next()) {
+				System.out.println(Suchresultate.getString(1));
+				if (Suchresultate.getString(1) != null) {
 					vorhanden = true;
 				}
 			}
-			rs3.close();
-			st2.close();
+			Suchresultate.close();
+			isbnSuche.close();
 
 			if (vorhanden != true) {
-				ps.setString(1, autor);
-				ps.setString(2, titel);
-				ps.setDate(3, Date.valueOf(erscheinungsjahr));
-				ps.setInt(4, isbn);
-				ps.setString(5, verlag);
-				ps.setInt(6, auflage);
-				ps.setString(7, leihfrist);
-				ps.addBatch();
+				schreibeEinträge.setString(1, autor);
+				schreibeEinträge.setString(2, titel);
+				schreibeEinträge.setDate(3, Date.valueOf(erscheinungsjahr));
+				schreibeEinträge.setInt(4, isbn);
+				schreibeEinträge.setString(5, verlag);
+				schreibeEinträge.setInt(6, auflage);
+				schreibeEinträge.setString(7, leihfrist);
+				schreibeEinträge.addBatch();
 			}
 
 			if (vorhanden == true) {
@@ -91,12 +104,12 @@ public class DBController {
 			}
 
 			connection.setAutoCommit(false);
-			ps.executeBatch();
+			schreibeEinträge.executeBatch();
 			connection.setAutoCommit(true);
-			connection.close();
-		} catch (SQLException e) {
+			
+		} catch (SQLException fehler) {
 			System.err.println("Fehler bei Datenbank-Abfrage");
-			e.printStackTrace();
+			fehler.printStackTrace();
 		}
 	}
 
@@ -116,11 +129,18 @@ public class DBController {
 			}
 
 			rs.close();
-			connection.close();
-		} catch (SQLException e) {
+			stmt.close();
+		} catch (SQLException fehler) {
 			System.err.println("Fehler bei Ausgabe");
-			e.printStackTrace();
+			fehler.printStackTrace();
 		}
+	}
+	
+	public void exit() throws SQLException
+	{
+		connection.close();
+		connection = null;	
+		
 	}
 
 	public void loescheBuch(int isbn) { 
@@ -130,28 +150,11 @@ public class DBController {
 			stmt5.execute(query);
 			System.out.println("Das Buch mit der ISBN = " + isbn
 					+ " wurde gelöscht!");
-			connection.close();
-		} catch (SQLException e) {
+			stmt5.close();
+		} catch (SQLException fehler) {
 			System.err.println("Fehler beim Löschen");
-			e.printStackTrace();
+			fehler.printStackTrace();
 		}
 	}
-
-	public static void main(String[] args) {
-		DBController dbc = DBController.getInstance();
-		dbc.initDBConnection();
-		dbc.schreibeDB("Mr. X", "Testbuch", "2014-01-03", 123456789,
-				"Springer", 3, "5 Wochen");
-		DBController dbc2 = DBController.getInstance();
-		dbc2.initDBConnection();
-		dbc2.schreibeDB("Horst", "Testbuch3", "2012-01-03", 11111112,
-				"Springer", 2, "5 Wochen");
-		DBController dbc3 = DBController.getInstance();
-		dbc3.initDBConnection();
-		dbc3.loescheBuch(11111112);
-		DBController dbc4 = DBController.getInstance();
-		dbc4.initDBConnection();
-		dbc4.ausgabeDB();
-	}
+	
 }
-
