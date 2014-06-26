@@ -278,9 +278,23 @@ public class jpAddBook extends javax.swing.JPanel {
     public void setBookTitel(String title) {
         this.tfBooktitel.setText(title);
     }
-    
-   
+    public void setComment(String comment) {
+        this.tfComment.setText(comment);
+    }
+   public void setEdition(String edition) {
+         this.tfEdition.setText(edition);
+    }
+   public void setLendingPeriod(String period) {
+          this.tfLendingPeriod.setText(period);
+    }
+   public void setPress(String press) {
+           this.tfPress.setText(press);
+    }
+   public void setYear(String year) {
+         this.tfYear.setText(year);
+    }
  
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
