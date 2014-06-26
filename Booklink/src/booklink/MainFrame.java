@@ -32,7 +32,7 @@ public class MainFrame extends javax.swing.JFrame {
         Search = new javax.swing.JButton();
         BuchButton1 = new javax.swing.JButton();
         multipanel = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        pdfpanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Booklink");
@@ -103,14 +103,14 @@ public class MainFrame extends javax.swing.JFrame {
             .addGap(0, 309, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pdfpanelLayout = new javax.swing.GroupLayout(pdfpanel);
+        pdfpanel.setLayout(pdfpanelLayout);
+        pdfpanelLayout.setHorizontalGroup(
+            pdfpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pdfpanelLayout.setVerticalGroup(
+            pdfpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 158, Short.MAX_VALUE)
         );
 
@@ -135,7 +135,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(multipanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(pdfpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
@@ -152,7 +152,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(multipanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pdfpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2))
                 .addContainerGap())
         );
@@ -189,7 +189,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_BuchButton1ActionPerformed
 
     private void BuchButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuchButton1MouseClicked
-         jpAddBook bookpanel = new jpAddBook();
+         jpAddBook bookpanel = new jpAddBook(false);
          multipanel.setVisible(true); 
          multipanel.setLayout(new java.awt.BorderLayout()); 
          multipanel.add(bookpanel); 
@@ -197,16 +197,20 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_BuchButton1MouseClicked
 
     private void PDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PDFMouseClicked
-      JPanel jpAddPDF = new JPanel();
-     jpAddPDF.setLayout( new BoxLayout(jpAddPDF, BoxLayout.PAGE_AXIS ) );
-
+     // jpAddPDF pdfpanel = new jpAddPDF();
+     // pdfpanel.setAuthor(Booklist.getSelectedValue().toString());
+     //  pdfpanel.setVisible(true); 
+     //    multipanel.setLayout(new java.awt.BorderLayout()); 
+      //   multipanel.add(pdfpanel); 
+      //   multipanel.validate();
         
                                                     // Fenster für PDfs anzeigen lassen      !!!!
     }//GEN-LAST:event_PDFMouseClicked
 
     private void BooklistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BooklistMouseClicked
-       Booklist.getSelectedValue(); 
-       jpAddBook bookpanel = new jpAddBook();
+        
+       jpAddBook bookpanel = new jpAddBook(true);
+       bookpanel.setAuthor(Booklist.getSelectedValue().toString());
        multipanel.setVisible(true); 
          multipanel.setLayout(new java.awt.BorderLayout()); 
          multipanel.add(bookpanel); 
@@ -259,8 +263,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton PDF;
     private javax.swing.JButton Search;
     private javax.swing.JTextField SearchField;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel multipanel;
+    private javax.swing.JPanel pdfpanel;
     // End of variables declaration//GEN-END:variables
 }
