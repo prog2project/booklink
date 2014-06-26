@@ -6,7 +6,17 @@
 
 package booklink.gui;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.InputVerifier;
+import javax.swing.JComponent;
+import javax.swing.text.JTextComponent;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -20,24 +30,24 @@ public class jpAddBook extends javax.swing.JPanel {
      */
     public jpAddBook(boolean showInfo) {
         initComponents();
+        addDateFormatter();
+        
+        btnOk.setVisible(true);
+        btnEdit.setVisible(true);
+        btnCancel.setVisible(true);
         
         lblTitelAndAutorError.setVisible(false);
         lblBooktitelError.setVisible(false);
         lblAuthorError.setVisible(false); 
         
         if (showInfo) {
-            this.tfAuthor.setEditable(false);
-            this.tfBooktitel.setEditable(false);
-            this.tfComment.setEditable(false);
-            this.tfEdition.setEditable(false);
-            this.tfISBN.setEditable(false);
-            this.tfLendingPeriod.setEditable(false);
-            this.tfPress.setEditable(false);
-            this.tfYear.setEditable(false);
-            this.btnCancel.setVisible(false);
-            this.btnOk.setVisible(false);
+
+            disableTextFields();
+            this.btnCancel.setEnabled(false);
+            this.btnOk.setEnabled(false);
+
         } else {
-            this.btnEdit.setVisible(false);
+            this.btnEdit.setEnabled(false);
         }
     }
 
@@ -137,17 +147,31 @@ public class jpAddBook extends javax.swing.JPanel {
             }
         });
 
-        tfISBN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        try {
+            tfISBN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-#-###-#####-#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         tfYear.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
 
-        tfLendingPeriod.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        tfLendingPeriod.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        tfLendingPeriod.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfLendingPeriodKeyTyped(evt);
+            }
+        });
 
         btnEdit.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnEdit.setText("Editieren");
         btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnEditMouseClicked(evt);
+            }
+        });
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
             }
         });
 
@@ -284,11 +308,17 @@ public class jpAddBook extends javax.swing.JPanel {
 
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
         // TODO add your handling code here:
-         this.setVisible(false);
+        disableTextFields();
+        this.btnEdit.setEnabled(true);
+        this.btnCancel.setEnabled(false);
+        this.btnOk.setEnabled(false);
+        
+         
     }//GEN-LAST:event_btnCancelMouseClicked
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void tfAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAuthorActionPerformed
@@ -305,12 +335,61 @@ public class jpAddBook extends javax.swing.JPanel {
         this.tfLendingPeriod.setEditable(true);
         this.tfPress.setEditable(true);
         this.tfYear.setEditable(true);
-        this.btnOk.setVisible(true);
-        this.btnEdit.setVisible(false);
-        this.btnCancel.setVisible(true);
+        
+        this.btnCancel.setEnabled(true);
+        this.btnOk.setEnabled(true);
+        this.btnEdit.setEnabled(false);
+
         
     }//GEN-LAST:event_btnEditMouseClicked
 
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void tfLendingPeriodKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfLendingPeriodKeyTyped
+      /*  tfLendingPeriod.setInputVerifier(new InputVerifier() {
+            private SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+            public boolean verify(JComponent input) {
+                boolean res = true;
+                JTextComponent tc = (JTextComponent)input;
+                String newContent = tc.getText();
+                if (newContent.length() >= 6) {
+                    try {
+                        Date d = sdf.parse(newContent);
+                        
+                        if (!sdf.format(d).equals(newContent)) {
+                            tc.selectAll();
+                            res = false;
+                        }
+                    }
+                    catch (ParseException ex) {
+                        tc.selectAll();
+                        res = false;
+                    }            
+                }
+                return res;
+            }
+        });
+        if (tfLendingPeriod.getInputVerifier().verify(this.tfLendingPeriod) == true) {
+         this.tfLendingPeriod.setBackground(Color.green);
+        } else {
+        this.tfLendingPeriod.setBackground(Color.red);
+        } */
+    }//GEN-LAST:event_tfLendingPeriodKeyTyped
+
+    private void disableTextFields() {
+            this.tfAuthor.setEditable(false);
+            this.tfBooktitel.setEditable(false);
+            this.tfComment.setEditable(false);
+            this.tfEdition.setEditable(false);
+            this.tfISBN.setEditable(false);
+            this.tfLendingPeriod.setEditable(false);
+            this.tfPress.setEditable(false);
+            this.tfYear.setEditable(false);
+    
+    }
+    
     public void setAuthor(String text){
     this.tfAuthor.setText(text);
     }
@@ -337,6 +416,14 @@ public class jpAddBook extends javax.swing.JPanel {
        this.tfISBN.setText(isbn);
    }
  
+   private void addDateFormatter() {
+        try { 
+            MaskFormatter mf = new MaskFormatter("##.##.####");
+            mf.install(tfLendingPeriod);
+        } catch (ParseException ex) {
+            Logger.getLogger(jpAddBook.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   }
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
