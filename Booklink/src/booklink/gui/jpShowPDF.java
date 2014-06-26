@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package booklink;
+package booklink.gui;
 
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;

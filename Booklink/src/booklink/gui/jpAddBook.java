@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package booklink;
+package booklink.gui;
 
 import java.awt.Component;
 
@@ -26,18 +26,18 @@ public class jpAddBook extends javax.swing.JPanel {
         lblAuthorError.setVisible(false); 
         
         if (showInfo) {
-        this.tfAuthor.setEditable(false);
-        this.tfBooktitel.setEditable(false);
-        this.tfComment.setEditable(false);
-        this.tfEdition.setEditable(false);
-        this.tfISBN.setEditable(false);
-        this.tfLendingPeriod.setEditable(false);
-        this.tfPress.setEditable(false);
-        this.tfYear.setEditable(false);
-        this.btnCancel.setVisible(false);
-        this.btnOk.setVisible(false);
+            this.tfAuthor.setEditable(false);
+            this.tfBooktitel.setEditable(false);
+            this.tfComment.setEditable(false);
+            this.tfEdition.setEditable(false);
+            this.tfISBN.setEditable(false);
+            this.tfLendingPeriod.setEditable(false);
+            this.tfPress.setEditable(false);
+            this.tfYear.setEditable(false);
+            this.btnCancel.setVisible(false);
+            this.btnOk.setVisible(false);
         } else {
-        this.btnEdit.setVisible(false);
+            this.btnEdit.setVisible(false);
         }
     }
 
