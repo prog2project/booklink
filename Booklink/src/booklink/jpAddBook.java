@@ -55,7 +55,7 @@ public class jpAddBook extends javax.swing.JPanel {
         lblTitelAndAutorError = new javax.swing.JLabel();
         tfBooktitel = new javax.swing.JFormattedTextField();
         tfAuthor = new javax.swing.JFormattedTextField();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        tfISBN = new javax.swing.JFormattedTextField();
         tfPress = new javax.swing.JFormattedTextField();
         tfYear = new javax.swing.JFormattedTextField();
         tfEdition = new javax.swing.JFormattedTextField();
@@ -126,7 +126,7 @@ public class jpAddBook extends javax.swing.JPanel {
             }
         });
 
-        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        tfISBN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
 
         tfYear.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
 
@@ -155,7 +155,7 @@ public class jpAddBook extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfBooktitel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfPress, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,7 +195,7 @@ public class jpAddBook extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblISBN)
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLendingPeriod)
                     .addComponent(tfLendingPeriod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -285,13 +285,15 @@ public class jpAddBook extends javax.swing.JPanel {
    public void setYear(String year) {
          this.tfYear.setText(year);
     }
+   public void setISBN(String isbn) {
+       this.tfISBN.setText(isbn);
+   }
  
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnOk;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel lblAuthor;
     private javax.swing.JLabel lblAuthorError;
     private javax.swing.JLabel lblBooktitel;
@@ -307,6 +309,7 @@ public class jpAddBook extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField tfBooktitel;
     private javax.swing.JFormattedTextField tfComment;
     private javax.swing.JFormattedTextField tfEdition;
+    private javax.swing.JFormattedTextField tfISBN;
     private javax.swing.JFormattedTextField tfLendingPeriod;
     private javax.swing.JFormattedTextField tfPress;
     private javax.swing.JFormattedTextField tfYear;
