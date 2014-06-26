@@ -6,6 +6,9 @@
 
 package booklink;
 
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author Kerstin
@@ -17,6 +20,8 @@ public class jpAddPDF extends javax.swing.JPanel {
      */
     public jpAddPDF() {
         initComponents();
+        FileFilter filter = new FileNameExtensionFilter("PDF Dateien",  "pdf"); 
+        this.jFileChooser1.setFileFilter(filter);
     }
 
     /**
