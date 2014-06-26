@@ -14,13 +14,18 @@ public class jpAddBook extends javax.swing.JPanel {
 
     /**
      * Creates new form jpAddBook
+     * @param showInfo Determines switch between add/show functionality
      */
-    public jpAddBook() {
+    public jpAddBook(boolean showInfo) {
         initComponents();
         
         lblTitelAndAutorError.setVisible(false);
         lblBooktitelError.setVisible(false);
         lblAuthorError.setVisible(false); 
+        if (showInfo) {
+        this.btnCancel.setVisible(false);
+        this.btnOk.setVisible(false);
+        }
     }
 
     /**
@@ -264,6 +269,13 @@ public class jpAddBook extends javax.swing.JPanel {
 
     public void setAuthor(String text){
     this.tfAuthor.setText(text);
+    }
+    
+    public void showInfo() {
+        // Show Info heisst, dass nur Informationen angezeigt werden, und daher
+        // die OK und Abbrechen funktionen nicht benötigt werden.
+        
+    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
