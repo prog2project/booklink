@@ -196,12 +196,11 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_BuchButton1MouseClicked
 
     private void PDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PDFMouseClicked
-     // jpAddPDF pdfpanel = new jpAddPDF();
-     // pdfpanel.setAuthor(Booklist.getSelectedValue().toString());
-     //  pdfpanel.setVisible(true); 
-     //    multipanel.setLayout(new java.awt.BorderLayout()); 
-      //   multipanel.add(pdfpanel); 
-      //   multipanel.validate();
+      jpAddPDF PDFpanel = new jpAddPDF();
+      pdfpanel.setVisible(true); 
+      pdfpanel.setLayout(new java.awt.BorderLayout()); 
+      pdfpanel.add(PDFpanel); 
+      pdfpanel.validate();
         
                                                     // Fenster für PDfs anzeigen lassen      !!!!
     }//GEN-LAST:event_PDFMouseClicked
@@ -210,6 +209,7 @@ public class MainFrame extends javax.swing.JFrame {
         
        jpAddBook bookpanel = new jpAddBook(true);
        bookpanel.setAuthor(Booklist.getSelectedValue().toString());
+       bookpanel.setBookTitel("50 shades of glitzerfisch");
        multipanel.setVisible(true); 
          multipanel.setLayout(new java.awt.BorderLayout()); 
          multipanel.add(bookpanel); 
