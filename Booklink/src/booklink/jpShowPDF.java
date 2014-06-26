@@ -13,7 +13,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author Kerstin
  */
-public class jpShowPDF extends jpAddPDF {
+public class jpShowPDF extends javax.swing.JPanel {
 
     /**
      * Creates new form jpAddPDF

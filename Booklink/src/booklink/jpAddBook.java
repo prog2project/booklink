@@ -26,8 +26,11 @@ public class jpAddBook extends javax.swing.JPanel {
         lblAuthorError.setVisible(false); 
         
         if (showInfo) {
+        this.tfAuthor.setEditable(false);
         this.btnCancel.setVisible(false);
         this.btnOk.setVisible(false);
+        } else {
+        this.btnEdit.setVisible(false);
         }
     }
 
@@ -61,6 +64,7 @@ public class jpAddBook extends javax.swing.JPanel {
         tfEdition = new javax.swing.JFormattedTextField();
         tfLendingPeriod = new javax.swing.JFormattedTextField();
         tfComment = new javax.swing.JFormattedTextField();
+        btnEdit = new javax.swing.JButton();
 
         btnOk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnOk.setText("OK");
@@ -132,6 +136,13 @@ public class jpAddBook extends javax.swing.JPanel {
 
         tfLendingPeriod.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
 
+        btnEdit.setText("jButton1");
+        btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -172,6 +183,8 @@ public class jpAddBook extends javax.swing.JPanel {
                 .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEdit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -212,8 +225,9 @@ public class jpAddBook extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
-                    .addComponent(btnOk))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(btnOk)
+                    .addComponent(btnEdit))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -263,6 +277,14 @@ public class jpAddBook extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfAuthorActionPerformed
 
+    private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
+        // Alle Felder wieder auf enabled
+        this.tfAuthor.setEditable(true);
+        this.btnOk.setVisible(true);
+        this.btnEdit.setVisible(false);
+        
+    }//GEN-LAST:event_btnEditMouseClicked
+
     public void setAuthor(String text){
     this.tfAuthor.setText(text);
     }
@@ -293,6 +315,7 @@ public class jpAddBook extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnOk;
     private javax.swing.JLabel lblAuthor;
     private javax.swing.JLabel lblAuthorError;
