@@ -50,7 +50,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         Booklist.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Grundlagen der Informatik", "Programmieren 1", "Programmieren 2", "Mathematik" };
+            String[] strings = { "Grundlagen der Informatik; Clark Kent, Lois Lane", "Programmieren 1; Thomas Müller, Philipp Lahm", "Programmieren 2", "Mathematik" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -107,7 +107,7 @@ public class MainFrame extends javax.swing.JFrame {
         pdfpanel.setLayout(pdfpanelLayout);
         pdfpanelLayout.setHorizontalGroup(
             pdfpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 548, Short.MAX_VALUE)
         );
         pdfpanelLayout.setVerticalGroup(
             pdfpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,11 +119,9 @@ public class MainFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                    .addComponent(SearchField))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(PDF)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -132,10 +130,11 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(BuchButton1)
                         .addGap(0, 388, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(multipanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pdfpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pdfpanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(multipanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(

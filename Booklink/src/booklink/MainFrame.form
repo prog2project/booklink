@@ -28,12 +28,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jScrollPane2" pref="141" max="32767" attributes="0"/>
-                  <Component id="SearchField" max="32767" attributes="0"/>
-              </Group>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="SearchField" min="-2" pref="141" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="PDF" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -43,10 +40,11 @@
                       <EmptySpace min="0" pref="388" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="multipanel" max="32767" attributes="0"/>
-                          <Component id="pdfpanel" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" pref="214" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="pdfpanel" alignment="1" max="32767" attributes="0"/>
+                          <Component id="multipanel" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -94,8 +92,8 @@
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="4">
-                <StringItem index="0" value="Grundlagen der Informatik"/>
-                <StringItem index="1" value="Programmieren 1"/>
+                <StringItem index="0" value="Grundlagen der Informatik; Clark Kent, Lois Lane"/>
+                <StringItem index="1" value="Programmieren 1; Thomas M&#xfc;ller, Philipp Lahm"/>
                 <StringItem index="2" value="Programmieren 2"/>
                 <StringItem index="3" value="Mathematik"/>
               </StringArray>
@@ -153,7 +151,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="548" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">

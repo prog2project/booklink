@@ -6,6 +6,8 @@
 
 package booklink;
 
+import java.awt.Component;
+
 /**
  *
  * @author Kerstin
@@ -22,6 +24,7 @@ public class jpAddBook extends javax.swing.JPanel {
         lblTitelAndAutorError.setVisible(false);
         lblBooktitelError.setVisible(false);
         lblAuthorError.setVisible(false); 
+        
         if (showInfo) {
         this.btnCancel.setVisible(false);
         this.btnOk.setVisible(false);
@@ -182,7 +185,7 @@ public class jpAddBook extends javax.swing.JPanel {
                     .addComponent(lblYear)
                     .addComponent(tfBooktitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEdition)
                     .addComponent(lblAuthor)
@@ -257,6 +260,7 @@ public class jpAddBook extends javax.swing.JPanel {
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
         // TODO add your handling code here:
          this.setVisible(false);
+         
     }//GEN-LAST:event_btnCancelMouseClicked
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -271,12 +275,12 @@ public class jpAddBook extends javax.swing.JPanel {
     this.tfAuthor.setText(text);
     }
     
-    public void showInfo() {
-        // Show Info heisst, dass nur Informationen angezeigt werden, und daher
-        // die OK und Abbrechen funktionen nicht benötigt werden.
-        
-    
+    public void setBookTitel(String title) {
+        this.tfBooktitel.setText(title);
     }
+    
+   
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
