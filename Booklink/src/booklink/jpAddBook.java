@@ -20,9 +20,7 @@ public class jpAddBook extends javax.swing.JPanel {
         
         lblTitelAndAutorError.setVisible(false);
         lblBooktitelError.setVisible(false);
-        lblAuthorError.setVisible(false);
-        
-        
+        lblAuthorError.setVisible(false); 
     }
 
     /**
@@ -264,6 +262,9 @@ public class jpAddBook extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfAuthorActionPerformed
 
+    public void setAuthor(String text){
+    this.tfAuthor.setText(text);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
