@@ -115,21 +115,21 @@ public class DBController {
 
 	public void ausgabeDB() { 
 		try {
-			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM books;");
-			while (rs.next()) {
-				System.out.println("Autor = " + rs.getString("Autor"));
-				System.out.println("Titel = " + rs.getString("Titel"));
+			Statement ausgabeStatement = connection.createStatement();
+			ResultSet ausgabeResultate = ausgabeStatement.executeQuery("SELECT * FROM books;");
+			while (ausgabeResultate.next()) {
+				System.out.println("Autor = " + ausgabeResultate.getString("Autor"));
+				System.out.println("Titel = " + ausgabeResultate.getString("Titel"));
 				System.out.println("Erscheinungsdatum = "
-						+ rs.getDate("Veröffentlichung"));
-				System.out.println("ISBN = " + rs.getInt("ISBN"));
-				System.out.println("Verlag = " + rs.getString("Verlag"));
-				System.out.println("Auflage = " + rs.getInt("Auflage"));
-				System.out.println("Leihfrist = " + rs.getString("Leihfrist"));
+						+ ausgabeResultate.getDate("Veröffentlichung"));
+				System.out.println("ISBN = " + ausgabeResultate.getInt("ISBN"));
+				System.out.println("Verlag = " + ausgabeResultate.getString("Verlag"));
+				System.out.println("Auflage = " + ausgabeResultate.getInt("Auflage"));
+				System.out.println("Leihfrist = " + ausgabeResultate.getString("Leihfrist"));
 			}
 
-			rs.close();
-			stmt.close();
+			ausgabeResultate.close();
+			ausgabeStatement.close();
 		} catch (SQLException fehler) {
 			System.err.println("Fehler bei Ausgabe");
 			fehler.printStackTrace();
@@ -146,11 +146,11 @@ public class DBController {
 	public void loescheBuch(int isbn) { 
 		String query = "delete from books where ISBN=" + isbn;
 		try {
-			Statement stmt5 = connection.createStatement();
-			stmt5.execute(query);
+			Statement loeschenStatement = connection.createStatement();
+			loeschenStatement.execute(query);
 			System.out.println("Das Buch mit der ISBN = " + isbn
 					+ " wurde gelöscht!");
-			stmt5.close();
+			loeschenStatement.close();
 		} catch (SQLException fehler) {
 			System.err.println("Fehler beim Löschen");
 			fehler.printStackTrace();
