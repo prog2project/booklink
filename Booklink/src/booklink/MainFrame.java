@@ -41,7 +41,6 @@ public class MainFrame extends javax.swing.JFrame {
         setTitle("Booklink");
         setBackground(new java.awt.Color(102, 153, 0));
         setMinimumSize(new java.awt.Dimension(888, 600));
-        setPreferredSize(new java.awt.Dimension(888, 600));
         getContentPane().setLayout(null);
 
         SearchField.addActionListener(new java.awt.event.ActionListener() {
@@ -55,8 +54,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(SearchField);
-        SearchField.setBounds(0, 0, 141, 39);
+        SearchField.setBounds(30, 0, 170, 40);
 
+        PDF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         PDF.setText("Skript/PDF +");
         PDF.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -69,8 +69,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(PDF);
-        PDF.setBounds(147, 0, 93, 23);
+        PDF.setBounds(470, 0, 140, 40);
 
+        Search.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         Search.setText("Search");
         Search.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -78,9 +79,11 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Search);
-        Search.setBounds(246, 0, 65, 23);
+        Search.setBounds(200, 0, 120, 40);
 
+        BuchButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         BuchButton1.setText("Buch +");
+        BuchButton1.setMaximumSize(new java.awt.Dimension(23, 23));
         BuchButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BuchButton1MouseClicked(evt);
@@ -92,16 +95,17 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BuchButton1);
-        BuchButton1.setBounds(317, 0, 67, 23);
+        BuchButton1.setBounds(330, 0, 130, 40);
 
         multipanel.setLayout(new java.awt.BorderLayout());
         getContentPane().add(multipanel);
-        multipanel.setBounds(237, 45, 640, 220);
+        multipanel.setBounds(270, 50, 700, 220);
 
         pdfpanel.setLayout(new java.awt.BorderLayout());
         getContentPane().add(pdfpanel);
-        pdfpanel.setBounds(237, 333, 640, 190);
+        pdfpanel.setBounds(270, 310, 710, 210);
 
+        Booklist.setBackground(new java.awt.Color(229, 255, 243));
         Booklist.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Grundlagen der Informatik; Clark Kent, Lois Lane", "Programmieren 1; Thomas Müller, Philipp Lahm", "Programmieren 2", "Mathematik" };
             public int getSize() { return strings.length; }
@@ -115,7 +119,7 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane2.setViewportView(Booklist);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(0, 45, 226, 489);
+        jScrollPane2.setBounds(30, 50, 230, 489);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -170,7 +174,16 @@ public class MainFrame extends javax.swing.JFrame {
         
        jpAddBook bookpanel = new jpAddBook(true);
        bookpanel.setAuthor(Booklist.getSelectedValue().toString());
-       bookpanel.setBookTitel("50 shades of glitzerfisch");
+     //  Booklist.addListSelectionListener();
+       
+     //  bookpanel.setBooktitel(Booklist.getSelectedValue().toString());
+       bookpanel.setComment(Booklist.getSelectedValue().toString());
+       bookpanel.setEdition(Booklist.getSelectedValue().toString());
+       bookpanel.setISBN(Booklist.getSelectedValue().toString());
+       bookpanel.setLendingPeriod(Booklist.getSelectedValue().toString());
+       bookpanel.setPress(Booklist.getSelectedValue().toString());
+       bookpanel.setYear(Booklist.getSelectedValue().toString());
+       
        multipanel.setVisible(true); 
          multipanel.setLayout(new java.awt.BorderLayout()); 
          multipanel.add(bookpanel); 
