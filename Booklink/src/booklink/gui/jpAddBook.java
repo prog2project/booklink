@@ -19,7 +19,9 @@ import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.MaskFormatter;
 import booklink.controller.*;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,6 +29,7 @@ import javax.swing.JFrame;
  */
 public class jpAddBook extends javax.swing.JPanel {
     MainFrame myparent;
+    private int myid;
 
     /**
      * Creates new form jpAddBook
@@ -34,6 +37,7 @@ public class jpAddBook extends javax.swing.JPanel {
      */
     public jpAddBook(MainFrame parent, boolean showInfo) {
         this.myparent = parent;
+        this.myid = parent.getID();
         initComponents();
         addDateFormatter();
         
@@ -50,6 +54,7 @@ public class jpAddBook extends javax.swing.JPanel {
             disableTextFields();
             this.btnCancel.setEnabled(false);
             this.btnOk.setEnabled(false);
+            myparent.setGoodStatus("Infos geladen!");
 
         } else {
             this.btnEdit.setEnabled(false);
@@ -87,6 +92,7 @@ public class jpAddBook extends javax.swing.JPanel {
         tfLendingPeriod = new javax.swing.JFormattedTextField();
         tfComment = new javax.swing.JFormattedTextField();
         btnEdit = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         btnOk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnOk.setText("OK");
@@ -180,14 +186,23 @@ public class jpAddBook extends javax.swing.JPanel {
             }
         });
 
+        btnDelete.setText("Löschen");
+        btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDelete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEdit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -273,7 +288,8 @@ public class jpAddBook extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
                     .addComponent(btnOk)
-                    .addComponent(btnEdit))
+                    .addComponent(btnEdit)
+                    .addComponent(btnDelete))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -314,9 +330,13 @@ public class jpAddBook extends javax.swing.JPanel {
                 "1999", 0, "Verlag", 0, "Leihfrist"
         );
         if(bSuccess) {
-           myparent.initDisplayTable();
+           // Wenn alles gut Läuft:
+            myparent.initDisplayTable();
+            myparent.setGoodStatus("Buch erfolgreich angelegt!");
+        } else {
+            myparent.setErrorStatus(bkctrl.getErrorText());
         }
-        String test = "Blubb";
+        
         
         
         
@@ -395,6 +415,25 @@ public class jpAddBook extends javax.swing.JPanel {
         } */
     }//GEN-LAST:event_tfLendingPeriodKeyTyped
 
+    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog (myparent, "Soll das Buch wirklich gelöscht werden?","Warning",dialogButton);
+        if(dialogResult == JOptionPane.YES_OPTION){
+            int id = myparent.getID();
+            if(id > 0) {
+            BookController ctrl = BookController.getInstance();
+            boolean success = ctrl.deleteBook(id);
+            if(!success) {
+             myparent.setErrorStatus("ID:" +id + "konnte nicht gelöscht werden!");
+            } else {
+                myparent.setGoodStatus("Buch mit ID: " +id  +" gelöscht." );
+                myparent.initDisplayTable();
+            }
+        }
+        }
+        
+    }//GEN-LAST:event_btnDeleteMouseClicked
+
     private void disableTextFields() {
             this.tfAuthor.setEditable(false);
             this.tfBooktitel.setEditable(false);
@@ -432,7 +471,10 @@ public class jpAddBook extends javax.swing.JPanel {
    public void setISBN(String isbn) {
        this.tfISBN.setText(isbn);
    }
- 
+   
+   public void setID(int id) {
+       this.myid = id;
+   }
    private void addDateFormatter() {
         try { 
             MaskFormatter mf = new MaskFormatter("##.##.####");
@@ -445,6 +487,7 @@ public class jpAddBook extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnOk;
     private javax.swing.JLabel lblAuthor;

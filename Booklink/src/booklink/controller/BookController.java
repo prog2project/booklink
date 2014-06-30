@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class BookController {
     
     private static final BookController bookcontroller = new BookController();
+    private String errorText;
     
     private BookController() {
 	}
@@ -57,14 +58,38 @@ public class BookController {
             DBController dbctrl = DBController.getInstance();
             if(dbctrl.initDBConnection()) {
                 bSuccess = dbctrl.addBook(autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
+                if(!bSuccess) {
+                   this.errorText = dbctrl.getErrorText();
+                } 
             }
             dbctrl.exit();
 
             return bSuccess;
         } catch (Exception e) {
+        
         }
         return bSuccess;
     }
+    
+    public boolean deleteBook(int id) {
+        boolean bSuccess = false;
+        try {
+            DBController dbctrl = DBController.getInstance();
+            if(dbctrl.initDBConnection()) {
+                bSuccess = dbctrl.deleteBook(id);
+                if(!bSuccess) {
+                   this.errorText = dbctrl.getErrorText();
+                } 
+            }
+            dbctrl.exit();
+
+            return bSuccess;
+        } catch (Exception e) {
+        
+        }
+        return bSuccess;
+    }
+    
     
     public String[] getBookInfo(int id) {
         DBController dbctr = DBController.getInstance();
@@ -82,5 +107,11 @@ public class BookController {
         
     
     }
-    
+   
+    public String getErrorText() {
+        if (errorText != null) {
+            return errorText;
+        }
+        return "Fehler ohne definierte Fehlermeldung. Sorry.";
+    }
 }

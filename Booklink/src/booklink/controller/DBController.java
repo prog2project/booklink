@@ -20,6 +20,7 @@ public class DBController {
  
 	private static final DBController dbcontroller = new DBController();
 	public static Connection connection;
+    private String errorText;
 	//private static final String DB_PATH = System.getProperty("user.home") + "/"
 	//		+ "Booklink.db";
     private static final String DB_PATH = "\\db\\booklink.db";
@@ -213,6 +214,24 @@ public class DBController {
 			fehler.printStackTrace();
 		}
 	}
+    
+    public boolean deleteBook(int id) { 
+		boolean bSuccess = false;
+        String query = "delete from books where ID=" + id;
+		try {
+			Statement loeschenStatement = connection.createStatement();
+			loeschenStatement.execute(query);
+			System.out.println("Das Buch mit der ID = " + id
+					+ " wurde gelöscht!");
+			loeschenStatement.close();
+            bSuccess = true;
+		} catch (SQLException fehler) {
+			System.err.println("Fehler beim Löschen");
+			fehler.printStackTrace();
+            bSuccess = false;
+		}
+        return bSuccess;
+	}
 	
     public boolean addBook(String autor,
 			String titel, 
@@ -229,10 +248,7 @@ public class DBController {
 			boolean vorhanden = false;
             String titlestatement = "select Titel from books where Titel like '%" +titel +"%';";
 			PreparedStatement titelsuche = connection.prepareStatement(titlestatement);
-            //.prepareStatement("select Titel from books where Titel like '" +titel "';");
-			//titelsuche.setInt(1, isbn);
-            
-			ResultSet Suchresultate = titelsuche.executeQuery();
+            ResultSet Suchresultate = titelsuche.executeQuery();
 			while (Suchresultate.next()) {
 				System.out.println(Suchresultate.getString(1));
 				if (Suchresultate.getString(1) != null) {
@@ -255,12 +271,15 @@ public class DBController {
 
 			if (vorhanden == true) {
 				System.out.println("Das Buch ist schon vorhanden");
-			}
+                this.errorText = "Das Buch ist schon vorhanden!";
+			} else {
+                connection.setAutoCommit(false);
+                schreibeEinträge.executeBatch();
+                connection.setAutoCommit(true);
+                bSuccess = true;
+            }
 
-			connection.setAutoCommit(false);
-			schreibeEinträge.executeBatch();
-			connection.setAutoCommit(true);
-            bSuccess = true;
+			
 			
 		} catch (Exception fehler) {
 			System.err.println("Fehler bei Datenbank-Abfrage");
@@ -269,7 +288,13 @@ public class DBController {
         return bSuccess;
 	}
     
-    
+   
+    public String getErrorText() {
+        if (errorText != null) {
+            return errorText;
+        }
+        return "Fehler ohne definierte Fehlermeldung. Sorry.";
+    }
     
 }
 

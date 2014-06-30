@@ -6,6 +6,7 @@ package booklink;
 import booklink.gui.jpAddBook;
 import booklink.gui.jpAddPDF;
 import booklink.controller.*;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -26,9 +27,11 @@ import javax.swing.table.TableColumn;
 
 
 public class MainFrame extends javax.swing.JFrame {
-
+    private UtilController utilctrl;
+    private int bookID;
    
     public MainFrame() {
+        this.utilctrl = UtilController.getInstance();
         initComponents();
         setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
         String path = null;
@@ -39,6 +42,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         // Erstmaliges Befüllen der Liste
         initDisplayTable();
+        
         
     }
 
@@ -122,6 +126,7 @@ public class MainFrame extends javax.swing.JFrame {
         pdfpanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        lblStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Booklink");
@@ -203,7 +208,6 @@ public class MainFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.setRowSelectionAllowed(true);
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable1.setShowHorizontalLines(false);
         jTable1.setShowVerticalLines(false);
@@ -217,6 +221,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(0, 50, 240, 490);
+
+        lblStatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblStatus.setText("Status");
+        getContentPane().add(lblStatus);
+        lblStatus.setBounds(640, 10, 350, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -273,12 +282,14 @@ public class MainFrame extends javax.swing.JFrame {
        //Object o = jTable1.getModel().getValueAt(row, 0);
         try {
           id = (int) jTable1.getModel().getValueAt(row, 0);
+          this.bookID = id;
           BookController ctrl = BookController.getInstance();
           String[] items = ctrl.getBookInfo(id);
           if (items != null) {
               jpAddBook bookpanel = new jpAddBook(this, true);
               bookpanel.setAuthor(items[0]);
               bookpanel.setBookTitel(items[1]);
+              //bookpanel.setID(id);
               multipanel.setVisible(true); 
               multipanel.setLayout(new java.awt.BorderLayout()); 
               multipanel.add(bookpanel); 
@@ -330,6 +341,28 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
 
+    public void setErrorStatus(String text) {
+        String Test = utilctrl.getTime();
+        this.lblStatus.setForeground(Color.red);
+        this.lblStatus.setText(Test + ": " + text);
+    }
+    
+    public void setNormalStatus(String text) {
+        String Test = utilctrl.getTime();
+        this.lblStatus.setForeground(Color.cyan);
+        this.lblStatus.setText(Test + ": " + text);
+    }
+    
+    public void setGoodStatus(String text) {
+        String Test = utilctrl.getTime();
+        this.lblStatus.setForeground(Color.green);
+        this.lblStatus.setText(Test + ": " + text);
+    }
+    
+    public int getID() {
+        return this.bookID;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BuchButton1;
     private javax.swing.JButton PDF;
@@ -337,6 +370,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField SearchField;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblStatus;
     private javax.swing.JPanel multipanel;
     private javax.swing.JPanel pdfpanel;
     // End of variables declaration//GEN-END:variables
