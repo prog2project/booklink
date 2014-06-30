@@ -7,6 +7,7 @@
 package booklink.controller;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -45,6 +46,23 @@ public class BookController {
         }
         
         return tm; 
+    }
+    
+    public String[] getBookInfo(int id) {
+        DBController dbctr = DBController.getInstance();
+        String[] bookinfo = null;
+        try {
+            if(dbctr.initDBConnection()) {
+                bookinfo = dbctr.getBookInfo(id);
+            }
+            dbctr.exit();  
+        } catch (Exception e) {
+        }
+        
+        
+        return bookinfo;
+        
+    
     }
     
 }

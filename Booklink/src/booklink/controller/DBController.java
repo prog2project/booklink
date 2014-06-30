@@ -140,14 +140,13 @@ public class DBController {
             Statement ausgabeStatement = connection.createStatement();
 			ResultSet ausgabeResultate = ausgabeStatement.executeQuery("SELECT books.ID, books.Autor, books.Titel FROM books;");
             ResultSetMetaData rmd = ausgabeResultate.getMetaData();
-            String col[] = {"ID", rmd.getColumnName(1), rmd.getColumnName(2)};
+            String col[] = {"ID", "Autor", "Titel"};
             ts.setColumnIdentifiers(col);
-            int i = 1;
+            
             while (ausgabeResultate.next()) {
                 System.out.println("DBController Autor = " + ausgabeResultate.getString("Autor"));
-                Object[] data = { ausgabeResultate.getInt(1), ausgabeResultate.getString(2), ausgabeResultate.getString(3)};
-                ts.addRow(data);
-                i++;
+                Object[] mydata = { ausgabeResultate.getInt(1), ausgabeResultate.getString(2), ausgabeResultate.getString(3)};
+                ts.addRow(mydata);
                 System.out.println("DBController Titel = " + ausgabeResultate.getString("Titel"));
             }
             rs = ausgabeResultate;
@@ -159,13 +158,48 @@ public class DBController {
         return ts;
     }
     
+    public String[] getBookInfo(int id) {
+        ResultSet rs = null;
+        
+        try {
+            PreparedStatement idsuche = connection
+					.prepareStatement("select * from books where ID = ?");
+			idsuche.setInt(1, id);
+            rs = idsuche.executeQuery();
+            int i = rs.getFetchSize();
+            while (rs.next()) {
+                System.out.println("DBController Autor = " + rs.getString("Autor"));
+                String newdata[] = {
+                    rs.getString("Autor"),
+                    rs.getString("Titel"),
+                    //rs.getDate("Veröffentlichung").toString(),
+                    //rs.getString("ISBN"),
+                    //rs.getString("Auflage"),
+                    //rs.getString("Verlag"),
+                    //rs.getString("Leihfrist"),
+                    };
+                String test = "sdfds";
+                this.data = newdata;
+            } 
+            //return rs;
+            idsuche.close();
+            rs.close();
+            return data;
+        } catch (Exception e) {
+            String test = "sdfsd";
+        }
+        return data;
+    }
+    
 	public void exit() throws SQLException
 	{
 		connection.close();
 		connection = null;	
 		
 	}
-
+    
+    private String[] data;
+    
 	public void loescheBuch(int isbn) { 
 		String query = "delete from books where ISBN=" + isbn;
 		try {

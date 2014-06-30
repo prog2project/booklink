@@ -268,7 +268,27 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
        int row = jTable1.getSelectedRow();
-       int column = jTable1.getSelectedColumn();
+       int id = 0;
+        // Erstmal die ID erwischen:
+       //Object o = jTable1.getModel().getValueAt(row, 0);
+        try {
+          id = (int) jTable1.getModel().getValueAt(row, 0);
+          BookController ctrl = BookController.getInstance();
+          String[] items = ctrl.getBookInfo(id);
+          if (items != null) {
+              jpAddBook bookpanel = new jpAddBook(true);
+              bookpanel.setAuthor(items[0]);
+              bookpanel.setBookTitel(items[1]);
+              multipanel.setVisible(true); 
+              multipanel.setLayout(new java.awt.BorderLayout()); 
+              multipanel.add(bookpanel); 
+              multipanel.validate();
+              
+          }
+        } catch (Exception e) {
+        }
+       
+       
        
         /// Funktion von Chris aufrufen ;) :D
        

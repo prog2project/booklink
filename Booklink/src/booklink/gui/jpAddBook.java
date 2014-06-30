@@ -391,7 +391,7 @@ public class jpAddBook extends javax.swing.JPanel {
     }
     
     public void setAuthor(String text){
-    this.tfAuthor.setText(text);
+        this.tfAuthor.setText(text);
     }
     
     public void setBookTitel(String title) {
