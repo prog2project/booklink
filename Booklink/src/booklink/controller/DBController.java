@@ -138,15 +138,16 @@ public class DBController {
         DefaultTableModel ts = new DefaultTableModel();
         try {
             Statement ausgabeStatement = connection.createStatement();
-			ResultSet ausgabeResultate = ausgabeStatement.executeQuery("SELECT books.Autor, books.Titel FROM books;");
+			ResultSet ausgabeResultate = ausgabeStatement.executeQuery("SELECT books.ID, books.Autor, books.Titel FROM books;");
             ResultSetMetaData rmd = ausgabeResultate.getMetaData();
-            String col[] = {rmd.getColumnName(1), rmd.getColumnName(2)};
+            String col[] = {"ID", rmd.getColumnName(1), rmd.getColumnName(2)};
             ts.setColumnIdentifiers(col);
             int i = 1;
             while (ausgabeResultate.next()) {
                 System.out.println("DBController Autor = " + ausgabeResultate.getString("Autor"));
-                String[] data = { ausgabeResultate.getString(1), ausgabeResultate.getString(2)};
+                Object[] data = { ausgabeResultate.getInt(1), ausgabeResultate.getString(2), ausgabeResultate.getString(3)};
                 ts.addRow(data);
+                i++;
                 System.out.println("DBController Titel = " + ausgabeResultate.getString("Titel"));
             }
             rs = ausgabeResultate;

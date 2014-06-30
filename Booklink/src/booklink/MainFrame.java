@@ -37,13 +37,13 @@ public class MainFrame extends javax.swing.JFrame {
             path = new File(".").getCanonicalPath(); 
         } catch (Exception e) {
         }
-        
-        displayTable();
+        // Erstmaliges Befüllen der Liste
+        initDisplayTable();
         
     }
 
     
-   private void displayTable() {
+   private void initDisplayTable() {
    /*jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {1, "Heinz", "Stephen King"},
@@ -57,10 +57,10 @@ public class MainFrame extends javax.swing.JFrame {
         )); */
        
       BookController bkctrl = BookController.getInstance();
-      ResultSet rs = null; 
-      DefaultTableModel ts = new DefaultTableModel();
-      ArrayList columnNames = new ArrayList();
-      ArrayList data = new ArrayList();
+      //ResultSet rs = null; 
+      //DefaultTableModel ts = new DefaultTableModel();
+      //ArrayList columnNames = new ArrayList();
+      //ArrayList data = new ArrayList();
       
       try {
             //rs = bkctrl.getBooklist();
@@ -104,7 +104,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
 
             tableColumn.setPreferredWidth(preferredWidth);
-        } */
+        }  */
 
     }
 
