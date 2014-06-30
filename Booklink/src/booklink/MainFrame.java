@@ -288,6 +288,11 @@ public class MainFrame extends javax.swing.JFrame {
               jpAddBook bookpanel = new jpAddBook(this, true);
               bookpanel.setAuthor(items[0]);
               bookpanel.setBookTitel(items[1]);
+              bookpanel.setYear(items[2]);
+              bookpanel.setISBN(items[3]);
+              bookpanel.setPress(items[4]);
+              bookpanel.setEdition(items[5]);
+              bookpanel.setLendingPeriod(items[6]);
               //bookpanel.setID(id);
               multipanel.setVisible(true); 
               multipanel.setLayout(new java.awt.BorderLayout()); 

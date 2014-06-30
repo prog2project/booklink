@@ -93,6 +93,7 @@ public class jpAddBook extends javax.swing.JPanel {
         tfComment = new javax.swing.JFormattedTextField();
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         btnOk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnOk.setText("OK");
@@ -164,9 +165,9 @@ public class jpAddBook extends javax.swing.JPanel {
             ex.printStackTrace();
         }
 
-        tfYear.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        tfYear.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
-        tfLendingPeriod.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        tfLendingPeriod.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         tfLendingPeriod.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfLendingPeriodKeyTyped(evt);
@@ -192,6 +193,8 @@ public class jpAddBook extends javax.swing.JPanel {
                 btnDeleteMouseClicked(evt);
             }
         });
+
+        jLabel1.setText("Tage");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -238,7 +241,10 @@ public class jpAddBook extends javax.swing.JPanel {
                                 .addComponent(tfComment, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(tfYear, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(tfEdition, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tfLendingPeriod, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(tfLendingPeriod, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel1))))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -274,7 +280,8 @@ public class jpAddBook extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfLendingPeriod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblLendingPeriod))
+                            .addComponent(lblLendingPeriod)
+                            .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfComment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -323,11 +330,16 @@ public class jpAddBook extends javax.swing.JPanel {
             }
         }
         
+        String sISBN = tfISBN.getText();
+        sISBN = sISBN.replace("-", "");
+        
+        
+        
         BookController bkctrl = BookController.getInstance();
         boolean bSuccess = bkctrl.addBook(
                 tfAuthor.getText(),
                 tfBooktitel.getText(),
-                "1999", 0, "Verlag", 0, "Leihfrist"
+                tfYear.getText(), sISBN, tfPress.getText(), tfEdition.getText(), tfLendingPeriod.getText()
         );
         if(bSuccess) {
            // Wenn alles gut Läuft:
@@ -476,12 +488,7 @@ public class jpAddBook extends javax.swing.JPanel {
        this.myid = id;
    }
    private void addDateFormatter() {
-        try { 
-            MaskFormatter mf = new MaskFormatter("##.##.####");
-            mf.install(tfLendingPeriod);
-        } catch (ParseException ex) {
-            Logger.getLogger(jpAddBook.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
    }
    
 
@@ -490,6 +497,7 @@ public class jpAddBook extends javax.swing.JPanel {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnOk;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblAuthor;
     private javax.swing.JLabel lblAuthorError;
     private javax.swing.JLabel lblBooktitel;

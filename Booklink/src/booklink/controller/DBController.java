@@ -141,14 +141,22 @@ public class DBController {
         DefaultTableModel ts = new DefaultTableModel();
         try {
             Statement ausgabeStatement = connection.createStatement();
-			ResultSet ausgabeResultate = ausgabeStatement.executeQuery("SELECT books.ID, books.Autor, books.Titel FROM books;");
+			ResultSet ausgabeResultate = ausgabeStatement.executeQuery("SELECT * FROM books;");
             ResultSetMetaData rmd = ausgabeResultate.getMetaData();
             String col[] = {"ID", "Autor", "Titel"};
             ts.setColumnIdentifiers(col);
             
             while (ausgabeResultate.next()) {
                 System.out.println("DBController Autor = " + ausgabeResultate.getString("Autor"));
-                Object[] mydata = { ausgabeResultate.getInt(1), ausgabeResultate.getString(2), ausgabeResultate.getString(3)};
+                Object[] mydata = { ausgabeResultate.getInt(1), 
+                                    ausgabeResultate.getString(2), 
+                                    ausgabeResultate.getString(3),
+                                    ausgabeResultate.getString(4),
+                                    ausgabeResultate.getString(5),
+                                    ausgabeResultate.getString(6),
+                                    ausgabeResultate.getString(7),
+                                    ausgabeResultate.getString(8),
+                };
                 ts.addRow(mydata);
                 System.out.println("DBController Titel = " + ausgabeResultate.getString("Titel"));
             }
@@ -175,11 +183,11 @@ public class DBController {
                 String newdata[] = {
                     rs.getString("Autor"),
                     rs.getString("Titel"),
-                    //rs.getDate("Veröffentlichung").toString(),
-                    //rs.getString("ISBN"),
-                    //rs.getString("Auflage"),
-                    //rs.getString("Verlag"),
-                    //rs.getString("Leihfrist"),
+                    rs.getString("Veröffentlichung"),
+                    rs.getString("ISBN"),
+                    rs.getString("Auflage"),
+                    rs.getString("Verlag"),
+                    rs.getString("Leihfrist")
                     };
                 String test = "sdfds";
                 this.data = newdata;
@@ -246,7 +254,7 @@ public class DBController {
 	
     public boolean addBook(String autor,
 			String titel, 
-			String erscheinungsjahr, int isbn, String verlag, int auflage,
+			String erscheinungsjahr, String isbn, String verlag, String auflage,
 			String leihfrist) {
 		boolean bSuccess = false;
         try {
@@ -273,10 +281,10 @@ public class DBController {
 				schreibeEinträge.setString(1, autor);
 				schreibeEinträge.setString(2, titel);
 				schreibeEinträge.setString(3,erscheinungsjahr);
-				schreibeEinträge.setInt(4, isbn);
+				schreibeEinträge.setString(4, isbn);
 				schreibeEinträge.setString(5, verlag);
-				schreibeEinträge.setInt(6, auflage);
-				schreibeEinträge.setString(7, leihfrist);
+				schreibeEinträge.setString(6, auflage);
+	 			schreibeEinträge.setString(7, leihfrist);
 				schreibeEinträge.addBatch();
 			}
 

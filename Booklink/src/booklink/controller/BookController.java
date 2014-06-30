@@ -51,7 +51,7 @@ public class BookController {
     
     public boolean addBook(String autor,
             String titel,
-            String erscheinungsjahr, int isbn, String verlag, int auflage,
+            String erscheinungsjahr, String isbn, String verlag, String auflage,
             String leihfrist) {
         boolean bSuccess = false;
         try {
