@@ -15,11 +15,14 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -226,12 +229,13 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_PDFActionPerformed
 
     private void SearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchFieldActionPerformed
-        // TODO add your handling code here:                            
+        search();
+        
     }//GEN-LAST:event_SearchFieldActionPerformed
 
     private void SearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchMouseClicked
        // jLabel1.setText("Gesucht wurde:  "+ SearchField.getText());             // Suche + Button
-      
+      search();
          
         
        
@@ -240,7 +244,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     private void SearchFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchFieldKeyPressed
       
-      
+      search();
       
     }//GEN-LAST:event_SearchFieldKeyPressed
 
@@ -300,6 +304,9 @@ public class MainFrame extends javax.swing.JFrame {
               pdfpanel.setLayout(new java.awt.BorderLayout()); 
               pdfpanel.add(showpdf); 
               pdfpanel.validate();
+          } else {
+              // Keine PDFs
+              pdfpanel.removeAll();
           }
         } catch (Exception e) {
         }
@@ -309,7 +316,50 @@ public class MainFrame extends javax.swing.JFrame {
         /// Funktion von Chris aufrufen ;) :D
        
     }//GEN-LAST:event_jTable1MouseClicked
+    
+    public void setTableSelection(int id) {
+        
+    }
+    
+    private void search() {
+        String value = SearchField.getText();
+          for (int row = 0; row <= jTable1.getRowCount() - 1; row++) {
+                for (int col = 0; col <= jTable1.getColumnCount() - 1; col++) {
 
+                    if (value.equals(jTable1.getValueAt(row, col))) {
+                        // Rahmen
+                        jTable1.scrollRectToVisible(jTable1.getCellRect(row, 0, true));
+                        // Focus setzen
+                        jTable1.setRowSelectionInterval(row, row);
+
+                        for (int i = 0; i <= jTable1.getColumnCount() - 1; i++) {
+                                jTable1.getColumnModel().getColumn(i).setCellRenderer(new HighlightRenderer());
+                        }
+                    }
+                }
+            }
+    
+    }
+    
+    private class HighlightRenderer extends DefaultTableCellRenderer {
+
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+
+        // Den TableCellRendererComponent des JTable holen
+        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+        //  Wenn wir die Row gefunden haben, anmalen
+        if(row == table.getSelectedRow()) {
+
+            // Erweitert: Zeichnet einen Blauen Rahmen um die Zelle
+            setBorder(BorderFactory.createMatteBorder(2, 1, 2, 1, Color.YELLOW));
+        }
+
+        return this;
+    }
+}
+    
     /**
      * @param args the command line arguments
      */
@@ -380,3 +430,4 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pdfpanel;
     // End of variables declaration//GEN-END:variables
 }
+
