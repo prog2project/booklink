@@ -48,6 +48,24 @@ public class BookController {
         return tm; 
     }
     
+    public boolean addBook(String autor,
+            String titel,
+            String erscheinungsjahr, int isbn, String verlag, int auflage,
+            String leihfrist) {
+        boolean bSuccess = false;
+        try {
+            DBController dbctrl = DBController.getInstance();
+            if(dbctrl.initDBConnection()) {
+                bSuccess = dbctrl.addBook(autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
+            }
+            dbctrl.exit();
+
+            return bSuccess;
+        } catch (Exception e) {
+        }
+        return bSuccess;
+    }
+    
     public String[] getBookInfo(int id) {
         DBController dbctr = DBController.getInstance();
         String[] bookinfo = null;

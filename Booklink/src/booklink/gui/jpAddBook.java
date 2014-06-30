@@ -6,6 +6,7 @@
 
 package booklink.gui;
 
+import booklink.MainFrame;
 import java.awt.Color;
 import java.awt.Component;
 import java.text.ParseException;
@@ -17,18 +18,22 @@ import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.MaskFormatter;
+import booklink.controller.*;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Kerstin
  */
 public class jpAddBook extends javax.swing.JPanel {
+    MainFrame myparent;
 
     /**
      * Creates new form jpAddBook
      * @param showInfo Determines switch between add/show functionality
      */
-    public jpAddBook(boolean showInfo) {
+    public jpAddBook(MainFrame parent, boolean showInfo) {
+        this.myparent = parent;
         initComponents();
         addDateFormatter();
         
@@ -301,7 +306,19 @@ public class jpAddBook extends javax.swing.JPanel {
                 lblAuthorError.setVisible(false);
             }
         }
-
+        
+        BookController bkctrl = BookController.getInstance();
+        boolean bSuccess = bkctrl.addBook(
+                tfAuthor.getText(),
+                tfBooktitel.getText(),
+                "1999", 0, "Verlag", 0, "Leihfrist"
+        );
+        if(bSuccess) {
+           myparent.initDisplayTable();
+        }
+        String test = "Blubb";
+        
+        
         
         
     }//GEN-LAST:event_btnOkActionPerformed

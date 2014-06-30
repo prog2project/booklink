@@ -214,6 +214,63 @@ public class DBController {
 		}
 	}
 	
+    public boolean addBook(String autor,
+			String titel, 
+			String erscheinungsjahr, int isbn, String verlag, int auflage,
+			String leihfrist) {
+		boolean bSuccess = false;
+        try {
+			Statement erstelleDatenbank = connection.createStatement();
+            PreparedStatement schreibeEinträge = connection
+					.prepareStatement(""
+                            + "INSERT INTO books ('Autor', 'Titel', 'Veröffentlichung', 'ISBN', 'Verlag', 'Auflage', 'Leihfrist')  "
+                            + "VALUES (?, ?, ?, ?, ?, ?, ?);");
+            
+			boolean vorhanden = false;
+            String titlestatement = "select Titel from books where Titel like '%" +titel +"%';";
+			PreparedStatement titelsuche = connection.prepareStatement(titlestatement);
+            //.prepareStatement("select Titel from books where Titel like '" +titel "';");
+			//titelsuche.setInt(1, isbn);
+            
+			ResultSet Suchresultate = titelsuche.executeQuery();
+			while (Suchresultate.next()) {
+				System.out.println(Suchresultate.getString(1));
+				if (Suchresultate.getString(1) != null) {
+					vorhanden = true;
+				}
+			}
+			Suchresultate.close();
+			titelsuche.close();
+
+			if (vorhanden != true) {
+				schreibeEinträge.setString(1, autor);
+				schreibeEinträge.setString(2, titel);
+				schreibeEinträge.setString(3,erscheinungsjahr);
+				schreibeEinträge.setInt(4, isbn);
+				schreibeEinträge.setString(5, verlag);
+				schreibeEinträge.setInt(6, auflage);
+				schreibeEinträge.setString(7, leihfrist);
+				schreibeEinträge.addBatch();
+			}
+
+			if (vorhanden == true) {
+				System.out.println("Das Buch ist schon vorhanden");
+			}
+
+			connection.setAutoCommit(false);
+			schreibeEinträge.executeBatch();
+			connection.setAutoCommit(true);
+            bSuccess = true;
+			
+		} catch (Exception fehler) {
+			System.err.println("Fehler bei Datenbank-Abfrage");
+			fehler.printStackTrace();
+		}
+        return bSuccess;
+	}
+    
+    
+    
 }
 
     

@@ -43,7 +43,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     
-   private void initDisplayTable() {
+   public void initDisplayTable() {
    /*jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {1, "Heinz", "Stephen King"},
@@ -249,7 +249,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_BuchButton1ActionPerformed
 
     private void BuchButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuchButton1MouseClicked
-         jpAddBook bookpanel = new jpAddBook(false);
+         jpAddBook bookpanel = new jpAddBook(this, false);
          multipanel.setVisible(true); 
          multipanel.setLayout(new java.awt.BorderLayout()); 
          multipanel.add(bookpanel); 
@@ -276,7 +276,7 @@ public class MainFrame extends javax.swing.JFrame {
           BookController ctrl = BookController.getInstance();
           String[] items = ctrl.getBookInfo(id);
           if (items != null) {
-              jpAddBook bookpanel = new jpAddBook(true);
+              jpAddBook bookpanel = new jpAddBook(this, true);
               bookpanel.setAuthor(items[0]);
               bookpanel.setBookTitel(items[1]);
               multipanel.setVisible(true); 
