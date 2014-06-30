@@ -6,6 +6,8 @@
 
 package booklink.gui;
 
+import booklink.MainFrame;
+import javax.swing.DefaultListModel;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -14,11 +16,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Kerstin
  */
 public class jpShowPDF extends javax.swing.JPanel {
-
+    MainFrame myparent;
     /**
      * Creates new form jpAddPDF
      */
-    public jpShowPDF() {
+    public jpShowPDF(MainFrame parent) {
+        this.myparent = parent;
+        
         initComponents();
         
     }
@@ -125,7 +129,19 @@ public class jpShowPDF extends javax.swing.JPanel {
           this.setVisible(false);
     }//GEN-LAST:event_btnCancelActionPerformed
 
-
+    public void setBookTitle(String title) {
+        
+    }
+    
+    public void setPDFList(String[] pdfs) {
+        DefaultListModel listModel = new DefaultListModel();
+        
+        for (int i = 0; i < pdfs.length; i++) {
+           listModel.addElement(pdfs[i]);
+        }
+        this.jList1.setModel(listModel);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnOK;

@@ -5,6 +5,7 @@ package booklink;
 
 import booklink.gui.jpAddBook;
 import booklink.gui.jpAddPDF;
+import booklink.gui.jpShowPDF;
 import booklink.controller.*;
 import java.awt.Color;
 import java.awt.Component;
@@ -48,17 +49,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     
    public void initDisplayTable() {
-   /*jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {1, "Heinz", "Stephen King"},
-                {2, "Bernd", "Grass, G."},
-                {3, "Zeppelin", "Kohl, H."},
-                {4, "Schlumpf", "Picard, J-L."}
-            },
-            new String [] {
-                "Nr", "Titel", "Autor"
-            }
-        )); */
+   
        
       BookController bkctrl = BookController.getInstance();
       //ResultSet rs = null; 
@@ -266,7 +257,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_BuchButton1MouseClicked
 
     private void PDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PDFMouseClicked
-      jpAddPDF PDFpanel = new jpAddPDF();
+      jpAddPDF PDFpanel = new jpAddPDF(this);
       pdfpanel.setVisible(true); 
       pdfpanel.setLayout(new java.awt.BorderLayout()); 
       pdfpanel.add(PDFpanel); 
@@ -285,6 +276,8 @@ public class MainFrame extends javax.swing.JFrame {
           this.bookID = id;
           BookController ctrl = BookController.getInstance();
           String[] items = ctrl.getBookInfo(id);
+          PDFController pdfctl = PDFController.getInstance();
+          String[] pdfitems = pdfctl.getPDFInfo(id);
           if (items != null) {
               jpAddBook bookpanel = new jpAddBook(this, true);
               bookpanel.setAuthor(items[0]);
@@ -295,6 +288,15 @@ public class MainFrame extends javax.swing.JFrame {
               multipanel.add(bookpanel); 
               multipanel.validate();
               
+          }
+          if (pdfitems != null) {
+              jpShowPDF showpdf = new jpShowPDF(this);
+              showpdf.setBookTitle(items[1]);
+              showpdf.setPDFList(pdfitems);
+              pdfpanel.setVisible(true); 
+              pdfpanel.setLayout(new java.awt.BorderLayout()); 
+              pdfpanel.add(showpdf); 
+              pdfpanel.validate();
           }
         } catch (Exception e) {
         }

@@ -8,6 +8,8 @@ package booklink.controller;
 
 import java.io.File;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -217,9 +219,18 @@ public class DBController {
     
     public boolean deleteBook(int id) { 
 		boolean bSuccess = false;
-        String query = "delete from books where ID=" + id;
+        String query = "delete from books where ID=" + id + ";";
+        String findPDFQuery = "select pathname from pdfs where bookid=" +id + ";";
 		try {
-			Statement loeschenStatement = connection.createStatement();
+			PreparedStatement findpdf = connection.prepareStatement(findPDFQuery);
+            ResultSet Suchresultate = findpdf.executeQuery();
+            if (Suchresultate.next()) {
+                String deletePDF = "delete from pdfs where bookid=" + id + ";";
+                Statement delpdf = connection.createStatement();
+                delpdf.execute(deletePDF);
+                delpdf.close();
+            }
+            Statement loeschenStatement = connection.createStatement();
 			loeschenStatement.execute(query);
 			System.out.println("Das Buch mit der ID = " + id
 					+ " wurde gelöscht!");
@@ -289,6 +300,65 @@ public class DBController {
 	}
     
    
+    public boolean addPDF(int bookid, String pathname) {
+		boolean bSuccess = false;
+        try {
+			//Statement erstelleDatenbank = connection.createStatement();
+            PreparedStatement schreibeEinträge = connection
+					.prepareStatement(""
+                            + "INSERT INTO pdfs ('bookid', 'pathname')  "
+                            + "VALUES (?, ?);");
+            
+           
+				schreibeEinträge.setInt(1, bookid);
+				schreibeEinträge.setString(2, pathname);
+				
+				schreibeEinträge.addBatch();
+			
+                connection.setAutoCommit(false);
+                schreibeEinträge.executeBatch();
+                connection.setAutoCommit(true);
+                bSuccess = true;
+            
+
+			
+		 
+		} catch (Exception fehler) {
+			System.err.println("Fehler bei Datenbank-Abfrage");
+			fehler.printStackTrace();
+		} 
+        return bSuccess;
+	}
+    
+    
+    public String[] getPDFInfo(int id) {
+        ResultSet rs = null;
+        
+        try {
+            PreparedStatement idsuche = connection
+					.prepareStatement("select pathname from pdfs where bookid = ?");
+			idsuche.setInt(1, id);
+            rs = idsuche.executeQuery();
+            int i = rs.getFetchSize();
+            List<String> tempArr = new ArrayList<String>();
+            while (rs.next()) {
+                System.out.println("DBController pdfs = " + rs.getString("pathname"));
+                tempArr.add(rs.getString("pathname"));
+                
+            } 
+            String[] tempString = new String[tempArr.size()];
+            tempArr.toArray(tempString);
+            this.data = tempString;
+            //return rs;
+            idsuche.close();
+            rs.close();
+            return data;
+        } catch (Exception e) {
+            String test = "sdfsd";
+        }
+        return data;
+    }
+    
     public String getErrorText() {
         if (errorText != null) {
             return errorText;

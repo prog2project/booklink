@@ -6,7 +6,10 @@
 
 package booklink.gui;
 
+import booklink.MainFrame;
+import booklink.controller.PDFController;
 import java.io.File;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.ListModel;
@@ -17,12 +20,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author Kerstin
  */
-public class jpAddPDF extends jpShowPDF {
-
+public class jpAddPDF extends javax.swing.JPanel {
+    MainFrame myparent;
     /**
      * Creates new form jpAddPDF
      */
-    public jpAddPDF() {
+    public jpAddPDF(MainFrame parent) {
+        this.myparent = parent;
         initComponents();
         // Panel wurde geladen, jetzt den Dialog zum Auswählen der PDFs erzeugen
         addPdf();
@@ -111,10 +115,16 @@ public class jpAddPDF extends jpShowPDF {
                 if (chooser.getSelectedFiles() != null && chooser.getSelectedFiles().length > 1) {
                     // Es wurden mehrere Dateien ausgewält
                     File Files[] = chooser.getSelectedFiles();
+                    
                     for (int i = 0; i < Files.length; i++) {
                         System.out.println("Die zu öffnende Datei ist: "
                                 + Files[i].getName());
                         
+                        PDFController pdfctl = PDFController.getInstance();
+                    int bookid = myparent.getID();
+                    
+                    String[] pathnames = { Files[i].getCanonicalPath() };
+                    pdfctl.addPDF(bookid, pathnames );
                         
                         listModel.addElement(Files[i].getAbsoluteFile().toString());
                         
@@ -126,6 +136,11 @@ public class jpAddPDF extends jpShowPDF {
                 } else {
                     System.out.println("Die zu öffnende Datei ist: "
                             + chooser.getSelectedFile().getName());
+                    PDFController pdfctl = PDFController.getInstance();
+                    int bookid = myparent.getID();
+                    
+                    String[] pathnames = { chooser.getSelectedFile().getCanonicalPath() };
+                    pdfctl.addPDF(bookid, pathnames );
                 }
 
             } else { // Benutzer drückte abbrechen
