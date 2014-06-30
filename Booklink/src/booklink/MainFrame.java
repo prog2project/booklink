@@ -37,6 +37,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         this.utilctrl = UtilController.getInstance();
         initComponents();
+        this.PDF.setEnabled(false);
         setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
         String path = null;
         // final File f = new File(MyClass.class.getProtectionDomain().getCodeSource().getLocation().getPath());
@@ -278,6 +279,7 @@ public class MainFrame extends javax.swing.JFrame {
        //Object o = jTable1.getModel().getValueAt(row, 0);
         try {
           id = (int) jTable1.getModel().getValueAt(row, 0);
+          this.PDF.setEnabled(true);
           this.bookID = id;
           BookController ctrl = BookController.getInstance();
           String[] items = ctrl.getBookInfo(id);
