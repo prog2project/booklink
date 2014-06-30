@@ -45,7 +45,6 @@ public class jpAddPDF extends javax.swing.JPanel {
         tfBooktitel = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
-        btnSave = new javax.swing.JButton();
 
         lblBooktitel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lblBooktitel.setText("Buchtitel:");
@@ -63,22 +62,18 @@ public class jpAddPDF extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jList1);
 
-        btnSave.setText("jButton1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSave)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblBooktitel)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(tfBooktitel, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblBooktitel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfBooktitel, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -90,9 +85,7 @@ public class jpAddPDF extends javax.swing.JPanel {
                     .addComponent(tfBooktitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSave)
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -108,6 +101,7 @@ public class jpAddPDF extends javax.swing.JPanel {
             chooser.setFileFilter(filter); // Den FileFilter zu dem JFC hinzufügen
             int returnVal = chooser.showOpenDialog(chooser);
             DefaultListModel listModel = new DefaultListModel();
+            int itemCount = 0;
             
             /* Abfrage, ob auf "Öffnen" geklickt wurde */
             if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -125,14 +119,12 @@ public class jpAddPDF extends javax.swing.JPanel {
                     
                     String[] pathnames = { Files[i].getCanonicalPath() };
                     pdfctl.addPDF(bookid, pathnames );
-                        
-                        listModel.addElement(Files[i].getAbsoluteFile().toString());
-                        
                     
-                       // list = new JList(listModel);
                   
                     }
-                    this.jList1.setModel(listModel);
+                    
+                   
+                    populateList();
                 } else {
                     System.out.println("Die zu öffnende Datei ist: "
                             + chooser.getSelectedFile().getName());
@@ -144,7 +136,7 @@ public class jpAddPDF extends javax.swing.JPanel {
                 }
 
             } else { // Benutzer drückte abbrechen
-              this.btnSave.setEnabled(false);
+              //this.btnSave.setEnabled(false);
             }
             
         } catch (Exception e) {
@@ -157,8 +149,21 @@ public class jpAddPDF extends javax.swing.JPanel {
     
     }
 
+    private void populateList() {
+        DefaultListModel listModel = new DefaultListModel();
+        PDFController ctl = PDFController.getInstance();
+        String[] items = ctl.getPDFInfo(myparent.getID());
+        if(items.length > 0) {
+            for (int i = 0; i < items.length; i++) {
+                listModel.addElement(items[i]);
+                
+            }
+            this.jList1.removeAll();
+            this.jList1.setModel(listModel);
+        }
+    
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSave;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBooktitel;

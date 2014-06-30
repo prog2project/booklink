@@ -249,6 +249,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_BuchButton1ActionPerformed
 
     private void BuchButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuchButton1MouseClicked
+         multipanel.removeAll();
          jpAddBook bookpanel = new jpAddBook(this, false);
          multipanel.setVisible(true); 
          multipanel.setLayout(new java.awt.BorderLayout()); 
@@ -279,6 +280,7 @@ public class MainFrame extends javax.swing.JFrame {
           PDFController pdfctl = PDFController.getInstance();
           String[] pdfitems = pdfctl.getPDFInfo(id);
           if (items != null) {
+              multipanel.removeAll();
               jpAddBook bookpanel = new jpAddBook(this, true);
               bookpanel.setAuthor(items[0]);
               bookpanel.setBookTitel(items[1]);
@@ -290,6 +292,7 @@ public class MainFrame extends javax.swing.JFrame {
               
           }
           if (pdfitems != null) {
+              pdfpanel.removeAll();
               jpShowPDF showpdf = new jpShowPDF(this);
               showpdf.setBookTitle(items[1]);
               showpdf.setPDFList(pdfitems);
