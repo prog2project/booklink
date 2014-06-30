@@ -5,8 +5,12 @@ package booklink;
 
 import booklink.gui.jpAddBook;
 import booklink.gui.jpAddPDF;
+import booklink.controller.*;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BoxLayout;
@@ -14,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.ListModel;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
@@ -26,13 +31,20 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+        String path = null;
+        // final File f = new File(MyClass.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+        try {
+            path = new File(".").getCanonicalPath(); 
+        } catch (Exception e) {
+        }
+        
         displayTable();
         
     }
 
     
    private void displayTable() {
-   jTable1.setModel(new javax.swing.table.DefaultTableModel(
+   /*jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {1, "Heinz", "Stephen King"},
                 {2, "Bernd", "Grass, G."},
@@ -42,7 +54,30 @@ public class MainFrame extends javax.swing.JFrame {
             new String [] {
                 "Nr", "Titel", "Autor"
             }
-        ));
+        )); */
+       
+      BookController bkctrl = new BookController();
+      ResultSet rs = null; 
+      DefaultTableModel ts = new DefaultTableModel();
+      ArrayList columnNames = new ArrayList();
+      ArrayList data = new ArrayList();
+      
+      try {
+            rs = bkctrl.getBooklist();
+            ResultSetMetaData md = rs.getMetaData();
+            
+            int columns = md.getColumnCount();
+            for (int i = 1; i <= columns; i++)
+            {
+                columnNames.add( md.getColumnName(i) );
+            }
+            
+            /*while (rs.next()) {
+                ts.addRow(new Object[] {rs.getRow(), rs.getString(1), rs.getString(2)});
+            } */
+           
+       } catch (Exception e) {
+       }
    
     RowSorter sorter = jTable1.getRowSorter();
     List sortKeys = new ArrayList();
