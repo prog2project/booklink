@@ -8,6 +8,7 @@ package booklink.controller;
 
 import java.io.File;
 import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -132,13 +133,20 @@ public class DBController {
 		}
 	}
 	
-    public ResultSet getAllBooks() {
+    public DefaultTableModel getAllBooks() {
         ResultSet rs = null;
+        DefaultTableModel ts = new DefaultTableModel();
         try {
             Statement ausgabeStatement = connection.createStatement();
 			ResultSet ausgabeResultate = ausgabeStatement.executeQuery("SELECT books.Autor, books.Titel FROM books;");
+            ResultSetMetaData rmd = ausgabeResultate.getMetaData();
+            String col[] = {rmd.getColumnName(1), rmd.getColumnName(2)};
+            ts.setColumnIdentifiers(col);
+            int i = 1;
             while (ausgabeResultate.next()) {
                 System.out.println("DBController Autor = " + ausgabeResultate.getString("Autor"));
+                String[] data = { ausgabeResultate.getString(1), ausgabeResultate.getString(2)};
+                ts.addRow(data);
                 System.out.println("DBController Titel = " + ausgabeResultate.getString("Titel"));
             }
             rs = ausgabeResultate;
@@ -147,7 +155,7 @@ public class DBController {
         } catch (SQLException e) {
         }
         
-        return rs;
+        return ts;
     }
     
 	public void exit() throws SQLException

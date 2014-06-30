@@ -56,37 +56,34 @@ public class MainFrame extends javax.swing.JFrame {
             }
         )); */
        
-      BookController bkctrl = new BookController();
+      BookController bkctrl = BookController.getInstance();
       ResultSet rs = null; 
       DefaultTableModel ts = new DefaultTableModel();
       ArrayList columnNames = new ArrayList();
       ArrayList data = new ArrayList();
       
       try {
-            rs = bkctrl.getBooklist();
-            ResultSetMetaData md = rs.getMetaData();
-            
-            int columns = md.getColumnCount();
-            for (int i = 1; i <= columns; i++)
-            {
-                columnNames.add( md.getColumnName(i) );
-            }
-            
+            //rs = bkctrl.getBooklist();
+            jTable1.setModel(bkctrl.getBooklist());
+            //ResultSetMetaData md = rs.getMetaData();
+            //String col[] = {md.getColumnName(1), md.getColumnName(2)};
+            //String test = "Bliub";
             /*while (rs.next()) {
                 ts.addRow(new Object[] {rs.getRow(), rs.getString(1), rs.getString(2)});
             } */
            
        } catch (Exception e) {
+           System.out.println("Fehler: " + e.toString());
        }
    
-    RowSorter sorter = jTable1.getRowSorter();
-    List sortKeys = new ArrayList();
-    sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
-    sorter.setSortKeys(sortKeys);
+   // RowSorter sorter = jTable1.getRowSorter();
+   // List sortKeys = new ArrayList();
+   // sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
+   // sorter.setSortKeys(sortKeys);
    
    
    
-   
+   /*
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         for (int column = 0; column < jTable1.getColumnCount(); column++) {
             TableColumn tableColumn = jTable1.getColumnModel().getColumn(column);
@@ -107,7 +104,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
 
             tableColumn.setPreferredWidth(preferredWidth);
-        }
+        } */
 
     }
 

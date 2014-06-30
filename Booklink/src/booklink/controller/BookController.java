@@ -7,6 +7,7 @@
 package booklink.controller;
 
 import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,20 +17,26 @@ public class BookController {
     
     private static final BookController bookcontroller = new BookController();
     
-    public BookController() {
+    private BookController() {
 	}
 
 	public static BookController getInstance() {
 		return bookcontroller;
 	}
     
-    public ResultSet getBooklist() {
+    public DefaultTableModel getBooklist() {
+        DefaultTableModel tm = new DefaultTableModel();
         ResultSet rs = null;
         DBController dbctrl = DBController.getInstance();
         try {
             if (dbctrl.initDBConnection()) {
                 //dbctrl.ausgabeDB();
-                rs = dbctrl.getAllBooks();
+                //rs = dbctrl.getAllBooks();
+                tm = dbctrl.getAllBooks();
+               /* while (rs.next()) {
+                    System.out.println("BookController Autor = " + rs.getString("Autor"));
+                    System.out.println("BookController Titel = " + rs.getString("Titel"));
+                } */
                 dbctrl.exit();
             } else {
             // Fehler melden.
@@ -37,7 +44,7 @@ public class BookController {
         } catch (Exception e) {
         }
         
-        return rs; 
+        return tm; 
     }
     
 }
