@@ -108,6 +108,7 @@ public class jpAddPDF extends javax.swing.JPanel {
                     
                     String[] pathnames = { chooser.getSelectedFile().getCanonicalPath() };
                     pdfctl.addPDF(bookid, pathnames );
+                    populateList();
                 }
 
             } else { // Benutzer drückte abbrechen

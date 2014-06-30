@@ -185,8 +185,8 @@ public class DBController {
                     rs.getString("Titel"),
                     rs.getString("Veröffentlichung"),
                     rs.getString("ISBN"),
-                    rs.getString("Auflage"),
                     rs.getString("Verlag"),
+                    rs.getString("Auflage"),
                     rs.getString("Leihfrist")
                     };
                 String test = "sdfds";
