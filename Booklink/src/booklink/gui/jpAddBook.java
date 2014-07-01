@@ -19,6 +19,7 @@ import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.MaskFormatter;
 import booklink.controller.*;
+import booklink.controller.BookController;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -31,6 +32,7 @@ import javax.swing.JOptionPane;
 public class jpAddBook extends javax.swing.JPanel {
     MainFrame myparent;
     private int myid;
+    private boolean bEdit;
 
     /**
      * Creates new form jpAddBook
@@ -303,7 +305,6 @@ public class jpAddBook extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        System.out.println("btnOkActionPerformed");
         
         Boolean bBothEmpty = false;
          
@@ -333,22 +334,25 @@ public class jpAddBook extends javax.swing.JPanel {
         
         String sISBN = tfISBN.getText();
         sISBN = sISBN.replace("-", "");
-   
-        BookController bkctrl = BookController.getInstance();
-        boolean bSuccess = bkctrl.addBook(
-                tfAuthor.getText(),
-                tfBooktitel.getText(),
-                tfYear.getText(), sISBN, tfPress.getText(), tfEdition.getText(), tfLendingPeriod.getText()
-        );
-        if(bSuccess) {
-           // Wenn alles gut Läuft:
-            myparent.initDisplayTable();
-            myparent.setGoodStatus("Buch erfolgreich angelegt!");
+        
+        if (!bEdit) {
+            BookController bkctrl = BookController.getInstance();
+            boolean bSuccess = bkctrl.addBook(
+                    tfAuthor.getText(),
+                    tfBooktitel.getText(),
+                    tfYear.getText(), sISBN, tfPress.getText(), tfEdition.getText(), tfLendingPeriod.getText()
+            );
+            if (bSuccess) {
+                // Wenn alles gut Läuft:
+                myparent.initDisplayTable();
+                myparent.setGoodStatus("Buch erfolgreich angelegt!");
+            } else {
+                myparent.setErrorStatus(bkctrl.getErrorText());
+            }
+
         } else {
-            myparent.setErrorStatus(bkctrl.getErrorText());
+            
         }
-        
-        
         
         
         
@@ -387,43 +391,17 @@ public class jpAddBook extends javax.swing.JPanel {
         this.btnCancel.setEnabled(true);
         this.btnOk.setEnabled(true);
         this.btnEdit.setEnabled(false);
+        this.bEdit = true;
 
         
     }//GEN-LAST:event_btnEditMouseClicked
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
+        this.bEdit = true;
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void tfLendingPeriodKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfLendingPeriodKeyTyped
-      /*  tfLendingPeriod.setInputVerifier(new InputVerifier() {
-            private SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-            public boolean verify(JComponent input) {
-                boolean res = true;
-                JTextComponent tc = (JTextComponent)input;
-                String newContent = tc.getText();
-                if (newContent.length() >= 6) {
-                    try {
-                        Date d = sdf.parse(newContent);
-                        
-                        if (!sdf.format(d).equals(newContent)) {
-                            tc.selectAll();
-                            res = false;
-                        }
-                    }
-                    catch (ParseException ex) {
-                        tc.selectAll();
-                        res = false;
-                    }            
-                }
-                return res;
-            }
-        });
-        if (tfLendingPeriod.getInputVerifier().verify(this.tfLendingPeriod) == true) {
-         this.tfLendingPeriod.setBackground(Color.green);
-        } else {
-        this.tfLendingPeriod.setBackground(Color.red);
-        } */
+      
     }//GEN-LAST:event_tfLendingPeriodKeyTyped
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
