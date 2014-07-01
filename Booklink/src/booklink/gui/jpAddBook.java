@@ -334,9 +334,9 @@ public class jpAddBook extends javax.swing.JPanel {
         
         String sISBN = tfISBN.getText();
         sISBN = sISBN.replace("-", "");
-        
+        BookController bkctrl = BookController.getInstance();
         if (!bEdit) {
-            BookController bkctrl = BookController.getInstance();
+            
             boolean bSuccess = bkctrl.addBook(
                     tfAuthor.getText(),
                     tfBooktitel.getText(),
@@ -351,6 +351,24 @@ public class jpAddBook extends javax.swing.JPanel {
             }
 
         } else {
+            
+            try {
+               bkctrl.editBook(myparent.getID(),
+                    tfAuthor.getText(),
+                    tfBooktitel.getText(),
+                    tfYear.getText(), sISBN, tfPress.getText(), tfEdition.getText(), tfLendingPeriod.getText()
+            );
+               myparent.initDisplayTable();
+               myparent.setGoodStatus("Buch erfolgreich editiert.");
+               disableTextFields();
+               this.btnOk.setEnabled(false);
+               this.btnCancel.setEnabled(false);
+               this.btnEdit.setEnabled(true);
+            } catch (Exception e) {
+                String test = e.getMessage();
+                myparent.setErrorStatus("Fehler beim editieren.");
+            }
+            
             
         }
         

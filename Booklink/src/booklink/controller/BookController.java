@@ -32,16 +32,12 @@ public class BookController {
         DBController dbctrl = DBController.getInstance();
         try {
             if (dbctrl.initDBConnection()) {
-                //dbctrl.ausgabeDB();
-                //rs = dbctrl.getAllBooks();
+                
                 tm = dbctrl.getAllBooks();
-               /* while (rs.next()) {
-                    System.out.println("BookController Autor = " + rs.getString("Autor"));
-                    System.out.println("BookController Titel = " + rs.getString("Titel"));
-                } */
+               
                 dbctrl.exit();
             } else {
-            // Fehler melden.
+                this.errorText = "Buchliste konnte nicht geladen werden.";
             }
         } catch (Exception e) {
         }
@@ -70,6 +66,29 @@ public class BookController {
         }
         return bSuccess;
     }
+    
+    public void editBook (int id, String autor,
+            String titel,
+            String erscheinungsjahr, String isbn, String verlag, String auflage,
+            String leihfrist) throws Exception {
+        boolean bSuccess = false;
+        try {
+            DBController dbctrl = DBController.getInstance();
+            if(dbctrl.initDBConnection()) {
+                bSuccess = dbctrl.editBook(id, autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
+                if(!bSuccess) {
+                   this.errorText = dbctrl.getErrorText();
+                } 
+            }
+            dbctrl.exit();
+
+            
+        } catch (Exception e) {
+        
+        }
+    
+    }
+    
     
     public boolean deleteBook(int id) {
         boolean bSuccess = false;

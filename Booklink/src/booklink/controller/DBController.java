@@ -308,6 +308,43 @@ public class DBController {
 	}
     
    
+    public boolean editBook(int id,String autor,
+			String titel, 
+			String erscheinungsjahr, String isbn, String verlag, String auflage,
+			String leihfrist) {
+		boolean bSuccess = false;
+        try {
+			Statement editBooks = connection.createStatement();
+            
+           // PreparedStatement schreibeEinträge = connection
+		//			.prepareStatement("UPDATE books set"
+         //                   + " Autor = '?', Titel = '?', Veröffentlichung = '?', ISBN = = '?', Verlag = '?', Auflage = '?', Leihfrist = '?' "
+         //                   + " where id = ?");
+            
+               String update = "UPDATE books set "
+                       + "Autor = '" + autor + "', " 
+                       + "Titel = '" + titel + "', " 
+                       + "Veröffentlichung = '" + erscheinungsjahr + "', " 
+                       + "ISBN = '" + isbn + "', " 
+                       + "Verlag = '" + verlag + "', " 
+                       + "Auflage = '" + auflage + "', " 
+                       + "Leihfrist = '" + leihfrist + "' " 
+                       + "where id =" +id +";";
+               int ret = editBooks.executeUpdate(update);
+			
+                bSuccess = true;
+            
+
+			
+			
+		} catch (Exception fehler) {
+			System.err.println("Fehler bei Datenbank-Abfrage");
+			fehler.printStackTrace();
+		}
+        return bSuccess;
+	}
+    
+    
     public boolean addPDF(int bookid, String pathname) {
 		boolean bSuccess = false;
         try {
