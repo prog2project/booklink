@@ -18,7 +18,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
- * @author Kerstin
+ * @author Kerstin Miethanner
  */
 public class jpAddPDF extends javax.swing.JPanel {
     MainFrame myparent;
@@ -68,11 +68,17 @@ public class jpAddPDF extends javax.swing.JPanel {
                 .addContainerGap(192, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * 
+     */
     private void addPdf() {
         try {
             JFileChooser chooser = new JFileChooser();  // Neuen JFC erzeugen
             chooser.setMultiSelectionEnabled(true); // Mehrfachselektion von Dateien erlauben
+            /**
+             * 
+             */
             FileFilter filter = new FileNameExtensionFilter("PDF Dateien", "pdf"); // File-Filter erzeugen (nur PDFs)
             chooser.setFileFilter(filter); // Den FileFilter zu dem JFC hinzufügen
             int returnVal = chooser.showOpenDialog(chooser);
@@ -124,7 +130,9 @@ public class jpAddPDF extends javax.swing.JPanel {
         
     
     }
-
+    /**
+     * Befüllt die Liste mit den PDFs
+     */
     private void populateList() {
         DefaultListModel listModel = new DefaultListModel();
         PDFController ctl = PDFController.getInstance();

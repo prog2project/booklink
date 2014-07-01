@@ -332,9 +332,7 @@ public class jpAddBook extends javax.swing.JPanel {
         
         String sISBN = tfISBN.getText();
         sISBN = sISBN.replace("-", "");
-        
-        
-        
+   
         BookController bkctrl = BookController.getInstance();
         boolean bSuccess = bkctrl.addBook(
                 tfAuthor.getText(),

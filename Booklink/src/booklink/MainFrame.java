@@ -34,10 +34,12 @@ public class MainFrame extends javax.swing.JFrame {
     private UtilController utilctrl;
     private int bookID;
    
+   
     public MainFrame() {
         this.utilctrl = UtilController.getInstance();
         initComponents();
-        this.PDF.setEnabled(false);
+        
+        PDF.setEnabled(false);
         setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
         String path = null;
         // final File f = new File(MyClass.class.getProtectionDomain().getCodeSource().getLocation().getPath());
@@ -348,18 +350,28 @@ public class MainFrame extends javax.swing.JFrame {
     
     }
     
+    /**
+     * Eigene private Klasse um einen Rahmen um bei der Suche die gefundene 
+     * Zelle hervorzuheben.
+     */
     private class HighlightRenderer extends DefaultTableCellRenderer {
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-
+        
+        /**
+         * Von der Elternklasse die Funktion getTableCellRendererComponent
+         * 
+         */
         // Den TableCellRendererComponent des JTable holen
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
-        //  Wenn wir die Row gefunden haben, anmalen
+        
+        /**
+         * Erweiterung des DefaultTableCellRenderer
+         */
         if(row == table.getSelectedRow()) {
 
-            // Erweitert: Zeichnet einen Blauen Rahmen um die Zelle
+            // Erweitert: Zeichnet einen gelben Rahmen um die Zelle
             setBorder(BorderFactory.createMatteBorder(2, 1, 2, 1, Color.YELLOW));
         }
 
