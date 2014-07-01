@@ -20,6 +20,7 @@ import javax.swing.text.JTextComponent;
 import javax.swing.text.MaskFormatter;
 import booklink.controller.*;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -427,7 +428,7 @@ public class jpAddBook extends javax.swing.JPanel {
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
         int dialogButton = JOptionPane.YES_NO_OPTION;
-        int dialogResult = JOptionPane.showConfirmDialog (myparent, "Soll das Buch wirklich gelöscht werden?","Warning",dialogButton);
+        int dialogResult = JOptionPane.showConfirmDialog (myparent, "Soll das Buch wirklich gelöscht werden?","Warnung",dialogButton);
         if(dialogResult == JOptionPane.YES_OPTION){
             int id = myparent.getID();
             if(id > 0) {
@@ -438,12 +439,15 @@ public class jpAddBook extends javax.swing.JPanel {
             } else {
                 myparent.setGoodStatus("Buch mit ID: " +id  +" gelöscht." );
                 myparent.initDisplayTable();
+                myparent.removePanels();
             }
         }
         }
         
     }//GEN-LAST:event_btnDeleteMouseClicked
 
+   
+    
     private void disableTextFields() {
             this.tfAuthor.setEditable(false);
             this.tfBooktitel.setEditable(false);

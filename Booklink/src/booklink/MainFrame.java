@@ -28,7 +28,7 @@ public class MainFrame extends javax.swing.JFrame {
         PDF.setEnabled(false);
         // Fenster soll fixe größe haben.
         this.setResizable(false);
-        
+        this.setLocation(1, 1);
         // Erstmaliges Befüllen der Liste
         initDisplayTable();
         
@@ -177,11 +177,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchFieldActionPerformed
 
     private void SearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchMouseClicked
-       // jLabel1.setText("Gesucht wurde:  "+ SearchField.getText());             // Suche + Button
-      search();
-         
-        
-       
+      search(); 
     }//GEN-LAST:event_SearchMouseClicked
 
     
@@ -269,6 +265,13 @@ public class MainFrame extends javax.swing.JFrame {
     
     public void setTableSelection(int id) {
         
+    }
+    
+    public void removePanels() {
+        multipanel.removeAll();
+        pdfpanel.removeAll();
+        this.repaint();
+        this.validate();
     }
     
     private void search() {
