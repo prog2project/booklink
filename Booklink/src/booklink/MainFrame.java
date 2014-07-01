@@ -9,23 +9,9 @@ import booklink.gui.jpShowPDF;
 import booklink.controller.*;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.event.KeyEvent;
-import java.io.File;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.ListModel;
-import javax.swing.RowSorter;
-import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 
 
 
@@ -40,13 +26,9 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         
         PDF.setEnabled(false);
-        setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
-        String path = null;
-        // final File f = new File(MyClass.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-        try {
-            path = new File(".").getCanonicalPath(); 
-        } catch (Exception e) {
-        }
+        // Fenster soll fixe größe haben.
+        this.setResizable(false);
+        
         // Erstmaliges Befüllen der Liste
         initDisplayTable();
         
@@ -55,58 +37,16 @@ public class MainFrame extends javax.swing.JFrame {
 
     
    public void initDisplayTable() {
-   
-       
-      BookController bkctrl = BookController.getInstance();
-      //ResultSet rs = null; 
-      //DefaultTableModel ts = new DefaultTableModel();
-      //ArrayList columnNames = new ArrayList();
-      //ArrayList data = new ArrayList();
+       BookController bkctrl = BookController.getInstance();
       
-      try {
-            //rs = bkctrl.getBooklist();
+       try {
+      
             jTable1.setModel(bkctrl.getBooklist());
-            //ResultSetMetaData md = rs.getMetaData();
-            //String col[] = {md.getColumnName(1), md.getColumnName(2)};
-            //String test = "Bliub";
-            /*while (rs.next()) {
-                ts.addRow(new Object[] {rs.getRow(), rs.getString(1), rs.getString(2)});
-            } */
-           
+            this.setGoodStatus("Buchliste geladen.");
        } catch (Exception e) {
-           System.out.println("Fehler: " + e.toString());
+           this.setErrorStatus("Fehler: " + e.getMessage());
        }
    
-   // RowSorter sorter = jTable1.getRowSorter();
-   // List sortKeys = new ArrayList();
-   // sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
-   // sorter.setSortKeys(sortKeys);
-   
-   
-   
-   /*
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        for (int column = 0; column < jTable1.getColumnCount(); column++) {
-            TableColumn tableColumn = jTable1.getColumnModel().getColumn(column);
-            int preferredWidth = tableColumn.getMinWidth();
-            int maxWidth = tableColumn.getMaxWidth();
-
-            for (int row = 0; row < jTable1.getRowCount(); row++) {
-                TableCellRenderer cellRenderer = jTable1.getCellRenderer(row, column);
-                Component c = jTable1.prepareRenderer(cellRenderer, row, column);
-                int width = c.getPreferredSize().width + jTable1.getIntercellSpacing().width;
-                preferredWidth = Math.max(preferredWidth, width);
-
-        //  We've exceeded the maximum width, no need to check other rows
-                if (preferredWidth >= maxWidth) {
-                    preferredWidth = maxWidth;
-                    break;
-                }
-            }
-
-            tableColumn.setPreferredWidth(preferredWidth);
-        }  */
-
     }
 
    
@@ -128,7 +68,7 @@ public class MainFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Booklink");
         setBackground(new java.awt.Color(102, 153, 0));
-        setMinimumSize(new java.awt.Dimension(888, 600));
+        setMinimumSize(new java.awt.Dimension(1024, 600));
         getContentPane().setLayout(null);
 
         SearchField.addActionListener(new java.awt.event.ActionListener() {
@@ -265,13 +205,14 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_BuchButton1MouseClicked
 
     private void PDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PDFMouseClicked
-      jpAddPDF PDFpanel = new jpAddPDF(this);
-      pdfpanel.setVisible(true); 
-      pdfpanel.setLayout(new java.awt.BorderLayout()); 
-      pdfpanel.add(PDFpanel); 
-      pdfpanel.validate();
-        
-                                                    // Fenster für PDfs anzeigen lassen      !!!!
+        // Der Knopf soll nur funktionieren, wenn er angeschaltet ist.
+        if (PDF.isEnabled()) {
+            jpAddPDF PDFpanel = new jpAddPDF(this);
+            pdfpanel.setVisible(true);
+            pdfpanel.setLayout(new java.awt.BorderLayout());
+            pdfpanel.add(PDFpanel);
+            pdfpanel.validate();
+        }
     }//GEN-LAST:event_PDFMouseClicked
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
