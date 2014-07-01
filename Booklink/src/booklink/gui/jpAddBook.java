@@ -307,71 +307,50 @@ public class jpAddBook extends javax.swing.JPanel {
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         
         Boolean bBothEmpty = false;
-         
-        {
+        Boolean bFieldsError = true;
+        
+        // Chris: Wir brauchen beide Informationen, also Titel und Autor
+        // Der Rest ist egal
+        if(!tfBooktitel.getText().equals("") &&  !tfAuthor.getText().equals("")) {
+            bFieldsError = false;
+        }
+        
+        
             if (tfBooktitel.getText().equals("") && tfAuthor.getText().equals("")) {
                 bBothEmpty = true;
                 lblTitelAndAutorError.setVisible(true);
             } 
             else {
                 lblTitelAndAutorError.setVisible(false);
+                
             }
             
             if (tfBooktitel.getText().equals("") && !bBothEmpty) { // Wenn dieses Feld leer dann soll Label angezeigt werden
                 lblBooktitelError.setVisible(true);
+                
             } 
             else {
                 lblBooktitelError.setVisible(false);
+                
             }
 
             if (tfAuthor.getText().equals("") && !bBothEmpty) {
                 lblAuthorError.setVisible(true);
+                
             } 
             else {
                 lblAuthorError.setVisible(false);
+                
             }
-        }
         
-        String sISBN = tfISBN.getText();
-        sISBN = sISBN.replace("-", "");
-        BookController bkctrl = BookController.getInstance();
-        if (!bEdit) {
-            
-            boolean bSuccess = bkctrl.addBook(
-                    tfAuthor.getText(),
-                    tfBooktitel.getText(),
-                    tfYear.getText(), sISBN, tfPress.getText(), tfEdition.getText(), tfLendingPeriod.getText()
-            );
-            if (bSuccess) {
-                // Wenn alles gut Läuft:
-                myparent.initDisplayTable();
-                myparent.setGoodStatus("Buch erfolgreich angelegt!");
+        
+        if (!bFieldsError) {
+            if (!bEdit) {
+                addBook();
             } else {
-                myparent.setErrorStatus(bkctrl.getErrorText());
+                editBook();
             }
-
-        } else {
-            
-            try {
-               bkctrl.editBook(myparent.getID(),
-                    tfAuthor.getText(),
-                    tfBooktitel.getText(),
-                    tfYear.getText(), sISBN, tfPress.getText(), tfEdition.getText(), tfLendingPeriod.getText()
-            );
-               myparent.initDisplayTable();
-               myparent.setGoodStatus("Buch erfolgreich editiert.");
-               disableTextFields();
-               this.btnOk.setEnabled(false);
-               this.btnCancel.setEnabled(false);
-               this.btnEdit.setEnabled(true);
-            } catch (Exception e) {
-                String test = e.getMessage();
-                myparent.setErrorStatus("Fehler beim editieren.");
-            }
-            
-            
         }
-        
         
         
     }//GEN-LAST:event_btnOkActionPerformed
@@ -442,7 +421,46 @@ public class jpAddBook extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnDeleteMouseClicked
 
-   
+    private void addBook() {
+        String sISBN = tfISBN.getText();
+        sISBN = sISBN.replace("-", "");
+        BookController bkctrl = BookController.getInstance();
+        boolean bSuccess = bkctrl.addBook(
+                    tfAuthor.getText(),
+                    tfBooktitel.getText(),
+                    tfYear.getText(), sISBN, tfPress.getText(), tfEdition.getText(), tfLendingPeriod.getText()
+            );
+            if (bSuccess) {
+                // Wenn alles gut Läuft:
+                myparent.initDisplayTable();
+                myparent.setGoodStatus("Buch erfolgreich angelegt!");
+            } else {
+                myparent.setErrorStatus(bkctrl.getErrorText());
+            }
+    
+    }
+    
+    private void editBook() {
+        String sISBN = tfISBN.getText();
+        sISBN = sISBN.replace("-", "");
+        BookController bkctrl = BookController.getInstance();
+        try {
+               bkctrl.editBook(myparent.getID(),
+                    tfAuthor.getText(),
+                    tfBooktitel.getText(),
+                    tfYear.getText(), sISBN, tfPress.getText(), tfEdition.getText(), tfLendingPeriod.getText()
+            );
+               myparent.initDisplayTable();
+               myparent.setGoodStatus("Buch erfolgreich editiert.");
+               disableTextFields();
+               this.btnOk.setEnabled(false);
+               this.btnCancel.setEnabled(false);
+               this.btnEdit.setEnabled(true);
+            } catch (Exception e) {
+                String test = e.getMessage();
+                myparent.setErrorStatus("Fehler beim editieren.");
+            }
+    }
     
     private void disableTextFields() {
             this.tfAuthor.setEditable(false);

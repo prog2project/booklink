@@ -64,6 +64,9 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         lblStatus = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Booklink");
@@ -82,7 +85,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(SearchField);
-        SearchField.setBounds(30, 0, 170, 40);
+        SearchField.setBounds(0, 0, 170, 40);
 
         PDF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         PDF.setText("Skript/PDF +");
@@ -97,7 +100,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(PDF);
-        PDF.setBounds(470, 0, 140, 40);
+        PDF.setBounds(420, 0, 140, 40);
 
         Search.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         Search.setText("Search");
@@ -107,7 +110,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Search);
-        Search.setBounds(200, 0, 120, 40);
+        Search.setBounds(170, 0, 120, 40);
 
         BuchButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         BuchButton1.setText("Buch +");
@@ -123,15 +126,15 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BuchButton1);
-        BuchButton1.setBounds(330, 0, 130, 40);
+        BuchButton1.setBounds(290, 0, 130, 40);
 
         multipanel.setLayout(new java.awt.BorderLayout());
         getContentPane().add(multipanel);
-        multipanel.setBounds(270, 50, 700, 220);
+        multipanel.setBounds(270, 50, 710, 220);
 
         pdfpanel.setLayout(new java.awt.BorderLayout());
         getContentPane().add(pdfpanel);
-        pdfpanel.setBounds(270, 310, 710, 210);
+        pdfpanel.setBounds(270, 280, 710, 210);
 
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -157,12 +160,27 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(0, 50, 240, 490);
+        jScrollPane1.setBounds(0, 50, 270, 460);
 
         lblStatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblStatus.setText("Status");
         getContentPane().add(lblStatus);
-        lblStatus.setBounds(640, 10, 350, 30);
+        lblStatus.setBounds(270, 490, 350, 20);
+
+        jMenu1.setText("Datei");
+
+        jMenuItem1.setText("Beenden");
+        jMenuItem1.setToolTipText("Beendet das Programm");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -259,13 +277,13 @@ public class MainFrame extends javax.swing.JFrame {
        
        
        
-        /// Funktion von Chris aufrufen ;) :D
-       
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
     
-    public void setTableSelection(int id) {
-        
-    }
+    
     
     public void removePanels() {
         multipanel.removeAll();
@@ -386,6 +404,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton PDF;
     private javax.swing.JButton Search;
     private javax.swing.JTextField SearchField;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblStatus;

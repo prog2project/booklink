@@ -387,8 +387,9 @@ public class DBController {
             int i = rs.getFetchSize();
             List<String> tempArr = new ArrayList<String>();
             while (rs.next()) {
-                System.out.println("DBController pdfs = " + rs.getString("pathname"));
+                //tempArr.add(rs.getString("ID"));
                 tempArr.add(rs.getString("pathname"));
+                
                 
             } 
             String[] tempString = new String[tempArr.size()];
