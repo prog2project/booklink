@@ -1,6 +1,11 @@
+/**
+ * Booklink (Studienprojekt)
+ * Autoren: Susanne Lapöck, Kerstin Miethanner, Sebastian Paulus, Christian Zwirlein
+ * (c) 2014 
+ */
+
 
 package booklink;
-
 
 
 import booklink.gui.jpAddBook;
@@ -15,11 +20,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 
 
-
+/**
+ * Hauptfenster. Wird beim start geladen
+ * @author Susanne Lapöck, Christian Zwirlein
+ */
 public class MainFrame extends javax.swing.JFrame {
     private UtilController utilctrl;
     private int bookID;
-   
    
     public MainFrame() {
         this.utilctrl = UtilController.getInstance();
@@ -31,22 +38,19 @@ public class MainFrame extends javax.swing.JFrame {
         this.setLocation(1, 1);
         // Erstmaliges Befüllen der Liste
         initDisplayTable();
-        
-        
     }
 
     
-   public void initDisplayTable() {
-       BookController bkctrl = BookController.getInstance();
-      
-       try {
-      
+    public void initDisplayTable() {
+        BookController bkctrl = BookController.getInstance();
+        try {
+
             jTable1.setModel(bkctrl.getBooklist());
             this.setGoodStatus("Buchliste geladen.");
-       } catch (Exception e) {
-           this.setErrorStatus("Fehler: " + e.getMessage());
-       }
-   
+        } catch (Exception e) {
+            this.setErrorStatus("Fehler: " + e.getMessage());
+        }
+
     }
 
    
@@ -190,19 +194,16 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_PDFActionPerformed
 
     private void SearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchFieldActionPerformed
-        search();
-        
+        search();    
     }//GEN-LAST:event_SearchFieldActionPerformed
 
     private void SearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchMouseClicked
-      search(); 
+        search(); 
     }//GEN-LAST:event_SearchMouseClicked
 
     
     private void SearchFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchFieldKeyPressed
-      
-      search();
-      
+        search();
     }//GEN-LAST:event_SearchFieldKeyPressed
 
     private void BuchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuchButton1ActionPerformed
@@ -233,62 +234,67 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_PDFMouseClicked
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-       int row = jTable1.getSelectedRow();
-       int id = 0;
-        // Erstmal die ID erwischen:
-       //Object o = jTable1.getModel().getValueAt(row, 0);
-        try {
-          id = (int) jTable1.getModel().getValueAt(row, 0);
-          this.PDF.setEnabled(true);
-          this.bookID = id;
-          BookController ctrl = BookController.getInstance();
-          String[] items = ctrl.getBookInfo(id);
-          PDFController pdfctl = PDFController.getInstance();
-          String[] pdfitems = pdfctl.getPDFInfo(id);
-          if (items != null) {
-              multipanel.removeAll();
-              jpAddBook bookpanel = new jpAddBook(this, true);
-              bookpanel.setAuthor(items[0]);
-              bookpanel.setBookTitel(items[1]);
-              bookpanel.setYear(items[2]);
-              bookpanel.setISBN(items[3]);
-              bookpanel.setPress(items[4]);
-              bookpanel.setEdition(items[5]);
-              bookpanel.setLendingPeriod(items[6]);
-              //bookpanel.setID(id);
-              multipanel.setVisible(true); 
-              multipanel.setLayout(new java.awt.BorderLayout()); 
-              multipanel.add(bookpanel); 
-              multipanel.validate();
-              
-          }
-          if (pdfitems != null) {
-              pdfpanel.removeAll();
-              jpShowPDF showpdf = new jpShowPDF();
-              showpdf.initPanel(this);
-              showpdf.setBookTitle(items[1]);
-              showpdf.setPDFList(pdfitems);
-              pdfpanel.setVisible(true); 
-              pdfpanel.setLayout(new java.awt.BorderLayout()); 
-              pdfpanel.add(showpdf); 
-              pdfpanel.validate();
-          } else {
-              // Keine PDFs
-              pdfpanel.removeAll();
-          }
-        } catch (Exception e) {
-        }
-       
-       
-       
+        itemSelected();
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
     
+    /**
+     * Lädt die Informationen zu einem ausgewähltem Buch
+     */
+    private void itemSelected() {
+        int row = jTable1.getSelectedRow();
+        int id = 0;
+        // Erstmal die ID erwischen:
+        //Object o = jTable1.getModel().getValueAt(row, 0);
+        try {
+            id = (int) jTable1.getModel().getValueAt(row, 0);
+            this.PDF.setEnabled(true);
+            this.bookID = id;
+            BookController ctrl = BookController.getInstance();
+            String[] items = ctrl.getBookInfo(id);
+            PDFController pdfctl = PDFController.getInstance();
+            String[] pdfitems = pdfctl.getPDFInfo(id);
+            if (items != null) {
+                multipanel.removeAll();
+                jpAddBook bookpanel = new jpAddBook(this, true);
+                bookpanel.setAuthor(items[0]);
+                bookpanel.setBookTitel(items[1]);
+                bookpanel.setYear(items[2]);
+                bookpanel.setISBN(items[3]);
+                bookpanel.setPress(items[4]);
+                bookpanel.setEdition(items[5]);
+                bookpanel.setLendingPeriod(items[6]);
+                multipanel.setVisible(true);
+                multipanel.setLayout(new java.awt.BorderLayout());
+                multipanel.add(bookpanel);
+                multipanel.validate();
+
+            }
+            if (pdfitems != null) {
+                pdfpanel.removeAll();
+                jpShowPDF showpdf = new jpShowPDF();
+                showpdf.initPanel(this);
+                showpdf.setBookTitle(items[1]);
+                showpdf.setPDFList(pdfitems);
+                pdfpanel.setVisible(true);
+                pdfpanel.setLayout(new java.awt.BorderLayout());
+                pdfpanel.add(showpdf);
+                pdfpanel.validate();
+            } else {
+                // Keine PDFs
+                pdfpanel.removeAll();
+            }
+        } catch (Exception e) {
+        }
+
+    }
     
-     
+    /**
+     * Löscht alle Panels, so dass ausser der Liste nichts mehr angezeigt wird.
+     */
     public void removePanels() {
         multipanel.removeAll();
         pdfpanel.removeAll();
@@ -296,6 +302,9 @@ public class MainFrame extends javax.swing.JFrame {
         this.validate();
     }
     
+    /**
+     * Suchfunktion, um Einträge in der Liste zu finden
+     */
     private void search() {
         String value = SearchField.getText();
           for (int row = 0; row <= jTable1.getRowCount() - 1; row++) {
