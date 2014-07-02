@@ -106,8 +106,6 @@ public class DBControllerTest {
     }
 
 
-   
-
     /**
      * Test of addBook method, of class DBController.
      */
@@ -204,15 +202,49 @@ public class DBControllerTest {
      * Test of getPDFInfo method, of class DBController.
      */
     @Test
-    public void testGetPDFInfo() {
+    public void testGetPDFInfo() throws Exception {
         System.out.println("getPDFInfo");
+        String autor = "TESTRUN";
+        String titel = "TESTRUNBOOK";
+        String erscheinungsjahr = "2014";
+        String isbn = "23748973248";
+        String verlag = "TESTVERLAG";
+        String auflage = "1";
+        String leihfrist = "6";
+        DBController instance = DBController.getInstance();
+        // Chris: Mal sehen...
+        assertTrue(instance.initDBConnection());
+        boolean addExpResult = true;
+        boolean result = instance.addBook(autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
+        
+        assertEquals(addExpResult, result);
+        // EDIT
+        String statement = "SELECT ID, TITEL FROM books WHERE TITEL = 'TESTRUNBOOK';";
+        titel = "EDITRUN";
         int id = 0;
-        DBController instance = null;
-        String[] expResult = null;
-        String[] result = instance.getPDFInfo(id);
-        assertArrayEquals(expResult, result);
+        
+        ResultSet rsSelect = instance.select(statement);
+        while (rsSelect.next()) {
+            id = rsSelect.getInt("ID");
+        }
+        assertTrue(id > 0);
+        rsSelect.close();
+        boolean editExpResult = true;
+        boolean editResult = instance.editBook(id, autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
+        assertEquals(editExpResult, editResult);
+        
+        String pathname = "C:\\Test.PDF";
+        
+        boolean expPDFResult = true;
+        assertTrue(instance.addPDF(id, pathname));
+        
+        
+        //String[] expPDFInfoResult = null;
+        String[] PDFINFOresult = instance.getPDFInfo(id);
+        instance.exit();
+        assertNotNull(PDFINFOresult);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -221,11 +253,46 @@ public class DBControllerTest {
     @Test
     public void testDelete() throws Exception {
         System.out.println("delete");
-        String statement = "";
-        DBController instance = null;
-        instance.delete(statement);
+                System.out.println("getPDFInfo");
+        String autor = "TESTRUN";
+        String titel = "TESTRUNBOOK";
+        String erscheinungsjahr = "2014";
+        String isbn = "23748973248";
+        String verlag = "TESTVERLAG";
+        String auflage = "1";
+        String leihfrist = "6";
+        DBController instance = DBController.getInstance();
+        // Chris: Mal sehen...
+        assertTrue(instance.initDBConnection());
+        boolean addExpResult = true;
+        boolean result = instance.addBook(autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
+        
+        assertEquals(addExpResult, result);
+        // EDIT
+        String statement = "SELECT ID, TITEL FROM books WHERE TITEL = 'TESTRUNBOOK';";
+        titel = "EDITRUN";
+        int id = 0;
+        
+        ResultSet rsSelect = instance.select(statement);
+        while (rsSelect.next()) {
+            id = rsSelect.getInt("ID");
+        }
+        assertTrue(id > 0);
+        rsSelect.close();
+        boolean editExpResult = true;
+        boolean editResult = instance.editBook(id, autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
+        assertEquals(editExpResult, editResult);
+        
+        String deletestatement = "DELETE FROM BOOKS WHERE TITEL = 'EDITRUN'";
+        try {
+            instance.delete(deletestatement);
+        } catch (Exception e) {
+            fail("Exception sollte nicht kommen.");
+        }
+        
+        instance.exit();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
   
