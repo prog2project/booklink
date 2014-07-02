@@ -7,6 +7,7 @@
 package booklink.controller;
 
 import booklink.gui.jpShowPDF;
+import booklink.model.PDFDeleteModel;
 import booklink.model.PDFSelectModel;
 import java.io.File;
 import java.sql.ResultSet;
@@ -32,12 +33,13 @@ public class PDFController {
     
     public void deletePDF(jpShowPDF thePanel, int bookid, String pdfname) throws Exception {
         try {
-            String statement = "DELETE from pdfs where pathname='" + pdfname + "'"
-                    + " AND bookid=" + bookid + ";";
+            PDFDeleteModel delModel = new PDFDeleteModel();
+            delModel.setBookId(bookid);
+            delModel.setPdfName(pdfname);
 
             DBController ctl = DBController.getInstance();
             if (ctl.initDBConnection()) {
-                ctl.deletePDF(statement);
+                ctl.delete(delModel.getSelectStatement());
             }
             ctl.exit();
             thePanel.populateList(bookid);

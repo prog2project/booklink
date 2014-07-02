@@ -318,15 +318,15 @@ public class DBController {
     }
     
     /**
-     * Chris: PDF Löschfunktion
+     * Chris: Löschfunktion
      * @param statement Das SQL Statement aus dem Controller
      * @throws Exception 
      */
-    public void deletePDF(String statement) throws Exception {
+    public void delete(String statement) throws Exception {
         try {
-            Statement delpdf = connection.createStatement();
-            delpdf.execute(statement);
-            delpdf.close();
+            Statement deleteStatement = connection.createStatement();
+            deleteStatement.execute(statement);
+            deleteStatement.close();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
