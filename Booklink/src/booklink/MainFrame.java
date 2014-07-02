@@ -39,16 +39,18 @@ public class MainFrame extends javax.swing.JFrame {
         PDF.setEnabled(false);
         // Fenster soll fixe größe haben.
         this.setResizable(false);
-        this.setLocation(1, 1);
+        // Etwas vom Rand weg
+        this.setLocation(5, 5);
         // Erstmaliges Befüllen der Liste
         initDisplayTable();
     }
 
-    
+    /**
+     * Funktion zum erstmaligen Befüllen der Buchliste
+     */
     public void initDisplayTable() {
         BookController bkctrl = BookController.getInstance();
         try {
-
             jTable1.setModel(bkctrl.getBooklist());
             this.setGoodStatus("Buchliste geladen.");
         } catch (Exception e) {
@@ -313,52 +315,23 @@ public class MainFrame extends javax.swing.JFrame {
      */
     private void search() {
         String value = SearchField.getText();
-          for (int row = 0; row <= jTable1.getRowCount() - 1; row++) {
-                for (int col = 0; col <= jTable1.getColumnCount() - 1; col++) {
+        for (int row = 0; row <= jTable1.getRowCount() - 1; row++) {
+            for (int col = 0; col <= jTable1.getColumnCount() - 1; col++) {
 
-                    if (value.equals(jTable1.getValueAt(row, col))) {
-                        // Rahmen
-                        jTable1.scrollRectToVisible(jTable1.getCellRect(row, 0, true));
-                        // Focus setzen
-                        jTable1.setRowSelectionInterval(row, row);
+                if (value.equals(jTable1.getValueAt(row, col))) {
+                    // Rahmen
+                    jTable1.scrollRectToVisible(jTable1.getCellRect(row, 0, true));
+                    // Focus setzen
+                    jTable1.setRowSelectionInterval(row, row);
 
-                        for (int i = 0; i <= jTable1.getColumnCount() - 1; i++) {
-                                jTable1.getColumnModel().getColumn(i).setCellRenderer(new HighlightRenderer());
-                        }
+                    for (int i = 0; i <= jTable1.getColumnCount() - 1; i++) {
+                        jTable1.getColumnModel().getColumn(i).setCellRenderer(new HighlightRenderer());
                     }
                 }
             }
-    
-    }
-    
-    /**
-     * Eigene private Klasse um einen Rahmen um bei der Suche die gefundene 
-     * Zelle hervorzuheben.
-     */
-    private class HighlightRenderer extends DefaultTableCellRenderer {
-
-    @Override
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        
-        /**
-         * Von der Elternklasse die Funktion getTableCellRendererComponent
-         * 
-         */
-        // Den TableCellRendererComponent des JTable holen
-        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        
-        /**
-         * Erweiterung des DefaultTableCellRenderer
-         */
-        if(row == table.getSelectedRow()) {
-
-            // Erweitert: Zeichnet einen gelben Rahmen um die Zelle
-            setBorder(BorderFactory.createMatteBorder(2, 1, 2, 1, Color.YELLOW));
         }
-
-        return this;
     }
-}
+    
     
     /**
      * @param args the command line arguments
@@ -414,7 +387,7 @@ public class MainFrame extends javax.swing.JFrame {
         this.lblStatus.setText(Test + ": " + text);
     }
     /**
-     * 
+     * Setzt Status- Messages im Status Label
      * @param text Fehlertext
      * @param code Fehlercode
      */
@@ -435,12 +408,42 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
     /**
-     * 
+     * Liefert die Ausgewählte Buch ID
      * @return Buch ID
      */
     public int getID() {
         return this.bookID;
     }
+    
+       /**
+     * Eigene private Klasse um einen Rahmen um bei der Suche die gefundene 
+     * Zelle hervorzuheben.
+     */
+    private class HighlightRenderer extends DefaultTableCellRenderer {
+
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        
+        /**
+         * Von der Elternklasse die Funktion getTableCellRendererComponent
+         * 
+         */
+        // Den TableCellRendererComponent des JTable holen
+        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        
+        /**
+         * Erweiterung des DefaultTableCellRenderer
+         */
+        if(row == table.getSelectedRow()) {
+
+            // Erweitert: Zeichnet einen gelben Rahmen um die Zelle
+            setBorder(BorderFactory.createMatteBorder(2, 1, 2, 1, Color.YELLOW));
+        }
+
+        return this;
+    }
+}
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BuchButton1;

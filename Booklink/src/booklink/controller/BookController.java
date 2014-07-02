@@ -1,8 +1,6 @@
 
 package booklink.controller;
 
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,7 +21,6 @@ public class BookController {
 
     public DefaultTableModel getBooklist() {
         DefaultTableModel tm = new DefaultTableModel();
-        ResultSet rs = null;
         DBController dbctrl = DBController.getInstance();
         try {
             if (dbctrl.initDBConnection()) {
