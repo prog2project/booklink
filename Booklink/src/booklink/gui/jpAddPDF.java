@@ -9,7 +9,6 @@ package booklink.gui;
 import booklink.MainFrame;
 import booklink.controller.PDFController;
 import java.io.File;
-import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -25,6 +24,8 @@ public class jpAddPDF extends jpShowPDF {
      */
     public jpAddPDF() {
         //this.myparent = parent;
+        // Chris: Wir benutzen die Components von jpShowPDF, daher macht
+        // es keinen Sinn, die lokalen Componenten zu erzeugen
         //initComponents();
         
     }
@@ -32,7 +33,7 @@ public class jpAddPDF extends jpShowPDF {
     @Override
     public void initPanel(MainFrame myparent) {
         super.initPanel(myparent);
-        // Panel wurde geladen, jetzt den Dialog zum Auswählen der PDFs erzeugen
+        // Chris: Panel wurde geladen, jetzt den Dialog zum Auswählen der PDFs erzeugen
         addPdf();
     }    
     
@@ -70,67 +71,38 @@ public class jpAddPDF extends jpShowPDF {
             chooser.setFileFilter(filter); // Den FileFilter zu dem JFC hinzufügen
             int returnVal = chooser.showOpenDialog(chooser);
 
-            /* Abfrage, ob auf "Öffnen" geklickt wurde */
+            // Abfrage, ob auf Öffnen geklickt wurde
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 // Wenn Mehrere Dateien ausgewählt wurden
                 if (chooser.getSelectedFiles() != null && chooser.getSelectedFiles().length > 1) {
                     // Es wurden mehrere Dateien ausgewält
                     File Files[] = chooser.getSelectedFiles();
-
                     for (int i = 0; i < Files.length; i++) {
-            
                         PDFController pdfctl = PDFController.getInstance();
                         int bookid = myparent.getID();
-
                         String[] pathnames = {Files[i].getCanonicalPath()};
                         pdfctl.addPDF(bookid, pathnames);
-
                     }
+                    // Chris: populateList aufrufen, um die Elemente darzustellen.
                     super.populateList(myparent.getID());
 
                 } else {
+                    // Es wurde nur eine Datei ausgewählt
                     PDFController pdfctl = PDFController.getInstance();
                     int bookid = myparent.getID();
                     String[] pathnames = {chooser.getSelectedFile().getCanonicalPath()};
                     pdfctl.addPDF(bookid, pathnames);
-                    super.populateList(myparent.getID());
+                    super.populateList(bookid);
                 }
-
             } else {
                 super.populateList(myparent.getID());
             }
-
         } catch (Exception e) {
             String ex = e.getMessage();
-            e.printStackTrace();
+            myparent.setErrorStatus("Fehler beim Anlegen von PDFs");
         }
-
     }
-    /**
-     * Befüllt die Liste mit den PDFs
-     */
-    /*
     
-    private void populateList() {
-        DefaultListModel listModel = new DefaultListModel();
-        PDFController ctl = PDFController.getInstance();
-        String[] items = ctl.getPDFInfo(myparent.getID());
-        if(items.length > 0) {
-            for (int i = 0; i < items.length; i++) {
-                listModel.addElement(items[i]);
-                
-            }
-            this.jList1.removeAll();
-            this.jList1.setModel(listModel);
-        } else {
-            this.jList1.setVisible(false);
-            //this.remove(this);
-            
-            
-            
-        }
-    
-    } */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
