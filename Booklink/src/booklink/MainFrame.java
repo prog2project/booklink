@@ -21,8 +21,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 
 /**
- * Hauptfenster. Wird beim start geladen
- * @author Susanne Lapöck, Christian Zwirlein
+ * Hauptfenster. Wird beim Start geladen
+ * @author Susanne Lapöck, mit Hilfe von Christian Zwirlein
  */
 public class MainFrame extends javax.swing.JFrame {
     private UtilController utilctrl;
