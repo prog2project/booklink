@@ -11,7 +11,9 @@ package booklink.model;
  * @author Christian Zwirlein
  */
 public class PDFSelectModel implements ISelectStatement{
-
+    private int bookID;
+    private String pathname;
+    
     public int getBookID() {
         return bookID;
     }
@@ -28,9 +30,6 @@ public class PDFSelectModel implements ISelectStatement{
         this.pathname = pathname;
     }
     
-    private int bookID;
-    private String pathname;
-
     @Override
     public String getSelectStatement() {
         return "SELECT * FROM pdfs where pathname='" + pathname + "' AND bookid = " +bookID +";";
