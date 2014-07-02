@@ -7,28 +7,34 @@
 package booklink.gui;
 
 import booklink.MainFrame;
+import booklink.controller.PDFController;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
- * @author Kerstin
+ * @author Kerstin Miethanner, Christian Zwirlein
  */
 public class jpShowPDF extends javax.swing.JPanel {
-    MainFrame myparent;
+    public MainFrame myparent;
     /**
      * Creates new form jpAddPDF
      */
-    public jpShowPDF(MainFrame parent) {
-        this.myparent = parent;
+    public jpShowPDF() {
         
         initComponents();
         
         
     }
-
+    
+    public void initPanel(MainFrame parent) {
+        this.myparent = parent;
+    
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,6 +57,11 @@ public class jpShowPDF extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jList1);
 
         jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -76,6 +87,17 @@ public class jpShowPDF extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String pdf = (String)this.jList1.getSelectedValue();
+        if (pdf == null) {
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(null, "Lösche " + pdf);
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void setBookTitle(String title) {
         
     }
@@ -90,6 +112,26 @@ public class jpShowPDF extends javax.swing.JPanel {
         }
         this.jList1.setModel(listModel); 
     }
+    
+    public void populateList(int id) {
+        DefaultListModel listModel = new DefaultListModel();
+        PDFController ctl = PDFController.getInstance();
+        String[] items = ctl.getPDFInfo(id);
+        if(items.length > 0) {
+            for (int i = 0; i < items.length; i++) {
+                listModel.addElement(items[i]);
+                
+            }
+            //this.jList1.removeAll();
+            this.jList1.setModel(listModel);
+        } else {
+            this.jList1.setVisible(false);
+            //this.remove(this);
+            
+        }
+    
+    }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

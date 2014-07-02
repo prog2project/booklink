@@ -18,18 +18,24 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author Kerstin Miethanner
  */
-public class jpAddPDF extends javax.swing.JPanel {
-    MainFrame myparent;
+public class jpAddPDF extends jpShowPDF {
+    //MainFrame myparent;
     /**
      * Creates new form jpAddPDF
      */
-    public jpAddPDF(MainFrame parent) {
-        this.myparent = parent;
-        initComponents();
-        // Panel wurde geladen, jetzt den Dialog zum Auswählen der PDFs erzeugen
-        addPdf();
+    public jpAddPDF() {
+        //this.myparent = parent;
+        //initComponents();
+        
     }
 
+    @Override
+    public void initPanel(MainFrame myparent) {
+        super.initPanel(myparent);
+        // Panel wurde geladen, jetzt den Dialog zum Auswählen der PDFs erzeugen
+        addPdf();
+    }    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,31 +45,17 @@ public class jpAddPDF extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
-
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        setBackground(new java.awt.Color(255, 51, 51));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+            .addGap(0, 613, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(192, Short.MAX_VALUE))
+            .addGap(0, 319, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
     
@@ -74,63 +66,51 @@ public class jpAddPDF extends javax.swing.JPanel {
         try {
             JFileChooser chooser = new JFileChooser();  // Neuen JFC erzeugen
             chooser.setMultiSelectionEnabled(true); // Mehrfachselektion von Dateien erlauben
-            /**
-             * 
-             */
             FileFilter filter = new FileNameExtensionFilter("PDF Dateien", "pdf"); // File-Filter erzeugen (nur PDFs)
             chooser.setFileFilter(filter); // Den FileFilter zu dem JFC hinzufügen
             int returnVal = chooser.showOpenDialog(chooser);
-            
-            
+
             /* Abfrage, ob auf "Öffnen" geklickt wurde */
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 // Wenn Mehrere Dateien ausgewählt wurden
                 if (chooser.getSelectedFiles() != null && chooser.getSelectedFiles().length > 1) {
                     // Es wurden mehrere Dateien ausgewält
                     File Files[] = chooser.getSelectedFiles();
-                    
+
                     for (int i = 0; i < Files.length; i++) {
-                        System.out.println("Die zu öffnende Datei ist: "
-                                + Files[i].getName());
-                        
+            
                         PDFController pdfctl = PDFController.getInstance();
-                    int bookid = myparent.getID();
-                    
-                    String[] pathnames = { Files[i].getCanonicalPath() };
-                    pdfctl.addPDF(bookid, pathnames );
-                    
-                  
+                        int bookid = myparent.getID();
+
+                        String[] pathnames = {Files[i].getCanonicalPath()};
+                        pdfctl.addPDF(bookid, pathnames);
+
                     }
-                    
-                   
-                    populateList();
+                    super.populateList(myparent.getID());
+
                 } else {
-                    System.out.println("Die zu öffnende Datei ist: "
-                            + chooser.getSelectedFile().getName());
                     PDFController pdfctl = PDFController.getInstance();
                     int bookid = myparent.getID();
-                    
-                    String[] pathnames = { chooser.getSelectedFile().getCanonicalPath() };
-                    pdfctl.addPDF(bookid, pathnames );
-                    populateList();
+                    String[] pathnames = {chooser.getSelectedFile().getCanonicalPath()};
+                    pdfctl.addPDF(bookid, pathnames);
+                    super.populateList(myparent.getID());
                 }
 
-            } else { 
-                populateList();
+            } else {
+                super.populateList(myparent.getID());
             }
-            
+
         } catch (Exception e) {
-            
+            String ex = e.getMessage();
+            e.printStackTrace();
         }
-        
-        
-        
-        
-    
+
     }
     /**
      * Befüllt die Liste mit den PDFs
      */
+    /*
+    
     private void populateList() {
         DefaultListModel listModel = new DefaultListModel();
         PDFController ctl = PDFController.getInstance();
@@ -142,11 +122,15 @@ public class jpAddPDF extends javax.swing.JPanel {
             }
             this.jList1.removeAll();
             this.jList1.setModel(listModel);
+        } else {
+            this.jList1.setVisible(false);
+            //this.remove(this);
+            
+            
+            
         }
     
-    }
+    } */
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList jList1;
-    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

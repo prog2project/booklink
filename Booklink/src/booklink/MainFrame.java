@@ -221,11 +221,14 @@ public class MainFrame extends javax.swing.JFrame {
     private void PDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PDFMouseClicked
         // Der Knopf soll nur funktionieren, wenn er angeschaltet ist.
         if (PDF.isEnabled()) {
-            jpAddPDF PDFpanel = new jpAddPDF(this);
+            jpAddPDF PDFpanel = new jpAddPDF();
+            PDFpanel.initPanel(this);
             pdfpanel.setVisible(true);
+            pdfpanel.removeAll();
             pdfpanel.setLayout(new java.awt.BorderLayout());
             pdfpanel.add(PDFpanel);
             pdfpanel.validate();
+            pdfpanel.repaint();
         }
     }//GEN-LAST:event_PDFMouseClicked
 
@@ -261,7 +264,8 @@ public class MainFrame extends javax.swing.JFrame {
           }
           if (pdfitems != null) {
               pdfpanel.removeAll();
-              jpShowPDF showpdf = new jpShowPDF(this);
+              jpShowPDF showpdf = new jpShowPDF();
+              showpdf.initPanel(this);
               showpdf.setBookTitle(items[1]);
               showpdf.setPDFList(pdfitems);
               pdfpanel.setVisible(true); 
@@ -284,7 +288,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
     
     
-    
+     
     public void removePanels() {
         multipanel.removeAll();
         pdfpanel.removeAll();
