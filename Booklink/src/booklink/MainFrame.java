@@ -216,6 +216,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void BuchButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuchButton1MouseClicked
          multipanel.removeAll();
+         pdfpanel.removeAll();
+         pdfpanel.setVisible(false);
          jpAddBook bookpanel = new jpAddBook(this, false);
          multipanel.setVisible(true); 
          multipanel.setLayout(new java.awt.BorderLayout()); 
@@ -411,7 +413,11 @@ public class MainFrame extends javax.swing.JFrame {
         this.lblStatus.setForeground(Color.green);
         this.lblStatus.setText(Test + ": " + text);
     }
-    
+    /**
+     * 
+     * @param text Fehlertext
+     * @param code Fehlercode
+     */
     public void setStatusMessage(String text, int code) {
         switch (code) {
             case MainFrame.ERROR_MESSAGE:

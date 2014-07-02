@@ -405,6 +405,11 @@ public class DBController {
         return data;
     }
     
+    /**
+     * Chris: PDF Löschfunktion
+     * @param statement Das SQL Statement aus dem Controller
+     * @throws Exception 
+     */
     public void deletePDF(String statement) throws Exception {
         try {
             Statement delpdf = connection.createStatement();
@@ -413,11 +418,23 @@ public class DBController {
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
-        
-        
-    
+     
     }
     
+    public ResultSet select(String statement) throws Exception {
+        try {
+            PreparedStatement selectStatement = connection.prepareStatement(statement);
+            ResultSet rsSelect = selectStatement.executeQuery();
+            //selectStatement.close();
+            return rsSelect; 
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+            //return null;
+        }
+        
+        //return;
+        
+    }
     
     public String getErrorText() {
         if (errorText != null) {

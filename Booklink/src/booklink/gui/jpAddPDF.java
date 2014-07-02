@@ -73,27 +73,15 @@ public class jpAddPDF extends jpShowPDF {
 
             // Abfrage, ob auf Öffnen geklickt wurde
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-                // Wenn Mehrere Dateien ausgewählt wurden
-                if (chooser.getSelectedFiles() != null && chooser.getSelectedFiles().length > 1) {
-                    // Es wurden mehrere Dateien ausgewält
-                    File Files[] = chooser.getSelectedFiles();
-                    for (int i = 0; i < Files.length; i++) {
-                        PDFController pdfctl = PDFController.getInstance();
-                        int bookid = myparent.getID();
-                        String[] pathnames = {Files[i].getCanonicalPath()};
-                        pdfctl.addPDF(bookid, pathnames);
-                    }
-                    // Chris: populateList aufrufen, um die Elemente darzustellen.
-                    super.populateList(myparent.getID());
-
-                } else {
-                    // Es wurde nur eine Datei ausgewählt
-                    PDFController pdfctl = PDFController.getInstance();
-                    int bookid = myparent.getID();
-                    String[] pathnames = {chooser.getSelectedFile().getCanonicalPath()};
-                    pdfctl.addPDF(bookid, pathnames);
-                    super.populateList(bookid);
+                // Chris: Massiv umgebaut. Geht jetzt über Model & Co.
+                try {
+                    PDFController ctl = PDFController.getInstance();
+                    ctl.addNewPDF(chooser.getSelectedFiles(), myparent.getID());
+                } catch (Exception e) {
+                    myparent.setStatusMessage("Fehler beim PDF Anlegen.", MainFrame.ERROR_MESSAGE);
                 }
+                super.populateList(myparent.getID());
+                
             } else {
                 super.populateList(myparent.getID());
             }

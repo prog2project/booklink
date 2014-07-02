@@ -90,6 +90,7 @@ public class jpShowPDF extends javax.swing.JPanel {
     private void btnPDFDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFDeleteActionPerformed
         String pdf = (String)this.jList1.getSelectedValue();
         if (pdf == null) {
+            myparent.setStatusMessage("Bitte PDF auswählen", MainFrame.ERROR_MESSAGE);
             return;
         } else {
             PDFController ctl = PDFController.getInstance();
