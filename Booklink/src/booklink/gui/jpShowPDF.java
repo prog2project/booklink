@@ -47,7 +47,7 @@ public class jpShowPDF extends javax.swing.JPanel {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
-        jButton1 = new javax.swing.JButton();
+        btnPDFDelete = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -56,10 +56,10 @@ public class jpShowPDF extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jList1);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPDFDelete.setText("Löschen");
+        btnPDFDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPDFDeleteActionPerformed(evt);
             }
         });
 
@@ -72,7 +72,7 @@ public class jpShowPDF extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(btnPDFDelete))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE))
                 .addGap(30, 30, 30))
         );
@@ -82,22 +82,39 @@ public class jpShowPDF extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(btnPDFDelete)
                 .addContainerGap(101, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnPDFDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFDeleteActionPerformed
         String pdf = (String)this.jList1.getSelectedValue();
         if (pdf == null) {
             return;
+        } else {
+            PDFController ctl = PDFController.getInstance();
+            try {
+                int dialogButton = JOptionPane.YES_NO_OPTION;
+                int retVal = JOptionPane.showConfirmDialog(myparent, "PDF Löschen?","Frage:", dialogButton);
+                if(retVal == JOptionPane.YES_OPTION) {
+                    ctl.deletePDF(this,myparent.getID(), pdf);
+                } else {
+                    myparent.setStatusMessage("Abbruch durch Benutzer", MainFrame.NEUTRAL_MESSAGE);
+                }
+            } catch (Exception e) {
+                myparent.setStatusMessage("Löschen des PDF fehlgeschlagen.", MainFrame.ERROR_MESSAGE);
+            }
         }
         
-        JOptionPane.showMessageDialog(null, "Lösche " + pdf);
 
 // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    }//GEN-LAST:event_btnPDFDeleteActionPerformed
+    
+    public void setMessageToParent(String message, int code) {
+        myparent.setStatusMessage(message, code);
+    }
+    
+    
     public void setBookTitle(String title) {
         
     }
@@ -134,7 +151,7 @@ public class jpShowPDF extends javax.swing.JPanel {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnPDFDelete;
     private javax.swing.JList jList1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;

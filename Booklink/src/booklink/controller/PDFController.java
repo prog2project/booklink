@@ -6,6 +6,9 @@
 
 package booklink.controller;
 
+import booklink.gui.jpShowPDF;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Christian Zwirlein <christian.zwirlein@stud.fh-rosenheim.de>
@@ -23,6 +26,25 @@ public class PDFController {
         return pdfcontroller;
     }
     
+    
+    public void deletePDF(jpShowPDF thePanel,int bookid, String pdfname) throws Exception {
+        try {
+            String statement = "DELETE from pdfs where pathname='" + pdfname + "'"
+                        + " AND bookid=" +bookid + ";";
+            
+            DBController ctl = DBController.getInstance();
+            if(ctl.initDBConnection()) {
+                ctl.deletePDF(statement);
+            }
+            ctl.exit();
+            thePanel.populateList(bookid);
+        } catch (Exception e) {
+            throw new Exception("PDF konnte nicht gelöscht werden.");
+        }
+        
+        
+        
+    }
     
     public boolean addPDF(int bookid, String[] pathnames) {
         boolean bSuccess = false;

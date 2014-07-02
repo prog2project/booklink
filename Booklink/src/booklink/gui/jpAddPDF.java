@@ -98,8 +98,8 @@ public class jpAddPDF extends jpShowPDF {
                 super.populateList(myparent.getID());
             }
         } catch (Exception e) {
-            String ex = e.getMessage();
-            myparent.setErrorStatus("Fehler beim Anlegen von PDFs");
+            
+            myparent.setStatusMessage("Fehler beim Anlegen von PDFs", MainFrame.ERROR_MESSAGE);
         }
     }
     

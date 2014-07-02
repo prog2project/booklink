@@ -57,7 +57,7 @@ public class jpAddBook extends javax.swing.JPanel {
             disableTextFields();
             this.btnCancel.setEnabled(false);
             this.btnOk.setEnabled(false);
-            myparent.setGoodStatus("Infos geladen!");
+            myparent.setStatusMessage("Infos geladen!", MainFrame.NEUTRAL_MESSAGE);
 
         } else {
             this.btnEdit.setEnabled(false);
@@ -410,9 +410,9 @@ public class jpAddBook extends javax.swing.JPanel {
             BookController ctrl = BookController.getInstance();
             boolean success = ctrl.deleteBook(id);
             if(!success) {
-             myparent.setErrorStatus("ID:" +id + "konnte nicht gelöscht werden!");
+             myparent.setStatusMessage("ID:" +id + "konnte nicht gelöscht werden!", MainFrame.ERROR_MESSAGE);
             } else {
-                myparent.setGoodStatus("Buch mit ID: " +id  +" gelöscht." );
+                myparent.setStatusMessage("Buch mit ID: " +id  +" gelöscht." , MainFrame.SUCCESS_MESSAGE);
                 myparent.initDisplayTable();
                 myparent.removePanels();
             }
@@ -433,9 +433,9 @@ public class jpAddBook extends javax.swing.JPanel {
             if (bSuccess) {
                 // Wenn alles gut Läuft:
                 myparent.initDisplayTable();
-                myparent.setGoodStatus("Buch erfolgreich angelegt!");
+                myparent.setStatusMessage("Buch erfolgreich angelegt!", MainFrame.SUCCESS_MESSAGE);
             } else {
-                myparent.setErrorStatus(bkctrl.getErrorText());
+                myparent.setStatusMessage(bkctrl.getErrorText(), MainFrame.ERROR_MESSAGE);
             }
     
     }
@@ -451,14 +451,13 @@ public class jpAddBook extends javax.swing.JPanel {
                     tfYear.getText(), sISBN, tfPress.getText(), tfEdition.getText(), tfLendingPeriod.getText()
             );
                myparent.initDisplayTable();
-               myparent.setGoodStatus("Buch erfolgreich editiert.");
+               myparent.setStatusMessage("Buch erfolgreich editiert.", MainFrame.SUCCESS_MESSAGE);
                disableTextFields();
                this.btnOk.setEnabled(false);
                this.btnCancel.setEnabled(false);
                this.btnEdit.setEnabled(true);
             } catch (Exception e) {
-                String test = e.getMessage();
-                myparent.setErrorStatus("Fehler beim editieren.");
+                myparent.setStatusMessage("Fehler beim editieren.", MainFrame.ERROR_MESSAGE);
             }
     }
     

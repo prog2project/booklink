@@ -80,7 +80,7 @@ public class DBController {
 			isbnSuche.setInt(1, isbn);
 			ResultSet Suchresultate = isbnSuche.executeQuery();
 			while (Suchresultate.next()) {
-				System.out.println(Suchresultate.getString(1));
+				//System.out.println(Suchresultate.getString(1));
 				if (Suchresultate.getString(1) != null) {
 					vorhanden = true;
 				}
@@ -147,7 +147,7 @@ public class DBController {
             ts.setColumnIdentifiers(col);
             
             while (ausgabeResultate.next()) {
-                System.out.println("DBController Autor = " + ausgabeResultate.getString("Autor"));
+                //System.out.println("DBController Autor = " + ausgabeResultate.getString("Autor"));
                 Object[] mydata = { ausgabeResultate.getInt(1), 
                                     ausgabeResultate.getString(2), 
                                     ausgabeResultate.getString(3),
@@ -158,7 +158,7 @@ public class DBController {
                                     ausgabeResultate.getString(8),
                 };
                 ts.addRow(mydata);
-                System.out.println("DBController Titel = " + ausgabeResultate.getString("Titel"));
+                //System.out.println("DBController Titel = " + ausgabeResultate.getString("Titel"));
             }
             rs = ausgabeResultate;
             ausgabeResultate.close();
@@ -179,7 +179,7 @@ public class DBController {
             rs = idsuche.executeQuery();
             int i = rs.getFetchSize();
             while (rs.next()) {
-                System.out.println("DBController Autor = " + rs.getString("Autor"));
+                //System.out.println("DBController Autor = " + rs.getString("Autor"));
                 String newdata[] = {
                     rs.getString("Autor"),
                     rs.getString("Titel"),
@@ -197,7 +197,7 @@ public class DBController {
             rs.close();
             return data;
         } catch (Exception e) {
-            String test = "sdfsd";
+            e.printStackTrace();
         }
         return data;
     }
@@ -404,6 +404,20 @@ public class DBController {
         }
         return data;
     }
+    
+    public void deletePDF(String statement) throws Exception {
+        try {
+            Statement delpdf = connection.createStatement();
+            delpdf.execute(statement);
+            delpdf.close();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+        
+        
+    
+    }
+    
     
     public String getErrorText() {
         if (errorText != null) {

@@ -27,6 +27,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class MainFrame extends javax.swing.JFrame {
     private UtilController utilctrl;
     private int bookID;
+    
+    public static final int SUCCESS_MESSAGE = 1;
+    public static final int ERROR_MESSAGE = 2;
+    public static final int NEUTRAL_MESSAGE = 3;
    
     public MainFrame() {
         this.utilctrl = UtilController.getInstance();
@@ -390,24 +394,44 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
 
-    public void setErrorStatus(String text) {
+    private void setErrorStatus(String text) {
         String Test = utilctrl.getTime();
         this.lblStatus.setForeground(Color.red);
         this.lblStatus.setText(Test + ": " + text);
     }
     
-    public void setNormalStatus(String text) {
+    private void setNormalStatus(String text) {
         String Test = utilctrl.getTime();
-        this.lblStatus.setForeground(Color.cyan);
+        this.lblStatus.setForeground(Color.blue);
         this.lblStatus.setText(Test + ": " + text);
     }
     
-    public void setGoodStatus(String text) {
+    private void setGoodStatus(String text) {
         String Test = utilctrl.getTime();
         this.lblStatus.setForeground(Color.green);
         this.lblStatus.setText(Test + ": " + text);
     }
     
+    public void setStatusMessage(String text, int code) {
+        switch (code) {
+            case MainFrame.ERROR_MESSAGE:
+                setErrorStatus(text);
+                break;
+            case MainFrame.SUCCESS_MESSAGE:
+                setGoodStatus(text);
+                break;
+            case MainFrame.NEUTRAL_MESSAGE:
+                setNormalStatus(text);
+                break;
+            default: 
+                setNormalStatus("Kein Status zum anzeigen.");
+                break;
+        }
+    }
+    /**
+     * 
+     * @return Buch ID
+     */
     public int getID() {
         return this.bookID;
     }
