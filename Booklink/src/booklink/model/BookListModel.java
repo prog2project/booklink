@@ -10,11 +10,34 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author cmz
+ * @author Christian Zwirlein
  */
-public class BookListModel extends DefaultTableModel{
+public class BookListModel extends DefaultTableModel implements ISelectStatement{
     
-    public BookListModel() {
+    private DefaultTableModel model;
 
+    public DefaultTableModel getModel() {
+        return model;
     }
+
+    public void setModel(DefaultTableModel model) {
+        this.model = model;
+    }
+
+    public String[] getColums() {
+        return colums;
+    }
+
+    public void setColums(String[] colums) {
+        this.colums = colums;
+    }
+    private String[] colums;
+    
+    
+    @Override
+    public String getSelectStatement() {
+        return "SELECT * FROM books";
+    }
+
+    
 }

@@ -13,18 +13,16 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * DB Controller nach dem Singleton Pattern
+ * Es kann daher nur zur Laufzeit immer nur eine Instanz geben.
  * @author Sebastian Paulus
  */
 public class DBController {
     
-    
- 
-	private static final DBController dbcontroller = new DBController();
+    private static final DBController dbcontroller = new DBController();
 	public static Connection connection;
     private String errorText;
-	//private static final String DB_PATH = System.getProperty("user.home") + "/"
-	//		+ "Booklink.db";
+	
     private static final String DB_PATH = "\\db\\booklink.db";
 
 	static {
@@ -62,78 +60,6 @@ public class DBController {
             throw new RuntimeException(fehler);
         }
         return false;
-	}
-
-	public void schreibeDB(String autor,
-			String titel, 
-			String erscheinungsjahr, int isbn, String verlag, int auflage,
-			String leihfrist) {
-		try {
-			Statement erstelleDatenbank = connection.createStatement();
-			erstelleDatenbank.executeUpdate("CREATE TABLE IF NOT EXISTS books (Autor, Titel, Veröffentlichung, ISBN,  Verlag, Auflage, Leihfrist);");
-			PreparedStatement schreibeEinträge = connection
-					.prepareStatement("INSERT INTO books VALUES (?, ?, ?, ?, ?, ?, ?);");
-
-			boolean vorhanden = false;
-			PreparedStatement isbnSuche = connection
-					.prepareStatement("select Titel from books where ISBN = ?");
-			isbnSuche.setInt(1, isbn);
-			ResultSet Suchresultate = isbnSuche.executeQuery();
-			while (Suchresultate.next()) {
-				//System.out.println(Suchresultate.getString(1));
-				if (Suchresultate.getString(1) != null) {
-					vorhanden = true;
-				}
-			}
-			Suchresultate.close();
-			isbnSuche.close();
-
-			if (vorhanden != true) {
-				schreibeEinträge.setString(1, autor);
-				schreibeEinträge.setString(2, titel);
-				schreibeEinträge.setDate(3, Date.valueOf(erscheinungsjahr));
-				schreibeEinträge.setInt(4, isbn);
-				schreibeEinträge.setString(5, verlag);
-				schreibeEinträge.setInt(6, auflage);
-				schreibeEinträge.setString(7, leihfrist);
-				schreibeEinträge.addBatch();
-			}
-
-			if (vorhanden == true) {
-				System.out.println("Das Buch ist schon vorhanden");
-			}
-
-			connection.setAutoCommit(false);
-			schreibeEinträge.executeBatch();
-			connection.setAutoCommit(true);
-			
-		} catch (SQLException fehler) {
-			System.err.println("Fehler bei Datenbank-Abfrage");
-			fehler.printStackTrace();
-		}
-	}
-
-	public void ausgabeDB() { 
-		try {
-			Statement ausgabeStatement = connection.createStatement();
-			ResultSet ausgabeResultate = ausgabeStatement.executeQuery("SELECT * FROM books;");
-			while (ausgabeResultate.next()) {
-				System.out.println("Autor = " + ausgabeResultate.getString("Autor"));
-				System.out.println("Titel = " + ausgabeResultate.getString("Titel"));
-				System.out.println("Erscheinungsdatum = "
-						+ ausgabeResultate.getDate("Veröffentlichung"));
-				System.out.println("ISBN = " + ausgabeResultate.getInt("ISBN"));
-				System.out.println("Verlag = " + ausgabeResultate.getString("Verlag"));
-				System.out.println("Auflage = " + ausgabeResultate.getInt("Auflage"));
-				System.out.println("Leihfrist = " + ausgabeResultate.getString("Leihfrist"));
-			}
-
-			ausgabeResultate.close();
-			ausgabeStatement.close();
-		} catch (SQLException fehler) {
-			System.err.println("Fehler bei Ausgabe");
-			fehler.printStackTrace();
-		}
 	}
 	
     public DefaultTableModel getAllBooks() {
@@ -210,20 +136,6 @@ public class DBController {
 	}
     
     private String[] data;
-    
-	public void loescheBuch(int isbn) { 
-		String query = "delete from books where ISBN=" + isbn;
-		try {
-			Statement loeschenStatement = connection.createStatement();
-			loeschenStatement.execute(query);
-			System.out.println("Das Buch mit der ISBN = " + isbn
-					+ " wurde gelöscht!");
-			loeschenStatement.close();
-		} catch (SQLException fehler) {
-			System.err.println("Fehler beim Löschen");
-			fehler.printStackTrace();
-		}
-	}
     
     public boolean deleteBook(int id) { 
 		boolean bSuccess = false;
@@ -431,9 +343,6 @@ public class DBController {
             throw new Exception(e.getMessage());
             //return null;
         }
-        
-        //return;
-        
     }
     
     public String getErrorText() {
