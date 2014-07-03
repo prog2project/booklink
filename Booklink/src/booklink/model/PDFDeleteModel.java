@@ -14,15 +14,24 @@ public class PDFDeleteModel implements ISelectStatement{
     
     private String pdfName;
     private int bookId;
-
+    /**
+     * 
+     * @return 
+     */
     public String getPdfName() {
         return pdfName;
     }
-
+    /**
+     * 
+     * @param pdfName 
+     */
     public void setPdfName(String pdfName) {
         this.pdfName = pdfName;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public int getBookId() {
         return bookId;
     }
@@ -31,8 +40,10 @@ public class PDFDeleteModel implements ISelectStatement{
         this.bookId = bookId;
     }
     
-    
-    
+    /**
+     * 
+     * @return 
+     */
     @Override
     public String getSelectStatement() {
         return  "DELETE from pdfs where pathname='" + pdfName + "'"

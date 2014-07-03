@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Kerstin
+ * @author Kerstin Miethanner
  */
 public class jpAddBook extends javax.swing.JPanel {
     MainFrame myparent;

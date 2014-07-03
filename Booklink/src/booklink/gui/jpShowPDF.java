@@ -10,9 +10,6 @@ import booklink.MainFrame;
 import booklink.controller.PDFController;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -140,11 +137,9 @@ public class jpShowPDF extends javax.swing.JPanel {
                 listModel.addElement(items[i]);
                 
             }
-            //this.jList1.removeAll();
             this.jList1.setModel(listModel);
         } else {
             this.jList1.setVisible(false);
-            //this.remove(this);
             
         }
     

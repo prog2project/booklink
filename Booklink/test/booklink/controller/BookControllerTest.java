@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author cmz
+ * @author Christian Zwirlein
  */
 public class BookControllerTest {
     
