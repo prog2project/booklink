@@ -150,8 +150,7 @@ public class DBController {
             }
             Statement loeschenStatement = connection.createStatement();
 			loeschenStatement.execute(query);
-			System.out.println("Das Buch mit der ID = " + id
-					+ " wurde gelöscht!");
+
 			loeschenStatement.close();
             bSuccess = true;
 		} catch (SQLException fehler) {

@@ -42,8 +42,11 @@ public class jpAddBook extends javax.swing.JPanel {
         this.myparent = parent;
         this.myid = parent.getID();
         initComponents();
-        addDateFormatter();
-        
+
+        /**
+        * Buttons Ok, Editieren & Abbrechen werden sichtbar gemacht
+        * Labels werden vorerst versteckt
+        */
         btnOk.setVisible(true);
         btnEdit.setVisible(true);
         btnCancel.setVisible(true);
@@ -52,6 +55,15 @@ public class jpAddBook extends javax.swing.JPanel {
         lblBooktitelError.setVisible(false);
         lblAuthorError.setVisible(false); 
         
+        /**
+        * Wenn man sich Buchinformationen anzeigen lässt wird die Funktion 
+        * "disableTextFields" aufgerufen, die Buttons "OK" und "Abbrechen"  
+        * werden in diesem Fall deaktiviert. 
+        * Eine Meldung mit dem Inthalt "Infos geladen!" erscheint.
+        * Nur der Editieren-Button kann genutzt werden.
+        * Wenn keine Infos vorhanden, ist Editieren-Button deaktiviert & der OK
+        * & Abbrechen Button sind aktiviert.
+        */
         if (showInfo) {
 
             disableTextFields();
@@ -391,26 +403,29 @@ public class jpAddBook extends javax.swing.JPanel {
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
         int dialogButton = JOptionPane.YES_NO_OPTION;
-        int dialogResult = JOptionPane.showConfirmDialog (myparent, "Soll das Buch wirklich gelöscht werden?","Warnung",dialogButton);
-        if(dialogResult == JOptionPane.YES_OPTION){
+        int dialogResult = JOptionPane.showConfirmDialog(myparent, "Soll das Buch wirklich gelöscht werden?", "Warnung", dialogButton);
+        if (dialogResult == JOptionPane.YES_OPTION) {
             int id = myparent.getID();
-            if(id > 0) {
-            BookController ctrl = BookController.getInstance();
-            boolean success = ctrl.deleteBook(id);
-            if(!success) {
-             myparent.setStatusMessage("ID:" +id + "konnte nicht gelöscht werden!", MainFrame.ERROR_MESSAGE);
-            } else {
-                myparent.setStatusMessage("Buch mit ID: " +id  +" gelöscht." , MainFrame.SUCCESS_MESSAGE);
-                myparent.initDisplayTable();
-                myparent.removePanels();
+            if (id > 0) {
+                BookController ctrl = BookController.getInstance();
+                boolean success = ctrl.deleteBook(id);
+                if (!success) {
+                    myparent.setStatusMessage("ID:" + id + "konnte nicht gelöscht werden!", MainFrame.ERROR_MESSAGE);
+                } else {
+                    myparent.setStatusMessage("Buch mit ID: " + id + " gelöscht.", MainFrame.SUCCESS_MESSAGE);
+                    myparent.initDisplayTable();
+                    myparent.removePanels();
+                }
             }
         }
-        }
-        
-    }//GEN-LAST:event_btnDeleteMouseClicked
 
+    }//GEN-LAST:event_btnDeleteMouseClicked
+    /**
+     * Funktion zum Anlegen eines Buches
+     */
     private void addBook() {
         String sISBN = tfISBN.getText();
+        // In der Datenbank werden ISBN Nummern ohne Striche gespeichert.
         sISBN = sISBN.replace("-", "");
         BookController bkctrl = BookController.getInstance();
         boolean bSuccess = bkctrl.addBook(
@@ -419,7 +434,7 @@ public class jpAddBook extends javax.swing.JPanel {
                     tfYear.getText(), sISBN, tfPress.getText(), tfEdition.getText(), tfLendingPeriod.getText()
             );
             if (bSuccess) {
-                // Wenn alles gut Läuft:
+                // Bei erfolg wird die Buchliste neu geladen.
                 myparent.initDisplayTable();
                 myparent.setStatusMessage("Buch erfolgreich angelegt!", MainFrame.SUCCESS_MESSAGE);
             } else {
@@ -427,7 +442,9 @@ public class jpAddBook extends javax.swing.JPanel {
             }
     
     }
-    
+    /**
+     * Funktion zum editieren der Bücher
+     */
     private void editBook() {
         String sISBN = tfISBN.getText();
         sISBN = sISBN.replace("-", "");
@@ -460,36 +477,38 @@ public class jpAddBook extends javax.swing.JPanel {
     
     }
     
-    public void setAuthor(String text){
+    public void setAuthor(String text) {
         this.tfAuthor.setText(text);
     }
-    
+
     public void setBookTitel(String title) {
         this.tfBooktitel.setText(title);
     }
-   public void setEdition(String edition) {
-         this.tfEdition.setText(edition);
+
+    public void setEdition(String edition) {
+        this.tfEdition.setText(edition);
     }
-   public void setLendingPeriod(String period) {
-          this.tfLendingPeriod.setText(period);
+
+    public void setLendingPeriod(String period) {
+        this.tfLendingPeriod.setText(period);
     }
-   public void setPress(String press) {
-           this.tfPress.setText(press);
+
+    public void setPress(String press) {
+        this.tfPress.setText(press);
     }
-   public void setYear(String year) {
-         this.tfYear.setText(year);
+
+    public void setYear(String year) {
+        this.tfYear.setText(year);
     }
-   public void setISBN(String isbn) {
-       this.tfISBN.setText(isbn);
-   }
-   
-   public void setID(int id) {
-       this.myid = id;
-   }
-   private void addDateFormatter() {
-        
-   }
-   
+
+    public void setISBN(String isbn) {
+        this.tfISBN.setText(isbn);
+    }
+
+    public void setID(int id) {
+        this.myid = id;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
