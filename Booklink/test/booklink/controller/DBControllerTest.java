@@ -106,7 +106,7 @@ public class DBControllerTest {
         String leihfrist = "6";
         DBController instance = DBController.getInstance();
         // Chris: Mal sehen...
-        assertTrue(instance.initDBConnection());
+        instance.initDBConnection();
         boolean addExpResult = true;
         boolean result = instance.addBook(autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
         
@@ -151,7 +151,7 @@ public class DBControllerTest {
         String leihfrist = "6";
         DBController instance = DBController.getInstance();
         // Chris: Mal sehen...
-        assertTrue(instance.initDBConnection());
+        instance.initDBConnection();
         boolean addExpResult = true;
         boolean result = instance.addBook(autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
         

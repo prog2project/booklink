@@ -167,7 +167,7 @@ public class DBController {
 			String leihfrist) {
 		boolean bSuccess = false;
         try {
-			Statement erstelleDatenbank = connection.createStatement();
+
             PreparedStatement schreibeEinträge = connection
 					.prepareStatement(""
                             + "INSERT INTO books ('Autor', 'Titel', 'Veröffentlichung', 'ISBN', 'Verlag', 'Auflage', 'Leihfrist')  "
@@ -198,20 +198,16 @@ public class DBController {
 			}
 
 			if (vorhanden == true) {
-				System.out.println("Das Buch ist schon vorhanden");
-                this.errorText = "Das Buch ist schon vorhanden!";
+				this.errorText = "Das Buch ist schon vorhanden!";
 			} else {
                 connection.setAutoCommit(false);
                 schreibeEinträge.executeBatch();
                 connection.setAutoCommit(true);
                 bSuccess = true;
             }
-
-			
 			
 		} catch (Exception fehler) {
-			System.err.println("Fehler bei Datenbank-Abfrage");
-			fehler.printStackTrace();
+			this.errorText = "Exception beim Anlegen.";
 		}
         return bSuccess;
 	}
@@ -225,11 +221,7 @@ public class DBController {
         try {
 			Statement editBooks = connection.createStatement();
             
-           // PreparedStatement schreibeEinträge = connection
-		//			.prepareStatement("UPDATE books set"
-         //                   + " Autor = '?', Titel = '?', Veröffentlichung = '?', ISBN = = '?', Verlag = '?', Auflage = '?', Leihfrist = '?' "
-         //                   + " where id = ?");
-            
+          
                String update = "UPDATE books set "
                        + "Autor = '" + autor + "', " 
                        + "Titel = '" + titel + "', " 
@@ -241,14 +233,14 @@ public class DBController {
                        + "where id =" +id +";";
                int ret = editBooks.executeUpdate(update);
 			
+               if(ret > 0) {
                 bSuccess = true;
-            
+               }
 
 			
 			
 		} catch (Exception fehler) {
-			System.err.println("Fehler bei Datenbank-Abfrage");
-			fehler.printStackTrace();
+			this.errorText = "Fehler beim editieren des Buchs.";
 		}
         return bSuccess;
 	}
@@ -309,7 +301,7 @@ public class DBController {
             rs.close();
             return data;
         } catch (Exception e) {
-            String test = "sdfsd";
+            errorText = "Fehler bei PDFInfo.";
         }
         return data;
     }

@@ -30,7 +30,13 @@ public class PDFController {
         return pdfcontroller;
     }
     
-    
+    /**
+     * Deletes PDF
+     * @param thePanel View to talk to
+     * @param bookid bookID
+     * @param pdfname Name(path of PDF)
+     * @throws Exception 
+     */
     public void deletePDF(jpShowPDF thePanel, int bookid, String pdfname) throws Exception {
         try {
             PDFDeleteModel delModel = new PDFDeleteModel();
@@ -48,7 +54,12 @@ public class PDFController {
         }
 
     }
-    
+    /**
+     * Adds new PDF File
+     * @param files Array of Files
+     * @param bookid BookID
+     * @throws Exception 
+     */
     public void addNewPDF(File files[], int bookid) throws Exception {
         try {
             for (int i = 0; i < files.length; i++) {
@@ -93,7 +104,8 @@ public class PDFController {
             }
             dbctr.exit();            
         } catch (Exception e) {
-            
+           // Zur Not auf System.out
+            System.out.println(e.getMessage());
         }
         
         return pdfinfo;
