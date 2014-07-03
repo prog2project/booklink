@@ -82,7 +82,6 @@ public class jpAddBook extends javax.swing.JPanel {
         lblYear = new javax.swing.JLabel();
         lblEdition = new javax.swing.JLabel();
         lblLendingPeriod = new javax.swing.JLabel();
-        lblComment = new javax.swing.JLabel();
         lblBooktitelError = new javax.swing.JLabel();
         lblAuthorError = new javax.swing.JLabel();
         lblTitelAndAutorError = new javax.swing.JLabel();
@@ -93,7 +92,6 @@ public class jpAddBook extends javax.swing.JPanel {
         tfYear = new javax.swing.JFormattedTextField();
         tfEdition = new javax.swing.JFormattedTextField();
         tfLendingPeriod = new javax.swing.JFormattedTextField();
-        tfComment = new javax.swing.JFormattedTextField();
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -140,9 +138,6 @@ public class jpAddBook extends javax.swing.JPanel {
         lblLendingPeriod.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lblLendingPeriod.setText("Leihfrist");
         lblLendingPeriod.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        lblComment.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblComment.setText("Bemerkung");
 
         lblBooktitelError.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lblBooktitelError.setForeground(new java.awt.Color(255, 0, 0));
@@ -237,11 +232,9 @@ public class jpAddBook extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(lblEdition, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(lblYear)
-                                .addComponent(lblLendingPeriod, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblComment, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblLendingPeriod, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tfComment, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(tfYear, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(tfEdition, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
@@ -284,11 +277,7 @@ public class jpAddBook extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfLendingPeriod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblLendingPeriod)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfComment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblComment))))
+                            .addComponent(jLabel1))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTitelAndAutorError)
@@ -378,7 +367,6 @@ public class jpAddBook extends javax.swing.JPanel {
         // Alle Felder wieder auf enabled
         this.tfAuthor.setEditable(true);
         this.tfBooktitel.setEditable(true);
-        this.tfComment.setEditable(true);
         this.tfEdition.setEditable(true);
         this.tfISBN.setEditable(true);
         this.tfLendingPeriod.setEditable(true);
@@ -464,7 +452,6 @@ public class jpAddBook extends javax.swing.JPanel {
     private void disableTextFields() {
             this.tfAuthor.setEditable(false);
             this.tfBooktitel.setEditable(false);
-            this.tfComment.setEditable(false);
             this.tfEdition.setEditable(false);
             this.tfISBN.setEditable(false);
             this.tfLendingPeriod.setEditable(false);
@@ -479,9 +466,6 @@ public class jpAddBook extends javax.swing.JPanel {
     
     public void setBookTitel(String title) {
         this.tfBooktitel.setText(title);
-    }
-    public void setComment(String comment) {
-        this.tfComment.setText(comment);
     }
    public void setEdition(String edition) {
          this.tfEdition.setText(edition);
@@ -517,7 +501,6 @@ public class jpAddBook extends javax.swing.JPanel {
     private javax.swing.JLabel lblAuthorError;
     private javax.swing.JLabel lblBooktitel;
     private javax.swing.JLabel lblBooktitelError;
-    private javax.swing.JLabel lblComment;
     private javax.swing.JLabel lblEdition;
     private javax.swing.JLabel lblISBN;
     private javax.swing.JLabel lblLendingPeriod;
@@ -526,7 +509,6 @@ public class jpAddBook extends javax.swing.JPanel {
     private javax.swing.JLabel lblYear;
     private javax.swing.JFormattedTextField tfAuthor;
     private javax.swing.JFormattedTextField tfBooktitel;
-    private javax.swing.JFormattedTextField tfComment;
     private javax.swing.JFormattedTextField tfEdition;
     private javax.swing.JFormattedTextField tfISBN;
     private javax.swing.JFormattedTextField tfLendingPeriod;

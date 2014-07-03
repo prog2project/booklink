@@ -6,7 +6,10 @@
 
 package booklink.controller;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
+import static junit.framework.Assert.assertEquals;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -57,33 +60,52 @@ public class BookControllerTest {
     @Test
     public void testGetBooklist() {
         System.out.println("getBooklist");
-        BookController instance = null;
-        DefaultTableModel expResult = null;
+        BookController instance = BookController.getInstance();
         DefaultTableModel result = instance.getBooklist();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotNull(result);
+        
+        
     }
 
     /**
      * Test of addBook method, of class BookController.
      */
     @Test
-    public void testAddBook() {
+    public void testAddBook() throws SQLException, Exception {
         System.out.println("addBook");
-        String autor = "";
-        String titel = "";
-        String erscheinungsjahr = "";
-        String isbn = "";
-        String verlag = "";
-        String auflage = "";
-        String leihfrist = "";
-        BookController instance = null;
-        boolean expResult = false;
+        String autor = "TESTRUN";
+        String titel = "TESTRUNBOOK";
+        String erscheinungsjahr = "2014";
+        String isbn = "23748973248";
+        String verlag = "TESTVERLAG";
+        String auflage = "1";
+        String leihfrist = "6";
+        BookController instance = BookController.getInstance();
+        boolean expResult = true;
         boolean result = instance.addBook(autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+                
+        DBController ctrl = DBController.getInstance();
+        assertTrue(ctrl.initDBConnection());
+        
+        String statement = "SELECT ID, TITEL FROM books WHERE TITEL = 'TESTRUNBOOK';";
+
+        int id = 0;
+        
+        ResultSet rsSelect = ctrl.select(statement);
+        while (rsSelect.next()) {
+            id = rsSelect.getInt("ID");
+        }
+        rsSelect.close();
+        assertTrue(id > 0);
+        ctrl.exit();
+        
+        // Chris: Immer zum schluss die Testdaten wieder wegmachen.
+        assertTrue(instance.deleteBook(id));
+        
+        
+        
     }
 
     /**
@@ -92,62 +114,127 @@ public class BookControllerTest {
     @Test
     public void testEditBook() throws Exception {
         System.out.println("editBook");
+        String autor = "TESTRUN";
+        String titel = "TESTRUNBOOK";
+        String erscheinungsjahr = "2014";
+        String isbn = "23748973248";
+        String verlag = "TESTVERLAG";
+        String auflage = "1";
+        String leihfrist = "6";
+        BookController instance = BookController.getInstance();
+        boolean expResult = true;
+        boolean result = instance.addBook(autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
+        assertEquals(expResult, result);
+        
+        DBController ctrl = DBController.getInstance();
+        assertTrue(ctrl.initDBConnection());
+        
+        String statement = "SELECT ID, TITEL FROM books WHERE TITEL = 'TESTRUNBOOK';";
+        titel = "EDITRUN";
         int id = 0;
-        String autor = "";
-        String titel = "";
-        String erscheinungsjahr = "";
-        String isbn = "";
-        String verlag = "";
-        String auflage = "";
-        String leihfrist = "";
-        BookController instance = null;
-        instance.editBook(id, autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
+        
+        ResultSet rsSelect = ctrl.select(statement);
+        while (rsSelect.next()) {
+            id = rsSelect.getInt("ID");
+        }
+        rsSelect.close();
+        assertTrue(id > 0);
+        ctrl.exit();
+        try {
+            instance.editBook(id, autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
+        } catch (Exception e) {
+            fail("Fehler beim editieren des Buchs.");
+        }
+        assertTrue(instance.deleteBook(id));
+        
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
      * Test of deleteBook method, of class BookController.
      */
     @Test
-    public void testDeleteBook() {
+    public void testDeleteBook() throws SQLException, Exception {
         System.out.println("deleteBook");
-        int id = 0;
-        BookController instance = null;
-        boolean expResult = false;
-        boolean result = instance.deleteBook(id);
+        String autor = "TESTRUN";
+        String titel = "TESTRUNBOOK";
+        String erscheinungsjahr = "2014";
+        String isbn = "23748973248";
+        String verlag = "TESTVERLAG";
+        String auflage = "1";
+        String leihfrist = "6";
+        BookController instance = BookController.getInstance();
+        boolean expResult = true;
+        boolean result = instance.addBook(autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
         assertEquals(expResult, result);
+        
+        DBController ctrl = DBController.getInstance();
+        assertTrue(ctrl.initDBConnection());
+        
+        String statement = "SELECT ID, TITEL FROM books WHERE TITEL = 'TESTRUNBOOK';";
+ 
+        int id = 0;
+        
+        ResultSet rsSelect = ctrl.select(statement);
+        while (rsSelect.next()) {
+            id = rsSelect.getInt("ID");
+        }
+        rsSelect.close();
+        assertTrue(id > 0);
+        ctrl.exit();
+        
+        
+        assertTrue(instance.deleteBook(id));
+        
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
      * Test of getBookInfo method, of class BookController.
      */
     @Test
-    public void testGetBookInfo() {
+    public void testGetBookInfo() throws Exception {
+
         System.out.println("getBookInfo");
+
+        String autor = "TESTRUN";
+        String titel = "TESTRUNBOOK";
+        String erscheinungsjahr = "2014";
+        String isbn = "23748973248";
+        String verlag = "TESTVERLAG";
+        String auflage = "1";
+        String leihfrist = "6";
+        BookController instance = BookController.getInstance();
+        boolean expResult = true;
+        boolean result = instance.addBook(autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
+        assertEquals(expResult, result);
+        
+        DBController ctrl = DBController.getInstance();
+        assertTrue(ctrl.initDBConnection());
+        
+        String statement = "SELECT ID, TITEL FROM books WHERE TITEL = 'TESTRUNBOOK';";
+
         int id = 0;
-        BookController instance = null;
-        String[] expResult = null;
-        String[] result = instance.getBookInfo(id);
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        ResultSet rsSelect = ctrl.select(statement);
+        while (rsSelect.next()) {
+            id = rsSelect.getInt("ID");
+        }
+        rsSelect.close();
+        assertTrue(id > 0);
+        ctrl.exit();
+        
+        String[] bookInfoResult = instance.getBookInfo(id);
+        String expBookInfoResult = "TESTRUNBOOK";
+        assertEquals(expBookInfoResult, bookInfoResult[1]);
+        assertTrue(instance.deleteBook(id));
+
+
+        
     }
 
-    /**
-     * Test of getErrorText method, of class BookController.
-     */
-    @Test
-    public void testGetErrorText() {
-        System.out.println("getErrorText");
-        BookController instance = null;
-        String expResult = "";
-        String result = instance.getErrorText();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+
     
 }

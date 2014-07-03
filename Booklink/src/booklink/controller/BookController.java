@@ -32,6 +32,7 @@ public class BookController {
                 this.errorText = "Buchliste konnte nicht geladen werden.";
             }
         } catch (Exception e) {
+            this.errorText = "Buchliste konnte nicht geladen werden.";
         }
 
         return tm;
@@ -54,6 +55,7 @@ public class BookController {
 
             return bSuccess;
         } catch (Exception e) {
+            this.errorText = "Exception beim Buch anlegen.";
 
         }
         return bSuccess;
@@ -75,7 +77,7 @@ public class BookController {
             dbctrl.exit();
 
         } catch (Exception e) {
-
+           this.errorText = "Fehler beim editieren des Buchs.";
         }
 
     }

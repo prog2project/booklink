@@ -115,7 +115,6 @@ public class DBController {
                     rs.getString("Auflage"),
                     rs.getString("Leihfrist")
                     };
-                String test = "sdfds";
                 this.data = newdata;
             } 
             //return rs;

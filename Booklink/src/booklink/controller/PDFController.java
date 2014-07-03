@@ -79,6 +79,7 @@ public class PDFController {
         }
     }
     
+    /*
     public boolean addPDF(int bookid, String[] pathnames) {
         boolean bSuccess = false;
         try {
@@ -101,7 +102,7 @@ public class PDFController {
         }
         return bSuccess;
     }
-    
+        */
     
     
     public String[] getPDFInfo(int id) {

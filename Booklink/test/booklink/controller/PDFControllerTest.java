@@ -8,6 +8,8 @@ package booklink.controller;
 
 import booklink.gui.jpShowPDF;
 import java.io.File;
+import java.sql.ResultSet;
+import static junit.framework.Assert.assertEquals;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -46,11 +48,9 @@ public class PDFControllerTest {
     @Test
     public void testGetInstance() {
         System.out.println("getInstance");
-        PDFController expResult = null;
         PDFController result = PDFController.getInstance();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotNull(result);
+
     }
 
     /**
@@ -59,13 +59,54 @@ public class PDFControllerTest {
     @Test
     public void testDeletePDF() throws Exception {
         System.out.println("deletePDF");
-        jpShowPDF thePanel = null;
-        int bookid = 0;
-        String pdfname = "";
-        PDFController instance = null;
-        instance.deletePDF(thePanel, bookid, pdfname);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        jpShowPDF thePanel = new jpShowPDF();
+        PDFController instance = PDFController.getInstance();
+        
+        String autor = "TESTRUN";
+        String titel = "TESTRUNBOOK";
+        String erscheinungsjahr = "2014";
+        String isbn = "23748973248";
+        String verlag = "TESTVERLAG";
+        String auflage = "1";
+        String leihfrist = "6";
+        BookController bkctrl = BookController.getInstance();
+        boolean expResult = true;
+        boolean result = bkctrl.addBook(autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
+        assertEquals(expResult, result);
+        
+                
+        DBController ctrl = DBController.getInstance();
+        assertTrue(ctrl.initDBConnection());
+        
+        String statement = "SELECT ID, TITEL FROM books WHERE TITEL = 'TESTRUNBOOK';";
+
+        int id = 0;
+        
+        ResultSet rsSelect = ctrl.select(statement);
+        while (rsSelect.next()) {
+            id = rsSelect.getInt("ID");
+        }
+        rsSelect.close();
+        assertTrue(id > 0);
+        ctrl.exit();
+
+        String pdfnames[] = {"C:\\test.pdf"};
+        String pdfname = "C:\\test.pdf";
+        File testfile = new File("C:\\test.pdf");
+        File[] files = {testfile};
+        
+        try {
+            instance.addNewPDF(files, id);
+        } catch (Exception e) {
+            fail("Test: ADD new PDF");
+        }
+        try {
+            instance.deletePDF(thePanel, id, pdfname);
+        } catch (Exception e) {
+            fail("PDFTest: DELETE");
+        }
+        assertTrue(bkctrl.deleteBook(id));
+
     }
 
     /**
@@ -74,43 +115,104 @@ public class PDFControllerTest {
     @Test
     public void testAddNewPDF() throws Exception {
         System.out.println("addNewPDF");
-        File[] files = null;
-        int bookid = 0;
-        PDFController instance = null;
-        instance.addNewPDF(files, bookid);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        File testfile = new File("C:\\test.pdf");
+        File[] files = {testfile};
+        PDFController instance = PDFController.getInstance();
+        
+        String autor = "TESTRUN";
+        String titel = "TESTRUNBOOK";
+        String erscheinungsjahr = "2014";
+        String isbn = "23748973248";
+        String verlag = "TESTVERLAG";
+        String auflage = "1";
+        String leihfrist = "6";
+        BookController bkctrl = BookController.getInstance();
+        boolean expResult = true;
+        boolean result = bkctrl.addBook(autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
+        assertEquals(expResult, result);
+        
+                
+        DBController ctrl = DBController.getInstance();
+        assertTrue(ctrl.initDBConnection());
+        
+        String statement = "SELECT ID, TITEL FROM books WHERE TITEL = 'TESTRUNBOOK';";
+
+        int id = 0;
+        
+        ResultSet rsSelect = ctrl.select(statement);
+        while (rsSelect.next()) {
+            id = rsSelect.getInt("ID");
+        }
+        rsSelect.close();
+        assertTrue(id > 0);
+        ctrl.exit();
+        
+        
+        try {
+            instance.addNewPDF(files, id);
+        } catch (Exception e) {
+            fail("Test: ADD new PDF");
+        }
+        assertTrue(bkctrl.deleteBook(id));
+        
+        
     }
 
-    /**
-     * Test of addPDF method, of class PDFController.
-     */
-    @Test
-    public void testAddPDF() {
-        System.out.println("addPDF");
-        int bookid = 0;
-        String[] pathnames = null;
-        PDFController instance = null;
-        boolean expResult = false;
-        boolean result = instance.addPDF(bookid, pathnames);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of getPDFInfo method, of class PDFController.
      */
     @Test
-    public void testGetPDFInfo() {
+    public void testGetPDFInfo() throws Exception {
         System.out.println("getPDFInfo");
+        System.out.println("addNewPDF");
+        
+        File testfile = new File("C:\\test.pdf");
+        File[] files = {testfile};
+        PDFController instance = PDFController.getInstance();
+        
+        String autor = "TESTRUN";
+        String titel = "TESTRUNBOOK";
+        String erscheinungsjahr = "2014";
+        String isbn = "23748973248";
+        String verlag = "TESTVERLAG";
+        String auflage = "1";
+        String leihfrist = "6";
+        BookController bkctrl = BookController.getInstance();
+        boolean expResult = true;
+        boolean result = bkctrl.addBook(autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
+        assertEquals(expResult, result);
+        
+                
+        DBController ctrl = DBController.getInstance();
+        assertTrue(ctrl.initDBConnection());
+        
+        String statement = "SELECT ID, TITEL FROM books WHERE TITEL = 'TESTRUNBOOK';";
+
         int id = 0;
-        PDFController instance = null;
-        String[] expResult = null;
-        String[] result = instance.getPDFInfo(id);
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        ResultSet rsSelect = ctrl.select(statement);
+        while (rsSelect.next()) {
+            id = rsSelect.getInt("ID");
+        }
+        rsSelect.close();
+        assertTrue(id > 0);
+        ctrl.exit();
+        
+        
+        try {
+            instance.addNewPDF(files, id);
+        } catch (Exception e) {
+            fail("Test: ADD new PDF");
+        }
+        
+        String[] pdfinforesult = instance.getPDFInfo(id);
+        String expectedResult = "C:\\test.pdf";
+        assertEquals(expectedResult, pdfinforesult[0]);
+        
+        assertTrue(bkctrl.deleteBook(id));
+
     }
     
 }

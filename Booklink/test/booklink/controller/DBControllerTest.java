@@ -95,14 +95,44 @@ public class DBControllerTest {
      * Test of getBookInfo method, of class DBController.
      */
     @Test
-    public void testGetBookInfo() throws SQLException {
-        DBController datenbankInstanz2 = DBController.getInstance();
-        datenbankInstanz2.initDBConnection();
-        System.out.println("getAllBooks");
-        // DefaultTableModel expResult = null;
-        DefaultTableModel result = datenbankInstanz2.getAllBooks();
-        assertNotNull(result);
-        datenbankInstanz2.exit();
+    public void testGetBookInfo() throws SQLException, Exception {
+        System.out.println("testGetBookInfo");
+        String autor = "TESTRUN";
+        String titel = "TESTRUNBOOK";
+        String erscheinungsjahr = "2014";
+        String isbn = "23748973248";
+        String verlag = "TESTVERLAG";
+        String auflage = "1";
+        String leihfrist = "6";
+        DBController instance = DBController.getInstance();
+        // Chris: Mal sehen...
+        assertTrue(instance.initDBConnection());
+        boolean addExpResult = true;
+        boolean result = instance.addBook(autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
+        
+        assertEquals(addExpResult, result);
+        // EDIT
+        String statement = "SELECT ID, TITEL FROM books WHERE TITEL = 'TESTRUNBOOK';";
+        titel = "EDITRUN";
+        int id = 0;
+        
+        ResultSet rsSelect = instance.select(statement);
+        while (rsSelect.next()) {
+            id = rsSelect.getInt("ID");
+        }
+        rsSelect.close();
+        assertTrue(id > 0);
+        boolean editExpResult = true;
+        boolean editResult = instance.editBook(id, autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
+        assertEquals(editExpResult, editResult);
+        String[] bookInfoResult = instance.getBookInfo(id);
+        String expBookInfoResult = "EDITRUN";
+        assertEquals(expBookInfoResult, bookInfoResult[1]);
+        // Chris: als letztes: delete Testen
+        assertTrue(instance.deleteBook(id));
+        
+        
+        instance.exit();
     }
 
 
