@@ -243,7 +243,7 @@ public class DBControllerTest {
         String leihfrist = "6";
         DBController instance = DBController.getInstance();
         // Chris: Mal sehen...
-        assertTrue(instance.initDBConnection());
+        instance.initDBConnection();
         boolean addExpResult = true;
         boolean result = instance.addBook(autor, titel, erscheinungsjahr, isbn, verlag, auflage, leihfrist);
         
@@ -271,8 +271,10 @@ public class DBControllerTest {
         
         //String[] expPDFInfoResult = null;
         String[] PDFINFOresult = instance.getPDFInfo(id);
+        assertTrue(instance.deleteBook(id));
         instance.exit();
         assertNotNull(PDFINFOresult);
+        
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }

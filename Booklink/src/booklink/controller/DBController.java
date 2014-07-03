@@ -84,7 +84,6 @@ public class DBController {
                                     ausgabeResultate.getString(8),
                 };
                 ts.addRow(mydata);
-                //System.out.println("DBController Titel = " + ausgabeResultate.getString("Titel"));
             }
             rs = ausgabeResultate;
             ausgabeResultate.close();
