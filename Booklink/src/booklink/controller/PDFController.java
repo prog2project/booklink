@@ -79,32 +79,11 @@ public class PDFController {
         }
     }
     
-    /*
-    public boolean addPDF(int bookid, String[] pathnames) {
-        boolean bSuccess = false;
-        try {
-            int len = pathnames.length;
-            for (int i = 0; i < len; i++) {
-                String pathname = pathnames[i];
-                DBController dbctrl = DBController.getInstance();
-                if (dbctrl.initDBConnection()) {
-                    bSuccess = dbctrl.addPDF(bookid, pathname);
-                    if (!bSuccess) {
-                        this.errorText = dbctrl.getErrorText();
-                    }
-                }
-                dbctrl.exit();
-            }
-
-            return bSuccess;
-        } catch (Exception e) {
-
-        }
-        return bSuccess;
-    }
-        */
-    
-    
+    /**
+     * Alle PDFs zu einem Buch laden.
+     * @param id BuchID
+     * @return String Array mit PDFs
+     */
     public String[] getPDFInfo(int id) {
         DBController dbctr = DBController.getInstance();
         String[] pdfinfo = null;

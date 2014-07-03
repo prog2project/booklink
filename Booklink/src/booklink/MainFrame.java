@@ -296,6 +296,7 @@ public class MainFrame extends javax.swing.JFrame {
                 pdfpanel.removeAll();
             }
         } catch (Exception e) {
+            this.setStatusMessage(e.getMessage(), ERROR_MESSAGE);
         }
 
     }
